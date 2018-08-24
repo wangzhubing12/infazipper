@@ -92,8 +92,23 @@
 	</property>
 	<property>
 		<name>workflow.paramter.filename</name>
-		<value>/home/infa/AAA.txt</value>
-		<description>workflow命名前缀</description>
+		<value>/home/infa/A1.txt</value>
+		<description>workflow参数文件</description>
+	</property>
+	<property>
+		<name>workflow.muti-params</name>
+		<value> 0200:/home/infa/A2.txt;
+				0400:/home/infa/A3.txt;
+				0500:/home/infa/A4.txt;
+				0600:/home/infa/A5.txt;
+		</value>
+		<description>
+			workflow参数文件,如配置此项，则原来的
+		    workflow.paramter.filename将被这里的配置取代。
+		         此项配置格式为，
+		         1）每个配置文件以分号隔开；
+		         2）每个配置文件前加上工作流额外的名称后缀和冒号；
+	   </description>
 	</property>
 	<property>
 		<name>mapping.type</name>
