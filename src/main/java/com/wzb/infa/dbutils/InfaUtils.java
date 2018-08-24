@@ -30,7 +30,7 @@ import java.io.IOException;
 /**
  * *
  * 创建各种INFA对象组件类型如Source Qualifier，会创建对应的字段 创建各种内置的对象如TRANSFORMATION类型时，不含对应字段
- *
+ *1
  */
 public class InfaUtils {
 
