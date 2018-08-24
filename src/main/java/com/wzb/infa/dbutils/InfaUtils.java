@@ -206,7 +206,7 @@ public class InfaUtils {
                 dataOffset = String.valueOf(Integer.parseInt(dataOffset) + 19);
             } else if (dataType.contains("number") || dataType.contains("float") || dataType.contains("double")) {
                 dataType = "number(p,s)";
-                dataLength = "0";
+                
                 dataPhysicalLength = rsCols.getString("PRECISION");
                 if ("0".equals(dataPhysicalLength)) {
                     dataPhysicalLength = "22";
