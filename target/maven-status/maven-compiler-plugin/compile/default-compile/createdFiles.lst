@@ -3,4 +3,7 @@ com\wzb\infa\dbutils\InfaUtils.class
 com\wzb\infa\infazipper\App.class
 com\wzb\infa\exceptions\NoPrimaryKeyException.class
 com\wzb\infa\properties\InfaProperty.class
+com\wzb\infa\dbutils\DbUtil.class
+com\wzb\infa\exceptions\UnsupportedDatatypeException.class
+com\wzb\infa\infazipper\App$StringPadder.class
 com\wzb\infa\exceptions\CheckTableExistException.class

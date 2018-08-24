@@ -1,5 +1,7 @@
-G:\infa\infazipper\src\main\java\com\wzb\infa\dbutils\InfaUtils.java
-G:\infa\infazipper\src\main\java\com\wzb\infa\properties\InfaProperty.java
-G:\infa\infazipper\src\main\java\com\wzb\infa\exceptions\NoPrimaryKeyException.java
-G:\infa\infazipper\src\main\java\com\wzb\infa\exceptions\CheckTableExistException.java
-G:\infa\infazipper\src\main\java\com\wzb\infa\infazipper\App.java
+C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper\src\main\java\com\wzb\infa\exceptions\UnsupportedDatatypeException.java
+C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper\src\main\java\com\wzb\infa\dbutils\InfaUtils.java
+C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper\src\main\java\com\wzb\infa\properties\InfaProperty.java
+C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper\src\main\java\com\wzb\infa\dbutils\DbUtil.java
+C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper\src\main\java\com\wzb\infa\infazipper\App.java
+C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper\src\main\java\com\wzb\infa\exceptions\CheckTableExistException.java
+C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper\src\main\java\com\wzb\infa\exceptions\NoPrimaryKeyException.java

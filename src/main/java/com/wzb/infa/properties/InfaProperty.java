@@ -18,7 +18,7 @@ public class InfaProperty extends Properties {
 	 * 单例模式，提供getInstance获取一个实例。
 	 * 提供addInfaProperty增加配置项
 	 */
-	private static InfaProperty infaProperty = null;
+	private static volatile InfaProperty infaProperty = null;
 	private static final long serialVersionUID = 1L;
 
 	private InfaProperty() {
@@ -38,7 +38,7 @@ public class InfaProperty extends Properties {
 			return infaProperty;
 		}
 	}
-
+	
 	public void addInfaProperty(String path) throws DocumentException {
 		try {
 			FileInputStream fs=new FileInputStream(path);
