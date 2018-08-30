@@ -6,18 +6,13 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 
 import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 
-public class InfaTruncInsertXML implements InfaXML {
-	private Element source;
-	private Element target;
-	private Element mapping;
-	private Element workflow;
+public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
+
 	public static Logger logger = Logger.getLogger(InfaTruncInsertXML.class);
 	public InfaTruncInsertXML(String owner, String tableName, boolean addHyFlag)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
@@ -159,68 +154,6 @@ public class InfaTruncInsertXML implements InfaXML {
 		// session ATTRIBUTE
 		InfaUtil.createWorkflowVariableAndAttribute(workflow, session);
 		logger.info("end InfaTruncInsertXML:"+tableName);
-	}
-
-	public Element getSource() {
-		return source;
-	}
-
-	public void setSource(Element source) {
-		this.source = source;
-	}
-
-	public Element getTarget() {
-		return target;
-	}
-
-	public void setTarget(Element target) {
-		this.target = target;
-	}
-
-	public Element getMapping() {
-		return mapping;
-	}
-
-	public void setMapping(Element mapping) {
-		this.mapping = mapping;
-	}
-
-	public Element getWorkflow() {
-		return workflow;
-	}
-
-	public void setWorkflow(Element workflow) {
-		this.workflow = workflow;
-	}
-
-	@Override
-	public Element addToFolder(Element folder) {
-		folder.add(this.getSource());
-		folder.add(this.getTarget());
-		folder.add(this.getMapping());
-		folder.add(this.getWorkflow());
-		return folder;
-	}
-
-	@Override
-	public void print() {
-		OutputFormat format = new OutputFormat("    ", true);
-		XMLWriter xmlWriter;
-		try {
-			xmlWriter = new XMLWriter(format);
-			xmlWriter.write(this.getSource());
-			xmlWriter.write(this.getTarget());
-			xmlWriter.write(this.getMapping());
-			xmlWriter.write(this.getWorkflow());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public String getWorkflowName() {
-		return workflow.attributeValue("NAME");
 	}
 
 }

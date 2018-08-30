@@ -6,19 +6,15 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 
 import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 
-public class InfaAddXML implements InfaXML {
-	private Element srcSource;
+public class InfaAddXML extends BaseInfaXML implements InfaXML {
+
 	private Element tarSource;
-	private Element target;
-	private Element mapping;
-	private Element workflow;
+
 	public static Logger logger = Logger.getLogger(InfaAddXML.class);
 
 	public InfaAddXML(String owner, String tableName)
@@ -67,7 +63,7 @@ public class InfaAddXML implements InfaXML {
 		}
 
 		// 源和目标
-		srcSource = srcTable.createSource(tableName, srcDBName);
+		source = srcTable.createSource(tableName, srcDBName);
 		tarSource = tarTable.createSource(tableName, tarDBName);
 		target = tarTable.createTarget(targetName, false);
 		((Element) target.selectSingleNode("TARGETFIELD[@NAME='HY_ID']")).addAttribute("KEYTYPE", "PRIMARY KEY")
@@ -85,7 +81,7 @@ public class InfaAddXML implements InfaXML {
 
 		Element joiner = srcTable.createJoiner(tarTable, crc32Col);
 
-		Element router = srcTable.createRouter(joiner, srcSource);
+		Element router = srcTable.createRouter(joiner, source);
 
 		Element updStg = srcTable.createUpdateStrategy("UPD_" + tableName, "DD_UPDATE", false, null);
 		Element delStg = tarTable.createUpdateStrategy(hyid);
@@ -104,7 +100,7 @@ public class InfaAddXML implements InfaXML {
 		mapping = InfaUtil.createMapping(mappingName);
 
 		// Instance
-		Element sSrcInst = InfaUtil.createInstance(srcSource, tableName);
+		Element sSrcInst = InfaUtil.createInstance(source, tableName);
 		Element sTarInst = InfaUtil.createInstance(tarSource, targetName);
 
 		Element srcQuaInst = InfaUtil.createQualifierInstance("SQ_S" + tableName, tableName);
@@ -131,7 +127,7 @@ public class InfaAddXML implements InfaXML {
 		Element tarDeleteInst = InfaUtil.createTargetInstance("DELETE_" + targetName, targetName);
 
 		ArrayList<Element> connectors = new ArrayList<>();
-		connectors.addAll(InfaUtil.createConnector(sSrcInst, srcSource, srcQuaInst, srcQua));
+		connectors.addAll(InfaUtil.createConnector(sSrcInst, source, srcQuaInst, srcQua));
 		connectors.addAll(InfaUtil.createConnector(srcQuaInst, srcQua, srcExpInst, srcExp));
 		connectors.addAll(InfaUtil.createConnector(srcExpInst, srcExp, srcStrInst, srcStr));
 		connectors.addAll(InfaUtil.createConnector(srcStrInst, srcStr, joinerInst, joiner, "_SRC"));
@@ -241,7 +237,7 @@ public class InfaAddXML implements InfaXML {
 
 		// SESSIONEXTENSION
 		Element sSrcInstSE = InfaUtil.createReaderSessionextension(srcQua.attributeValue("NAME"),
-				srcSource.attributeValue("NAME"));
+				source.attributeValue("NAME"));
 		Element sTarInstSE = InfaUtil.createReaderSessionextension(tarQua.attributeValue("NAME"),
 				tarSource.attributeValue("NAME"));
 		Element srcQuaInstSE = InfaUtil.createReaderSessionextension(srcQua, "$DBConnectionSRC");
@@ -303,75 +299,4 @@ public class InfaAddXML implements InfaXML {
 		logger.info("end InfaTruncInsertXML:" + tableName);
 	}
 
-	public Element getSrcSource() {
-		return srcSource;
-	}
-
-	public void setSrcSource(Element srcSource) {
-		this.srcSource = srcSource;
-	}
-
-	public Element getTarSource() {
-		return tarSource;
-	}
-
-	public void setTarSource(Element tarSource) {
-		this.tarSource = tarSource;
-	}
-
-	public Element getTarget() {
-		return target;
-	}
-
-	public void setTarget(Element target) {
-		this.target = target;
-	}
-
-	public Element getMapping() {
-		return mapping;
-	}
-
-	public void setMapping(Element mapping) {
-		this.mapping = mapping;
-	}
-
-	public Element getWorkflow() {
-		return workflow;
-	}
-
-	public void setWorkflow(Element workflow) {
-		this.workflow = workflow;
-	}
-
-	@Override
-	public Element addToFolder(Element folder) {
-		folder.add(this.getSrcSource());
-		folder.add(this.getTarSource());
-		folder.add(this.getTarget());
-		folder.add(this.getMapping());
-		folder.add(this.getWorkflow());
-		return folder;
-	}
-
-	@Override
-	public void print() {
-		OutputFormat format = new OutputFormat("    ", true);
-		XMLWriter xmlWriter;
-		try {
-			xmlWriter = new XMLWriter(format);
-			xmlWriter.write(this.getSrcSource());
-			xmlWriter.write(this.getTarSource());
-			xmlWriter.write(this.getTarget());
-			xmlWriter.write(this.getMapping());
-			xmlWriter.write(this.getWorkflow());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public String getWorkflowName() {
-		return workflow.attributeValue("NAME");
-	}
 }

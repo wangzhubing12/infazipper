@@ -6,19 +6,13 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 
 import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 
-public class InfaZipperXML implements InfaXML{
-	private Element srcSource;
-	private Element tarSource;
-	private Element target;
-	private Element mapping;
-	private Element workflow;
+public class InfaZipperXML extends BaseInfaXML implements InfaXML{
+
 	public static Logger logger = Logger.getLogger(InfaZipperXML.class);
 	public InfaZipperXML(String owner, String tableName)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
@@ -66,7 +60,7 @@ public class InfaZipperXML implements InfaXML{
 		}
 
 		// 源和目标
-		srcSource = srcTable.createSource(tableName, srcDBName);
+		source = srcTable.createSource(tableName, srcDBName);
 		tarSource = tarTable.createSource(tableName, tarDBName);
 		target = tarTable.createTarget(targetName, true);
 		((Element) target.selectSingleNode("TARGETFIELD[@NAME='QYSJ']")).addAttribute("KEYTYPE", "PRIMARY KEY")
@@ -84,7 +78,7 @@ public class InfaZipperXML implements InfaXML{
 
 		Element joiner = srcTable.createJoiner(tarTable, crc32Col);
 
-		Element router = srcTable.createRouter(joiner, srcSource);
+		Element router = srcTable.createRouter(joiner, source);
 
 		Element upd3Stg = srcTable.createUpdateStrategy("UPD_D_" + targetName, "DD_UPDATE", true, qysj);
 
@@ -115,7 +109,7 @@ public class InfaZipperXML implements InfaXML{
 		mapping = InfaUtil.createMapping(mappingName);
 
 		// Instance
-		Element sSrcInst = InfaUtil.createInstance(srcSource, tableName);
+		Element sSrcInst = InfaUtil.createInstance(source, tableName);
 		Element sTarInst = InfaUtil.createInstance(tarSource, targetName);
 
 		Element srcQuaInst = InfaUtil.createQualifierInstance("SQ_S" + tableName, tableName);
@@ -145,7 +139,7 @@ public class InfaZipperXML implements InfaXML{
 		Element tarDeleteInst = InfaUtil.createTargetInstance("DELETE_" + targetName, targetName);
 
 		ArrayList<Element> connectors = new ArrayList<>();
-		connectors.addAll(InfaUtil.createConnector(sSrcInst, srcSource, srcQuaInst, srcQua));
+		connectors.addAll(InfaUtil.createConnector(sSrcInst, source, srcQuaInst, srcQua));
 		connectors.addAll(InfaUtil.createConnector(srcQuaInst, srcQua, srcExpInst, srcExp));
 		connectors.addAll(InfaUtil.createConnector(srcExpInst, srcExp, srcStrInst, srcStr));
 		connectors.addAll(InfaUtil.createConnector(srcStrInst, srcStr, joinerInst, joiner, "_SRC"));
@@ -268,7 +262,7 @@ public class InfaZipperXML implements InfaXML{
 
 		// SESSIONEXTENSION
 		Element sSrcInstSE = InfaUtil.createReaderSessionextension(srcQua.attributeValue("NAME"),
-				srcSource.attributeValue("NAME"));
+				source.attributeValue("NAME"));
 		Element sTarInstSE = InfaUtil.createReaderSessionextension(tarQua.attributeValue("NAME"),
 				tarSource.attributeValue("NAME"));
 		Element srcQuaInstSE = InfaUtil.createReaderSessionextension(srcQua, "$DBConnectionSRC");
@@ -334,75 +328,5 @@ public class InfaZipperXML implements InfaXML{
 		InfaUtil.createWorkflowVariableAndAttribute(workflow, session);
 		logger.info("end InfaZipperXML:"+tableName);
 	}
-
-	public Element getSrcSource() {
-		return srcSource;
-	}
-
-	public void setSrcSource(Element srcSource) {
-		this.srcSource = srcSource;
-	}
-
-	public Element getTarSource() {
-		return tarSource;
-	}
-
-	public void setTarSource(Element tarSource) {
-		this.tarSource = tarSource;
-	}
-
-	public Element getTarget() {
-		return target;
-	}
-
-	public void setTarget(Element target) {
-		this.target = target;
-	}
-
-	public Element getMapping() {
-		return mapping;
-	}
-
-	public void setMapping(Element mapping) {
-		this.mapping = mapping;
-	}
-
-	public Element getWorkflow() {
-		return workflow;
-	}
-
-	public void setWorkflow(Element workflow) {
-		this.workflow = workflow;
-	}
-	@Override
-	public Element addToFolder(Element folder){
-		logger.info("addToFolder:"+srcSource.attributeValue("NAME"));
-		folder.add(this.getSrcSource());
-		folder.add(this.getTarSource());
-		folder.add(this.getTarget());
-		folder.add(this.getMapping());
-		folder.add(this.getWorkflow());
-		return folder;
-	}
-
-	@Override
-	public void print() {
-		OutputFormat format = new OutputFormat("    ", true);
-		XMLWriter xmlWriter;
-		try {
-			xmlWriter = new XMLWriter(format);
-			xmlWriter.write(this.getSrcSource());
-			xmlWriter.write(this.getTarSource());
-			xmlWriter.write(this.getTarget());
-			xmlWriter.write(this.getMapping());
-			xmlWriter.write(this.getWorkflow());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-	@Override
-	public String getWorkflowName() {
-		return workflow.attributeValue("NAME");
-	}
+	
 }

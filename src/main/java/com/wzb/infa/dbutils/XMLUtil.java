@@ -68,6 +68,9 @@ public class XMLUtil {
 		for (InfaXML xml : Infaxmls) {
 			logger.info("addToFolder:"+xml.getWorkflowName());
 			xml.addToFolder(folder);
+			
+			
+			
 		}
 		xmlWriter.write(doc);
 		logger.info("end writeInfaXMLToFile");
@@ -108,6 +111,7 @@ public class XMLUtil {
 			break;
 		}
 		logger.info("end createInfaXML");
+			
 		return xml;
 	}
 
