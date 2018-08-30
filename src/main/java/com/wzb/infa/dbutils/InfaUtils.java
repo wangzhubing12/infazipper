@@ -3,9 +3,8 @@ package com.wzb.infa.dbutils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -25,7 +24,6 @@ import com.wzb.infa.exceptions.CheckTableExistException;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 import com.wzb.infa.properties.InfaProperty;
-import java.io.IOException;
 
 /**
  * *
@@ -75,93 +73,6 @@ public class InfaUtils {
         }
     };
 
-    /**
-     * 导入源,含有字段的备注
-     *
-     * @throws SQLException
-     *
-     * @deprecated 使用importSource(String, String),不含字段备注
-     *
-     */
-    @SuppressWarnings("unused")
-    private Element createSource(Connection connect, String owner, String table)
-            throws NoPrimaryKeyException, SQLException {
-
-        StringBuilder sqlsb = new StringBuilder();
-        sqlsb.append("SELECT A.TABLE_NAME, A.COLUMN_NAME NAME,\n");
-        sqlsb.append("       LOWER(DECODE(A.DATA_TYPE, 'NUMBER', 'NUMBER(P,S)', A.DATA_TYPE)) DATATYPE,\n");
-        sqlsb.append("       TO_CHAR(DECODE(A.DATA_TYPE, 'DATE', '19', 'NUMBER',\n");
-        sqlsb.append("                       nvl(A.DATA_PRECISION, 0), 0)) LENGTH,\n");
-        sqlsb.append("       TO_CHAR(DECODE(A.DATA_TYPE, 'DATE', '19', 'NUMBER',\n");
-        sqlsb.append("                       NVL(A.DATA_PRECISION, A.DATA_LENGTH), A.DATA_LENGTH)) PRECISION,\n");
-        sqlsb.append("       TO_CHAR(NVL(A.DATA_SCALE, '0')) SCALE,\n");
-        sqlsb.append("       DECODE(A.NULLABLE, 'N', 'NOTNULL', 'Y', 'NULL') NULLABLE,\n");
-        sqlsb.append("       A.COLUMN_ID FIELDNUMBER,\n");
-        sqlsb.append("       NVL(SUM(DECODE(A.DATA_TYPE, 'DATE', 19,\n");
-        sqlsb.append("                       NVL(A.DATA_PRECISION, A.DATA_LENGTH)))\n");
-        sqlsb.append("            OVER(ORDER BY A.COLUMN_ID ROWS BETWEEN UNBOUNDED PRECEDING AND 1\n");
-        sqlsb.append("                 PRECEDING), 0) PHYSICALOFFSET,\n");
-        sqlsb.append("       NVL(SUM(DECODE(A.DATA_TYPE, 'DATE', '19', 'NUMBER', A.DATA_PRECISION,\n");
-        sqlsb.append("                       '0'))\n");
-        sqlsb.append("            OVER(ORDER BY A.COLUMN_ID ROWS BETWEEN UNBOUNDED PRECEDING AND 1\n");
-        sqlsb.append("                 PRECEDING), '0') OFFSET,\n");
-        sqlsb.append("       TO_CHAR(DECODE(A.DATA_TYPE, 'DATE', '19', 'NUMBER',\n");
-        sqlsb.append("                       NvL(A.DATA_PRECISION, 0), A.DATA_LENGTH)) PHYSICALLENGTH,\n");
-        sqlsb.append("       NVL2((SELECT C.COLUMN_NAME\n");
-        sqlsb.append("               FROM ALL_CONSTRAINTS B, ALL_CONS_COLUMNS C\n");
-        sqlsb.append("              WHERE B.TABLE_NAME = A.TABLE_NAME\n");
-        sqlsb.append("                AND B.TABLE_NAME = C.TABLE_NAME\n");
-        sqlsb.append("                AND B.OWNER = C.OWNER\n");
-        sqlsb.append("                AND B.CONSTRAINT_NAME = C.CONSTRAINT_NAME\n");
-        sqlsb.append("                AND B.CONSTRAINT_TYPE = 'P'\n");
-        sqlsb.append("                AND A.COLUMN_NAME = C.COLUMN_NAME\n");
-        sqlsb.append("                AND A.OWNER = C.OWNER), 'PRIMARY KEY', 'NOT A KEY') KEYTYPE,\n");
-        sqlsb.append("       (select b.COMMENTS\n");
-        sqlsb.append("           from all_col_comments b\n");
-        sqlsb.append("          where a.OWNER = b.OWNER\n");
-        sqlsb.append("            and a.TABLE_NAME = b.TABLE_NAME\n");
-        sqlsb.append("            and a.COLUMN_NAME = b.COLUMN_NAME) COMMENTS\n");
-        sqlsb.append("  FROM ALL_TAB_COLUMNS A\n");
-        sqlsb.append(" WHERE A.TABLE_NAME = ?\n");
-        sqlsb.append("   AND A.OWNER = ?\n");
-        sqlsb.append(" ORDER BY 8");
-        String sql = sqlsb.toString();
-        Element el = DocumentHelper.createElement("SOURCE").addAttribute("BUSINESSNAME", "")
-                .addAttribute("DATABASETYPE", "Oracle")
-                .addAttribute("DBDNAME", infaProperty.getProperty("source.dbname", owner))
-                .addAttribute("DESCRIPTION", dbUtil.getTabComments(owner, table)).addAttribute("NAME", table)
-                .addAttribute("OBJECTVERSION", "1").addAttribute("OWNERNAME", owner).addAttribute("VERSIONNUMBER", "1");
-        try {
-            PreparedStatement pstm = connect.prepareStatement(sql);
-            pstm.setString(1, table);
-            pstm.setString(2, owner);
-            ResultSet rs = pstm.executeQuery();
-            boolean hasPrimaryKey = false;
-            while (rs.next()) {
-                hasPrimaryKey = hasPrimaryKey || "PRIMARY KEY".equals(rs.getString("KEYTYPE"));
-                el.addElement("SOURCEFIELD").addAttribute("BUSINESSNAME", "")
-                        .addAttribute("DATATYPE", rs.getString("DATATYPE"))
-                        .addAttribute("DESCRIPTION", rs.getString("COMMENTS"))
-                        .addAttribute("FIELDNUMBER", rs.getString("FIELDNUMBER")).addAttribute("FIELDPROPERTY", "0")
-                        .addAttribute("FIELDTYPE", "ELEMITEM").addAttribute("HIDDEN", "NO")
-                        .addAttribute("KEYTYPE", rs.getString("KEYTYPE")).addAttribute("LENGTH", rs.getString("LENGTH"))
-                        .addAttribute("LEVEL", "0").addAttribute("NAME", rs.getString("NAME"))
-                        .addAttribute("NULLABLE", rs.getString("NULLABLE")).addAttribute("OCCURS", "0")
-                        .addAttribute("OFFSET", rs.getString("OFFSET"))
-                        .addAttribute("PHYSICALLENGTH", rs.getString("PHYSICALLENGTH"))
-                        .addAttribute("PHYSICALOFFSET", rs.getString("PHYSICALOFFSET")).addAttribute("PICTURETEXT", "")
-                        .addAttribute("PRECISION", rs.getString("PRECISION"))
-                        .addAttribute("SCALE", rs.getString("SCALE")).addAttribute("USAGE_FLAGS", "");
-            }
-            if (!hasPrimaryKey) {
-                throw new NoPrimaryKeyException(" no PrimaryKey");
-            }
-            return el;
-        } catch (SQLException e) {
-            log.error(sql);
-            throw new NoPrimaryKeyException(e.getMessage());
-        }
-    }
 
     // 这个方法不导入字段备注信息，同时分开导出主键信息，效率较高
     private Element createSource(String owner, String table)

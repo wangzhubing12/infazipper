@@ -39,15 +39,16 @@ public class InfaProperty extends Properties {
 		}
 	}
 	
-	public void addInfaProperty(String path) throws DocumentException {
+	public InfaProperty addInfaProperty(String path) throws DocumentException {
 		try {
 			FileInputStream fs=new FileInputStream(path);
 			addInfaProperty(fs);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		return infaProperty;
 	}
-	public void addInfaProperty(InputStream path) throws DocumentException {
+	private void addInfaProperty(InputStream path) throws DocumentException {
 		// 使用dom4j解析infa.xml,读取默认配置文件
 		SAXReader reader = new SAXReader();
 		// 获取默认配置

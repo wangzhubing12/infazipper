@@ -33,7 +33,7 @@ import com.wzb.infa.properties.InfaProperty;
  */
 public class App {
 
-    private final InfaProperty infaProperty = InfaProperty.getInstance();
+	public final InfaProperty infaProperty = InfaProperty.getInstance();
     private final Logger log = Logger.getLogger(App.class);
     // 依赖infaProperty，所以必须在infaProperty的“自定义配置”之后在获取实例
     private InfaUtils infaUtil = null;
@@ -101,6 +101,7 @@ public class App {
                         case "2":
                             infaUtil.makeAddXML(table);
                             break;
+
                         default:
                             infaUtil.makeTruncateThenDeleteXML(table);
                             break;

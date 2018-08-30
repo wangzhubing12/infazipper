@@ -92,13 +92,29 @@
 	</property>
 	<property>
 		<name>workflow.paramter.filename</name>
-		<value>/home/infa/AAA.txt</value>
-		<description>workflow命名前缀</description>
+		<value>/home/infa/A1.txt</value>
+		<description>workflow参数文件</description>
+	</property>
+	<property>
+		<name>workflow.muti-params</name>
+		<value> 0200:/home/infa/A2.txt;
+				0400:/home/infa/A3.txt;
+				0500:/home/infa/A4.txt;
+				0600:/home/infa/A5.txt;
+		</value>
+		<description>
+			workflow参数文件,如配置此项，则原来的
+		    workflow.paramter.filename将被这里的配置取代。
+		         此项配置格式为，
+		         1）每个配置文件以分号隔开；
+		         2）每个配置文件前加上工作流额外的名称后缀和冒号；
+	   </description>
 	</property>
 	<property>
 		<name>mapping.type</name>
 		<value>1</value>
-		<description>1：拉链表；2：增量对比抽取；其他：全删全插（默认）</description>
+		<description>1：拉链表；2：增量对比抽取；2.1：增量对比+写删除日志表；
+		其他：全删全插（默认）</description>
 	</property>
 	<property>
 		<name>target.prefix</name>
@@ -214,5 +230,10 @@
 		<value>HY_UPDATE_FLAG</value>
 		<description>默认HY_UPDATE_FLAG</description>
     </property>
+    <property>
+		<name>add.delete.log</name>
+		<value>recode_delete_log</value>
+		<description>增量比对删除记录,日志表的表名</description>
+	</property>
 	-->	
 </configuration>
