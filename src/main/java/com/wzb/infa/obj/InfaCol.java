@@ -180,7 +180,7 @@ public class InfaCol {
 	public String getDataType() throws UnsupportedDatatypeException {
 		String _dataType;
 		if (!dataTypeO2I.containsKey(this.dataType)) {
-			throw new UnsupportedDatatypeException("Unsupported Data type" + ":" + this.dataType);
+			throw new UnsupportedDatatypeException("Unsupported Data type" + columnName + ":" + this.dataType);
 		} else if (this.dataType.contains("timestamp")) {
 
 			_dataType = "timestamp";
@@ -298,6 +298,8 @@ public class InfaCol {
 			put("nclob", "ntext");
 			put("number", "decimal");
 			put("number(p,s)", "decimal");
+			put("float", "decimal");
+			put("double", "decimal");
 			put("nvarchar2", "nstring");
 			put("raw", "binary");
 			put("timestamp", "date/time");

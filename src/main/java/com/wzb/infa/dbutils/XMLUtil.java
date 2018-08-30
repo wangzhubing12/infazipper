@@ -41,7 +41,7 @@ public class XMLUtil {
 	public static Logger logger = Logger.getLogger(XMLUtil.class);
 
 	private Document createDocument() throws IOException {
-		logger.info("begin createDocument");
+		logger.debug("begin createDocument");
 		// 设置INFA XML文件头、POWERMART、REPOSITORY、FOLDER部分
 		Document doc = DocumentHelper.createDocument();
 		doc.addDocType("POWERMART", "", "powrmart.dtd");
@@ -55,12 +55,12 @@ public class XMLUtil {
 				.addAttribute("GROUP", "").addAttribute("OWNER", "pccontroller").addAttribute("SHARED", "NOTSHARED")
 				.addAttribute("DESCRIPTION", "").addAttribute("PERMISSIONS", "rwx---r--")
 				.addAttribute("UUID", "7ff86550-beb3-4ac6-832d-50ad401c0e97");
-		logger.info("end createDocument");
+		logger.debug("end createDocument");
 		return doc;
 	}
 
 	public void writeInfaXMLToFile(ArrayList<InfaXML> Infaxmls, String toFileName) throws IOException {
-		logger.info("begin writeInfaXMLToFile");
+		logger.debug("begin writeInfaXMLToFile");
 		OutputFormat format = new OutputFormat("    ", true);
 		format.setEncoding("GBK");
 		File xmloutFile = new File(toFileName);
@@ -71,11 +71,11 @@ public class XMLUtil {
 		String[] mutiParams = infaProperty.getProperty("workflow.muti-params", "-1").replaceAll("\n", "").split(";");
 		Element workflow;
 		for (InfaXML xml : Infaxmls) {
-			logger.info("addToFolder:" + xml.getWorkflowName());
+			logger.debug("addToFolder:" + xml.getWorkflowName());
 
 			workflow = xml.getWorkflow();
 			if (!"-1".equals(mutiParams[0])) {
-				logger.info("deal mutiParams:" + xml.getWorkflowName());
+				logger.debug("deal mutiParams:" + xml.getWorkflowName());
 				// 先添加其他部分
 				folder.add(xml.getSource());
 				if (xml.getTarSource() == null) {
@@ -105,12 +105,13 @@ public class XMLUtil {
 
 		}
 		xmlWriter.write(doc);
-		logger.info("end writeInfaXMLToFile");
+		xmlWriter.flush();
+		logger.debug("end writeInfaXMLToFile");
 	}
 
 	public InfaXML createInfaXML(String table, String xmlType)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
-		logger.info("begin createInfaXML");
+		logger.debug("begin createInfaXML");
 		InfaXML xml;
 		String username = infaProperty.getProperty("source.username").toUpperCase();
 		String sourceTablename;
@@ -142,7 +143,7 @@ public class XMLUtil {
 			xml = new InfaTruncInsertXML(owner, sourceTablename, false);
 			break;
 		}
-		logger.info("end createInfaXML");
+		logger.debug("end createInfaXML");
 
 		return xml;
 	}

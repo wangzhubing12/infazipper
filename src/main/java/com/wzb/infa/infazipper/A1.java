@@ -46,47 +46,51 @@ public class A1 {
 
 		A1 a1 = new A1();
 		HashSet<String> tableLIst = a1.getTableList(); // 表清单
+		String fileName = infaProperty.getProperty("work.dir")
+				+ infaProperty.getProperty("xml.output", "gen.xml").toLowerCase(); // 生成的文件名
 		int size = tableLIst.size(); // 总的表数量
-		int errorSize = 0; // 报错的表数量
-		int tableCount = 0;// 已经生成XML的表数量
+		int errorSize = 0; // 当前报错的表数量
+		int sucessSize = 0;// 当前成功的表数量
+		int tableSize = 0;// 当前生成的表总数量
+		int fileCount = 0;// 当前生成的文件总数量
+		int mapsize = Integer.parseInt(infaProperty.getProperty("xml.output.mappings", "20"));
 
 		String mappingType = infaProperty.getProperty("mapping.type", "-1");
 		ArrayList<InfaXML> xmls = new ArrayList<>(); // 保存生成的XML
+
 		for (String table : tableLIst) {
-			logger.debug("Makeing xml for " + StringPadder.rightPad(table, "-", 30) + "(" + (tableCount + errorSize + 1)
-					+ "/" + size + ")");
+			tableSize++;
 
 			try {
 				xmls.add(xmlUtil.createInfaXML(table, mappingType));
+				logger.debug("success!");
+				sucessSize++;
 			} catch (UnsupportedDatatypeException | SQLException | CheckTableExistException e) {
 				logger.error(e.getMessage());
 				errorSize++;
-				tableCount--;
 			} catch (NoPrimaryKeyException e) {
 				logger.error(e.getMessage());
 				errorSize++;
-				tableCount--;
 			}
-			logger.debug("success!");
+			logger.info("Make xml for " + StringPadder.rightPad(table, "-", 30) + "(" + tableSize + "/" + size
+					+ ")---success:" + sucessSize);
+			// 如果生成的表数量达到xx个则切换文件(排除掉报错的)
+			if (((sucessSize > 0) && (sucessSize % mapsize) == 0) || tableSize >= size) {
 
-			tableCount++;
-
-			// 如果生成的表数量达到xx个则切换文件
-			if ((tableCount % Integer.parseInt(infaProperty.getProperty("xml.output.mappings", "20"))) == 0
-					|| tableCount >= size) {
-				int fileCount = Math.floorDiv(tableCount,
-						Integer.parseInt(infaProperty.getProperty("xml.output.mappings", "20")));
-				String fileName = infaProperty.getProperty("work.dir") + infaProperty
-						.getProperty("xml.output", "gen.xml").toLowerCase().replace(".xml", fileCount + ".xml");
+				logger.info("write InfaXML To File:" + fileName.replace(".xml", fileCount + ".xml"));
 				try {
-					xmlUtil.writeInfaXMLToFile(xmls, fileName);
+					xmlUtil.writeInfaXMLToFile(xmls, fileName.replace(".xml", fileCount + ".xml"));
+					fileCount++;
+					xmls.clear();
 				} catch (IOException e) {
 					logger.error(e.getMessage());
 					System.exit(-1);
 				}
 			}
-		}
 
+		}
+		logger.info("----------------------------------------------------------------");
+		logger.info("MAKE FILES:" + (fileCount) + ",WITH ERROR TABLES:" + errorSize);
 		DbUtil.getInstance().release();
 	}
 

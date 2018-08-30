@@ -555,6 +555,7 @@ public class InfaTable {
 		ResultSet rsPrimaryCols = dbUtil.getPrimaryCols(owner, tableName);
 
 		while (rsPrimaryCols.next()) {
+			logger.debug("find primary key" + tableName);
 			hasPk = true;
 			columnName = rsPrimaryCols.getString("COLUMN_NAME");
 			for (InfaCol ketCol : this.cols) {
@@ -562,6 +563,9 @@ public class InfaTable {
 					ketCol.setKeyType("PRIMARY KEY");
 				}
 			}
+		}
+		if(!hasPk) {
+			logger.debug("no primary key" + tableName);
 		}
 		logger.debug("end InfaTable" + tableName);
 	}
