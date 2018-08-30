@@ -9,6 +9,7 @@ import org.dom4j.Element;
 
 import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
+import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 
 public class InfaAddXML extends BaseInfaXML implements InfaXML {
@@ -18,9 +19,9 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 	public static Logger logger = Logger.getLogger(InfaAddXML.class);
 
 	public InfaAddXML(String owner, String tableName)
-			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
+			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
 		super();
-		logger.info("begin InfaTruncInsertXML:" + tableName);
+		logger.debug("begin InfaTruncInsertXML:" + tableName);
 		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
 		if (targetName.length() > 30) {
 			targetName = targetName.substring(0, 30);
@@ -296,7 +297,7 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 		// WORKFLOWVARIABLE
 		// session ATTRIBUTE
 		InfaUtil.createWorkflowVariableAndAttribute(workflow, session);
-		logger.info("end InfaTruncInsertXML:" + tableName);
+		logger.debug("end InfaTruncInsertXML:" + tableName);
 	}
 
 }

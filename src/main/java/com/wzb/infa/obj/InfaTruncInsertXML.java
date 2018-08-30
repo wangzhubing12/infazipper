@@ -17,7 +17,7 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 	public InfaTruncInsertXML(String owner, String tableName, boolean addHyFlag)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
 		super();
-		logger.info("begin InfaTruncInsertXML:"+tableName);
+		logger.debug("begin InfaTruncInsertXML:"+tableName);
 		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
 		if (targetName.length() > 30) {
 			targetName = targetName.substring(0, 30);
@@ -153,7 +153,7 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 		// WORKFLOWVARIABLE
 		// session ATTRIBUTE
 		InfaUtil.createWorkflowVariableAndAttribute(workflow, session);
-		logger.info("end InfaTruncInsertXML:"+tableName);
+		logger.debug("end InfaTruncInsertXML:"+tableName);
 	}
 
 }

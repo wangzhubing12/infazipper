@@ -11,6 +11,7 @@ import org.dom4j.Element;
 
 import com.wzb.infa.dbutils.DbUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
+import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 
 /**
@@ -39,7 +40,8 @@ public class InfaTable {
 	/***
 	 * 创建一个updateStrategy对象
 	 */
-	public Element createUpdateStrategy(String updateStrategyName,String updateStrategyValue, boolean primaryKeyOnly, InfaCol addCol) {
+	public Element createUpdateStrategy(String updateStrategyName, String updateStrategyValue, boolean primaryKeyOnly,
+			InfaCol addCol) {
 		Element updateStrategy = DocumentHelper.createElement("TRANSFORMATION").addAttribute("DESCRIPTION", "")
 				.addAttribute("NAME", updateStrategyName).addAttribute("OBJECTVERSION", "1")
 				.addAttribute("REUSABLE", "NO").addAttribute("TYPE", "Update Strategy")
@@ -517,7 +519,7 @@ public class InfaTable {
 	 */
 	public InfaTable(String owner, String tableName) throws SQLException, CheckTableExistException {
 		super();
-		logger.info("begin InfaTable"+tableName);
+		logger.debug("begin InfaTable" + tableName);
 		this.owner = owner;
 		this.tableName = tableName;
 		InfaCol col;
@@ -561,7 +563,7 @@ public class InfaTable {
 				}
 			}
 		}
-		logger.info("end InfaTable"+tableName);
+		logger.debug("end InfaTable" + tableName);
 	}
 
 	// 无参构造函数隐藏
@@ -612,7 +614,7 @@ public class InfaTable {
 		return sb.toString();
 	}
 
-	public String getPkString() {
+	public String getPkString() throws NoPrimaryKeyException {
 		StringBuilder sb = new StringBuilder();
 		for (InfaCol col : this.cols) {
 			if ("NOT A KEY".equals(col.getKeyType())) {
@@ -638,6 +640,9 @@ public class InfaTable {
 			} catch (UnsupportedDatatypeException e) {
 				e.printStackTrace();
 			}
+		}
+		if (sb.length() == 0) {
+			throw new NoPrimaryKeyException(this.owner+"."+this.tableName+" NoPrimaryKey!");
 		}
 		sb.delete(sb.length() - 7, sb.length());
 		return sb.toString();

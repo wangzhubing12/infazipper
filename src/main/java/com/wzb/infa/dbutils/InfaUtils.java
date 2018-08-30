@@ -2163,7 +2163,7 @@ public class InfaUtils {
             xmlWriter.write(doc.selectSingleNode(v_path));
             xmlWriter.flush();
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error("444"+e.getMessage());
         }
     }
 

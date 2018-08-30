@@ -17,7 +17,7 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML{
 	public InfaZipperXML(String owner, String tableName)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
 		super();
-		logger.info("begin InfaZipperXML:"+tableName);
+		logger.debug("begin InfaZipperXML:"+tableName);
 		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
 		if (targetName.length() > 30) {
 			targetName = targetName.substring(0, 30);
@@ -326,7 +326,7 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML{
 		// WORKFLOWVARIABLE
 		// session ATTRIBUTE
 		InfaUtil.createWorkflowVariableAndAttribute(workflow, session);
-		logger.info("end InfaZipperXML:"+tableName);
+		logger.debug("end InfaZipperXML:"+tableName);
 	}
 	
 }

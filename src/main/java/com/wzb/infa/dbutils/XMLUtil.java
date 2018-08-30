@@ -16,6 +16,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
 import com.wzb.infa.exceptions.CheckTableExistException;
+import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 import com.wzb.infa.obj.InfaAddXML;
 import com.wzb.infa.obj.InfaTruncInsertXML;
@@ -108,7 +109,7 @@ public class XMLUtil {
 	}
 
 	public InfaXML createInfaXML(String table, String xmlType)
-			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
+			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
 		logger.info("begin createInfaXML");
 		InfaXML xml;
 		String username = infaProperty.getProperty("source.username").toUpperCase();
