@@ -38,6 +38,7 @@ public class XMLUtil {
 
 	public final InfaProperty infaProperty = InfaProperty.getInstance();
 	public static Logger logger = Logger.getLogger(XMLUtil.class);
+
 	private Document createDocument() throws IOException {
 		logger.info("begin createDocument");
 		// 设置INFA XML文件头、POWERMART、REPOSITORY、FOLDER部分
@@ -65,12 +66,42 @@ public class XMLUtil {
 		XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(xmloutFile), format);
 		Document doc = createDocument();
 		Element folder = (Element) doc.selectSingleNode("//FOLDER");
+
+		String[] mutiParams = infaProperty.getProperty("workflow.muti-params", "-1").replaceAll("\n", "").split(";");
+		Element workflow;
 		for (InfaXML xml : Infaxmls) {
-			logger.info("addToFolder:"+xml.getWorkflowName());
-			xml.addToFolder(folder);
-			
-			
-			
+			logger.info("addToFolder:" + xml.getWorkflowName());
+
+			workflow = xml.getWorkflow();
+			if (!"-1".equals(mutiParams[0])) {
+				logger.info("deal mutiParams:" + xml.getWorkflowName());
+				// 先添加其他部分
+				folder.add(xml.getSource());
+				if (xml.getTarSource() == null) {
+				} else {
+					folder.add(xml.getTarSource());
+				}
+				folder.add(xml.getTarget());
+				folder.add(xml.getMapping());
+				Element e;
+				String wfName = workflow.attributeValue("NAME");
+				String wfNameAdd;
+				String wfParam;
+				for (String mutiParam : mutiParams) {
+					e = workflow.createCopy();
+					wfNameAdd = mutiParam.split(":")[0].trim();
+					wfParam = mutiParam.split(":")[1].trim();
+					// 修改工作流名称
+					e.addAttribute("NAME", wfName + wfNameAdd);
+					// 修改参数文件路径
+					((Element) e.selectSingleNode("ATTRIBUTE[@NAME='Parameter Filename']")).addAttribute("VALUE",
+							wfParam);
+					folder.add(e);// workflow加到folder下
+				}
+			} else {
+				xml.addToFolder(folder);// workflow加到folder下
+			}
+
 		}
 		xmlWriter.write(doc);
 		logger.info("end writeInfaXMLToFile");
@@ -111,7 +142,7 @@ public class XMLUtil {
 			break;
 		}
 		logger.info("end createInfaXML");
-			
+
 		return xml;
 	}
 
