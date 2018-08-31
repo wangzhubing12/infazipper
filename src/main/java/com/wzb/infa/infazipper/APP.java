@@ -71,6 +71,7 @@ public class APP {
 			tableSize++;
 
 			try {
+				//创建XML并加入到ArrayList<InfaXML>
 				xmls.add(xmlUtil.createInfaXML(table, mappingType));
 				logger.debug("success!");
 				sucessSize++;

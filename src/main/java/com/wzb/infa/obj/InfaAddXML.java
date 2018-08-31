@@ -11,6 +11,7 @@ import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
+import com.wzb.infa.properties.InfaProperty;
 
 public class InfaAddXML extends BaseInfaXML implements InfaXML {
 
@@ -22,15 +23,17 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
 		super();
 		logger.debug("begin InfaAddXML:" + tableName);
-		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
+
+		InfaProperty infaProperty = InfaProperty.getInstance();
+		String targetName = infaProperty.getProperty("target.prefix", "") + tableName;
 		if (targetName.length() > 30) {
 			targetName = targetName.substring(0, 30);
 		}
-		String sqlFilter = InfaUtil.infaProperty.getProperty("sql.filter", "");
-		String srcDBName = InfaUtil.infaProperty.getProperty("target.dbname", "TARDB");
-		String tarDBName = InfaUtil.infaProperty.getProperty("target.dbname", "SRCDB");
-		String mappingName = InfaUtil.infaProperty.getProperty("map.prefix", "M_") + tableName
-				+ InfaUtil.infaProperty.getProperty("map.suffix", "_INC");
+		String sqlFilter = infaProperty.getProperty("sql.filter", "");
+		String srcDBName = infaProperty.getProperty("target.dbname", "TARDB");
+		String tarDBName = infaProperty.getProperty("target.dbname", "SRCDB");
+		String mappingName = infaProperty.getProperty("map.prefix", "M_") + tableName
+				+ infaProperty.getProperty("map.suffix", "_INC");
 
 		InfaTable srcTable = new InfaTable(owner, tableName);
 		if (!srcTable.isHasPk()) {
@@ -41,20 +44,49 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 		InfaCol hyid;
 		InfaCol hyUpdateDate;
 		InfaCol hyUpdateFlag;
+		String hy_id;
+		String hy_update_date;
+		String hy_update_flag;
 		InfaCol crc32Col;
 		String crc32 = srcTable.getCRC32String();
 		String pkString = srcTable.getPkString();
 		{
+
+			// 先看是否强制使用配置文件中的配置
+			String force = infaProperty.getProperty("add.col.force", "false").toUpperCase();
+			if ("TRUE".equals(force)) {
+				// 如果强制用配置文件中的配置(强制又不指定，仍然用默认的三个字段)
+				hy_id = infaProperty.getProperty("add.col.hy_id", "HY_ID").toUpperCase();
+				hy_update_date = infaProperty.getProperty("add.col.hy_update_date", "HY_UPDATE_DATE").toUpperCase();
+				hy_update_flag = infaProperty.getProperty("add.col.hy_update_flag", "HY_UPDATE_FLAG").toUpperCase();
+			} else {
+				// 不强制用配置文件中的配置
+
+				// 先设置默认使用的值
+				hy_id = "HY_ID";
+				hy_update_date = "HY_UPDATE_DATE";
+				hy_update_flag = "HY_UPDATE_FLAG";
+				// 如果某个字段已经存在于源表中，就从配置文件中取，如果配置文件中没有配置，用名称+"_$"
+				if (tarTable.hasCol(hy_id)) {
+					hy_id = infaProperty.getProperty("add.col.hy_id", "HY_ID_$").toUpperCase();
+				} else if (tarTable.hasCol(hy_update_date)) {
+					hy_update_date = infaProperty.getProperty("add.col.hy_update_date", "HY_UPDATE_DATE_$")
+							.toUpperCase();
+				} else if (tarTable.hasCol(hy_update_flag)) {
+					hy_update_flag = infaProperty.getProperty("add.col.hy_update_flag", "HY_UPDATE_FLAG_$")
+							.toUpperCase();
+				}
+			}
 			// ADD COLS
 			int infaTableColSize = tarTable.getCols().size();
 
-			hyid = new InfaCol("HY_ID", "", "varchar2", "128", "0", "0", "NOTNULL",
-					String.valueOf(infaTableColSize + 1), "NOT A KEY");
+			hyid = new InfaCol(hy_id, "", "varchar2", "128", "0", "0", "NOTNULL", String.valueOf(infaTableColSize + 1),
+					"NOT A KEY");
 
-			hyUpdateDate = new InfaCol("HY_UPDATE_DATE", "", "DATE", "19", "0", "0", "NOTNULL",
+			hyUpdateDate = new InfaCol(hy_update_date, "", "DATE", "19", "0", "0", "NOTNULL",
 					String.valueOf(infaTableColSize + 2), "NOT A KEY");
 
-			hyUpdateFlag = new InfaCol("HY_UPDATE_FLAG", "", "VARCHAR2", "1", "0", "0", "NOTNULL",
+			hyUpdateFlag = new InfaCol(hy_update_flag, "", "VARCHAR2", "1", "0", "0", "NOTNULL",
 					String.valueOf(infaTableColSize + 3), "NOT A KEY");
 
 			crc32Col = new InfaCol("CRC32", "", "varchar2", "32", "0", "0", "NOTNULL",
@@ -70,7 +102,7 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 		source = srcTable.createSource(tableName, srcDBName);
 		tarSource = tarTable.createSource(tableName, tarDBName);
 		target = tarTable.createTarget(targetName, false);
-		((Element) target.selectSingleNode("TARGETFIELD[@NAME='HY_ID']")).addAttribute("KEYTYPE", "PRIMARY KEY")
+		((Element) target.selectSingleNode("TARGETFIELD[@NAME='" + hy_id + "']")).addAttribute("KEYTYPE", "PRIMARY KEY")
 				.addAttribute("NULLABLE", "NOTNULL");
 
 		// 构造中间组件

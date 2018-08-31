@@ -650,4 +650,13 @@ public class InfaTable {
 		return sb.toString();
 	}
 
+	public boolean hasCol(String colname) {
+		for (InfaCol col : this.cols) {
+			if (colname.equals(col.getColumnName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

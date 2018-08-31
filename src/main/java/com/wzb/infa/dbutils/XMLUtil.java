@@ -64,7 +64,9 @@ public class XMLUtil {
 		OutputFormat format = new OutputFormat("    ", true);
 		format.setEncoding("GBK");
 		File xmloutFile = new File(toFileName);
+		
 		XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(xmloutFile), format);
+		
 		Document doc = createDocument();
 		Element folder = (Element) doc.selectSingleNode("//FOLDER");
 

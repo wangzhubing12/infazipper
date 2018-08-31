@@ -11,6 +11,7 @@ import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
+import com.wzb.infa.properties.InfaProperty;
 
 public class InfaZipperXML extends BaseInfaXML implements InfaXML {
 
@@ -20,15 +21,17 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML {
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
 		super();
 		logger.debug("begin InfaZipperXML:" + tableName);
-		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
+
+		InfaProperty infaProperty = InfaProperty.getInstance();
+		String targetName = infaProperty.getProperty("target.prefix", "") + tableName;
 		if (targetName.length() > 30) {
 			targetName = targetName.substring(0, 30);
 		}
-		String sqlFilter = InfaUtil.infaProperty.getProperty("sql.filter", "");
-		String srcDBName = InfaUtil.infaProperty.getProperty("target.dbname", "TARDB");
-		String tarDBName = InfaUtil.infaProperty.getProperty("target.dbname", "SRCDB");
-		String mappingName = InfaUtil.infaProperty.getProperty("map.prefix", "M_") + tableName
-				+ InfaUtil.infaProperty.getProperty("map.suffix", "_INC");
+		String sqlFilter = infaProperty.getProperty("sql.filter", "");
+		String srcDBName = infaProperty.getProperty("target.dbname", "TARDB");
+		String tarDBName = infaProperty.getProperty("target.dbname", "SRCDB");
+		String mappingName = infaProperty.getProperty("map.prefix", "M_") + tableName
+				+ infaProperty.getProperty("map.suffix", "_INC");
 
 		InfaTable srcTable = new InfaTable(owner, tableName);
 		if (!srcTable.isHasPk()) {
@@ -43,18 +46,40 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML {
 		String crc32 = srcTable.getCRC32String();
 		// String pkString = srcTable.getPkString();
 		{
+			String _qysj;
+			String _sxsj;
+			String _jlzt;
+			// 先看是否强制使用配置文件中的配置
+			String force = infaProperty.getProperty("zipper.col.force", "false").toUpperCase();
+			if ("TRUE".equals(force)) {
+				// 如果强制用配置文件中的配置(强制又不指定，仍然用默认的三个字段)
+				_qysj = infaProperty.getProperty("zipper.col.qysj", "QYSJ").toUpperCase();
+				_sxsj = infaProperty.getProperty("zipper.col.sxsj", "SXSJ").toUpperCase();
+				_jlzt = infaProperty.getProperty("zipper.col.jlzt", "JLZT").toUpperCase();
+			} else {
+				// 不强制用配置文件中的配置
+
+				// 先设置默认使用的值
+				_qysj = "QYSJ";
+				_sxsj = "SXSJ";
+				_jlzt = "JLZT";
+				// 如果某个字段已经存在于源表中，就从配置文件中取，如果配置文件中没有配置，用名称+"_$"
+				if (tarTable.hasCol(_qysj)) {
+					_qysj = infaProperty.getProperty("zipper.col.qysj", "QYSJ_$").toUpperCase();
+				} else if (tarTable.hasCol(_sxsj)) {
+					_sxsj = infaProperty.getProperty("zipper.col.sxsj", "SXSJ_$").toUpperCase();
+				} else if (tarTable.hasCol(_jlzt)) {
+					_jlzt = infaProperty.getProperty("zipper.col.jlzt", "JLZT_$").toUpperCase();
+				}
+			}
 			// ADD COLS
 			int infaTableColSize = tarTable.getCols().size();
-
-			qysj = new InfaCol("QYSJ", "", "DATE", "19", "0", "0", "NOTNULL", String.valueOf(infaTableColSize + 1),
+			qysj = new InfaCol(_qysj, "", "DATE", "19", "0", "0", "NOTNULL", String.valueOf(infaTableColSize + 1),
 					"NOT A KEY");
-
-			sxsj = new InfaCol("SXSJ", "", "DATE", "19", "0", "0", "NULL", String.valueOf(infaTableColSize + 2),
+			sxsj = new InfaCol(_sxsj, "", "DATE", "19", "0", "0", "NULL", String.valueOf(infaTableColSize + 2),
 					"NOT A KEY");
-
-			jlzt = new InfaCol("JLZT", "", "VARCHAR2", "1", "0", "0", "NOTNULL", String.valueOf(infaTableColSize + 3),
+			jlzt = new InfaCol(_jlzt, "", "VARCHAR2", "1", "0", "0", "NOTNULL", String.valueOf(infaTableColSize + 3),
 					"NOT A KEY");
-
 			crc32Col = new InfaCol("CRC32", "", "varchar2", "32", "0", "0", "NOTNULL",
 					String.valueOf(infaTableColSize + 4), "NOT A KEY");
 
