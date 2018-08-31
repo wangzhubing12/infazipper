@@ -41,13 +41,13 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 
 		if (addHyFlag) {
 			// ADD COLS
-			InfaCol hyid = new InfaCol("HY_ID", "", "varchar2", "24", "0", "0", "NOT NULL",
+			InfaCol hyid = new InfaCol("HY_ID", "", "varchar2", "24", "0", "0", "NOTNULL",
 					String.valueOf(infaTableColSize + 1), "NOT A KEY");
 
-			InfaCol hyUpdateDate = new InfaCol("HY_UPDATE_DATE", "", "DATE", "19", "0", "0", "NOT NULL",
+			InfaCol hyUpdateDate = new InfaCol("HY_UPDATE_DATE", "", "DATE", "19", "0", "0", "NOTNULL",
 					String.valueOf(infaTableColSize + 2), "NOT A KEY");
 
-			InfaCol hyUpdateFlag = new InfaCol("HY_UPDATE_FLAG", "", "VARCHAR2", "1", "0", "0", "NOT NULL",
+			InfaCol hyUpdateFlag = new InfaCol("HY_UPDATE_FLAG", "", "VARCHAR2", "1", "0", "0", "NOTNULL",
 					String.valueOf(infaTableColSize + 3), "NOT A KEY");
 			// TARGET ADD COLS
 			target.add(hyid.createTargetField(false));
