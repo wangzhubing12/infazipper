@@ -16,8 +16,6 @@ import com.wzb.infa.properties.InfaProperty;
 
 public class InfaAddXML extends BaseInfaXML implements InfaXML {
 
-	private Element tarSource;
-
 	public static Logger logger = Logger.getLogger(InfaAddXML.class);
 
 	public InfaAddXML(String owner, String tableName)
