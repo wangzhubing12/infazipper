@@ -123,15 +123,24 @@ public class APP {
 			logger.debug("Table List File Name:" + tableListFileName);
 			tableListReader = new BufferedReader(new InputStreamReader(new FileInputStream(tableListFileName)));
 
+			String line;
 			String table;
 			String tarTable;
-			while ((table = tableListReader.readLine()) != null) {
-				if (table.length() == 0)
+			while ((line = tableListReader.readLine()) != null) {
+				if (line.length() == 0)
 					continue;
-				tarTable = targetTabPrefix + table.trim().toUpperCase();
+				// target table 长度，需要判断源表是否带有OWNER，只取表名部分
+				if (line.contains(".")) {
+					tarTable = targetTabPrefix + line.split("\\.")[1].trim().toUpperCase();
 
+				} else {
+					tarTable = targetTabPrefix + line.trim().toUpperCase();
+
+				}
 				if (tarTable.length() > 30)
 					tarTable = tarTable.substring(0, 30);
+
+				table = line.trim().toUpperCase();
 
 				if (!tarTableList.contains(tarTable)) {
 					tarTableList.add(tarTable);
