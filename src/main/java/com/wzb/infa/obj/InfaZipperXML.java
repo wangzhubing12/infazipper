@@ -64,9 +64,11 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML {
 				// 如果默认的字段已经存在于源表中,用名称+"_$"
 				if (tarTable.hasCol(_qysj)) {
 					_qysj = "QYSJ_$";
-				} else if (tarTable.hasCol(_sxsj)) {
+				}
+				if (tarTable.hasCol(_sxsj)) {
 					_sxsj = "SXSJ_$";
-				} else if (tarTable.hasCol(_jlzt)) {
+				}
+				if (tarTable.hasCol(_jlzt)) {
 					_jlzt = "JLZT_$";
 				}
 			}

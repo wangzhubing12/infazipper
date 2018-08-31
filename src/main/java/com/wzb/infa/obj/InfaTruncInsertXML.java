@@ -67,9 +67,11 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 				// 如果默认的字段已经存在于源表中,用名称+"_$"
 				if (infaTable.hasCol(hy_id)) {
 					hy_id = "HY_ID_$";
-				} else if (infaTable.hasCol(hy_update_date)) {
+				}
+				if (infaTable.hasCol(hy_update_date)) {
 					hy_update_date = "HY_UPDATE_DATE_$";
-				} else if (infaTable.hasCol(hy_update_flag)) {
+				}
+				if (infaTable.hasCol(hy_update_flag)) {
 					hy_update_flag = "HY_UPDATE_FLAG_$";
 				}
 			}

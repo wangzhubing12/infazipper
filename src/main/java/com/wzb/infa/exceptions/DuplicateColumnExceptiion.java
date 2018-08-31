@@ -3,7 +3,7 @@ package com.wzb.infa.exceptions;
 public class DuplicateColumnExceptiion extends Exception {
 
 	public DuplicateColumnExceptiion(String string) {
-		super();
+		super(string);
 	}
 
 	/**

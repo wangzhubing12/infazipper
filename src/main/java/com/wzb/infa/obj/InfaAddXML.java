@@ -59,7 +59,7 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 			hy_id = infaProperty.getProperty("add.col.hy_id", "HY_ID").toUpperCase();
 			hy_update_date = infaProperty.getProperty("add.col.hy_update_date", "HY_UPDATE_DATE").toUpperCase();
 			hy_update_flag = infaProperty.getProperty("add.col.hy_update_flag", "HY_UPDATE_FLAG").toUpperCase();
-		
+
 			if ("TRUE".equals(force)) {
 				// 如果强制用配置文件中的配置,直接用上面配置文件中的名称
 			} else {
@@ -68,9 +68,11 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 				// 如果默认的字段已经存在于源表中,用名称+"_$"
 				if (tarTable.hasCol(hy_id)) {
 					hy_id = "HY_ID_$";
-				} else if (tarTable.hasCol(hy_update_date)) {
+				}
+				if (tarTable.hasCol(hy_update_date)) {
 					hy_update_date = "HY_UPDATE_DATE_$";
-				} else if (tarTable.hasCol(hy_update_flag)) {
+				}
+				if (tarTable.hasCol(hy_update_flag)) {
 					hy_update_flag = "HY_UPDATE_FLAG_$";
 				}
 			}
@@ -96,7 +98,6 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 			} catch (DuplicateColumnExceptiion e) {
 				logger.fatal(e.getMessage());
 			}
-
 
 		}
 
