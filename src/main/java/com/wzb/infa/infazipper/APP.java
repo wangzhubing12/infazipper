@@ -53,10 +53,10 @@ public class APP {
 				+ infaProperty.getProperty("xml.output", "gen.xml").toLowerCase(); // 生成的文件名
 		String errorFileName = infaProperty.getProperty("work.dir")
 				+ infaProperty.getProperty("tables.error", "infaxml_error.log").toLowerCase(); // 生成的文件名
-		
-		//设置报错写入到日志文件的文件名
-		((FileAppender)LogManager.getRootLogger().getAppender("errorfile")).setFile(errorFileName);
-		
+
+		// 设置报错写入到日志文件的文件名
+		((FileAppender) LogManager.getRootLogger().getAppender("errorfile")).setFile(errorFileName);
+
 		int size = tableLIst.size(); // 总的表数量
 		int errorSize = 0; // 当前报错的表数量
 		int sucessSize = 0;// 当前成功的表数量
@@ -71,7 +71,7 @@ public class APP {
 			tableSize++;
 
 			try {
-				//创建XML并加入到ArrayList<InfaXML>
+				// 创建XML并加入到ArrayList<InfaXML>
 				xmls.add(xmlUtil.createInfaXML(table, mappingType));
 				logger.debug("success!");
 				sucessSize++;
@@ -108,18 +108,37 @@ public class APP {
 	 * 获取要生成的表清单
 	 */
 	private HashSet<String> getTableList() {
-		HashSet<String> tableList = new HashSet<>();// 保存要生成的表清单
-		BufferedReader tableListReader = null;// 读取要生成的表名清单的Reader
-		try {
+		// 保存要生成的表清单
+		HashSet<String> tableList = new HashSet<>();
+		// 保存要生成的目标表清单，判断是否有多个源表加上前缀在截取30位后对应相同目标表
+		HashSet<String> tarTableList = new HashSet<>();
+		// 读取要生成的表名清单的Reader
+		BufferedReader tableListReader = null;
+		// 目标表前缀
+		String targetTabPrefix = InfaProperty.getInstance().getProperty("target.prefix", "");
 
-			String propertieFileName = InfaProperty.getInstance().getProperty("work.dir")
+		try {
+			String tableListFileName = InfaProperty.getInstance().getProperty("work.dir")
 					+ InfaProperty.getInstance().getProperty("tables");
-			logger.debug("Property File Name:" + propertieFileName);
-			tableListReader = new BufferedReader(new InputStreamReader(new FileInputStream(propertieFileName)));
+			logger.debug("Table List File Name:" + tableListFileName);
+			tableListReader = new BufferedReader(new InputStreamReader(new FileInputStream(tableListFileName)));
 
 			String table;
+			String tarTable;
 			while ((table = tableListReader.readLine()) != null) {
-				tableList.add(table.trim().toUpperCase());
+				if (table.length() == 0)
+					continue;
+				tarTable = targetTabPrefix + table.trim().toUpperCase();
+
+				if (tarTable.length() > 30)
+					tarTable = tarTable.substring(0, 30);
+
+				if (!tarTableList.contains(tarTable)) {
+					tarTableList.add(tarTable);
+					tableList.add(table.trim().toUpperCase());
+				} else {
+					logger.error("Same target table name found:" + tarTable + ",ignore this table!");
+				}
 			}
 		} catch (FileNotFoundException e) {
 			logger.error("找不到配置文件：" + e.getMessage());

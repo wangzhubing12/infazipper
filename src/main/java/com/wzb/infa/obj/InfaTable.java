@@ -11,6 +11,7 @@ import org.dom4j.Element;
 
 import com.wzb.infa.dbutils.DbUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
+import com.wzb.infa.exceptions.DuplicateColumnExceptiion;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 
@@ -659,4 +660,14 @@ public class InfaTable {
 		return false;
 	}
 
+	public InfaTable addCol(InfaCol colToAdd) throws DuplicateColumnExceptiion {
+
+		for (InfaCol col : this.cols) {
+			if (col.getColumnName().equals(colToAdd.getColumnName())) {
+				throw new DuplicateColumnExceptiion(this.tableName + "." + colToAdd.getColumnName());
+			}
+		}
+		this.cols.add(colToAdd);
+		return this;
+	}
 }

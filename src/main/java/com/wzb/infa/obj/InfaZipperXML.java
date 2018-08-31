@@ -51,25 +51,23 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML {
 			String _jlzt;
 			// 先看是否强制使用配置文件中的配置
 			String force = infaProperty.getProperty("zipper.col.force", "false").toUpperCase();
+			// 拿到配置文件中的配置(强制又不指定，用QYSJ字段)
+			_qysj = infaProperty.getProperty("zipper.col.qysj", "QYSJ").toUpperCase();
+			_sxsj = infaProperty.getProperty("zipper.col.sxsj", "SXSJ").toUpperCase();
+			_jlzt = infaProperty.getProperty("zipper.col.jlzt", "JLZT").toUpperCase();
 			if ("TRUE".equals(force)) {
-				// 如果强制用配置文件中的配置(强制又不指定，仍然用默认的三个字段)
-				_qysj = infaProperty.getProperty("zipper.col.qysj", "QYSJ").toUpperCase();
-				_sxsj = infaProperty.getProperty("zipper.col.sxsj", "SXSJ").toUpperCase();
-				_jlzt = infaProperty.getProperty("zipper.col.jlzt", "JLZT").toUpperCase();
+				// 如果强制用配置文件中的配置,直接用上面配置文件中的名称
+
 			} else {
 				// 不强制用配置文件中的配置
 
-				// 先设置默认使用的值
-				_qysj = "QYSJ";
-				_sxsj = "SXSJ";
-				_jlzt = "JLZT";
-				// 如果某个字段已经存在于源表中，就从配置文件中取，如果配置文件中没有配置，用名称+"_$"
+				// 如果默认的字段已经存在于源表中,用名称+"_$"
 				if (tarTable.hasCol(_qysj)) {
-					_qysj = infaProperty.getProperty("zipper.col.qysj", "QYSJ_$").toUpperCase();
+					_qysj = "QYSJ_$";
 				} else if (tarTable.hasCol(_sxsj)) {
-					_sxsj = infaProperty.getProperty("zipper.col.sxsj", "SXSJ_$").toUpperCase();
+					_sxsj = "SXSJ_$";
 				} else if (tarTable.hasCol(_jlzt)) {
-					_jlzt = infaProperty.getProperty("zipper.col.jlzt", "JLZT_$").toUpperCase();
+					_jlzt = "JLZT_$";
 				}
 			}
 			// ADD COLS

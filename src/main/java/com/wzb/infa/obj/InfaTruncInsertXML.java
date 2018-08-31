@@ -53,27 +53,24 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 		if (addHyFlag) {
 			// 先看是否强制使用配置文件中的配置
 			String force = infaProperty.getProperty("add.col.force", "false").toUpperCase();
+			// 拿到配置文件中的配置(强制又不指定，用HY_ID字段)
+			hy_id = infaProperty.getProperty("add.col.hy_id", "HY_ID").toUpperCase();
+			hy_update_date = infaProperty.getProperty("add.col.hy_update_date", "HY_UPDATE_DATE").toUpperCase();
+			hy_update_flag = infaProperty.getProperty("add.col.hy_update_flag", "HY_UPDATE_FLAG").toUpperCase();
+
 			if ("TRUE".equals(force)) {
-				// 如果强制用配置文件中的配置(强制又不指定，仍然用默认的三个字段)
-				hy_id = infaProperty.getProperty("add.col.hy_id", "HY_ID").toUpperCase();
-				hy_update_date = infaProperty.getProperty("add.col.hy_update_date", "HY_UPDATE_DATE").toUpperCase();
-				hy_update_flag = infaProperty.getProperty("add.col.hy_update_flag", "HY_UPDATE_FLAG").toUpperCase();
+				// 如果强制用配置文件中的配置,直接用上面配置文件中的名称
+
 			} else {
 				// 不强制用配置文件中的配置
 
-				// 先设置默认使用的值
-				hy_id = "HY_ID";
-				hy_update_date = "HY_UPDATE_DATE";
-				hy_update_flag = "HY_UPDATE_FLAG";
-				// 如果某个字段已经存在于源表中，就从配置文件中取，如果配置文件中没有配置，用名称+"_$"
+				// 如果默认的字段已经存在于源表中,用名称+"_$"
 				if (infaTable.hasCol(hy_id)) {
-					hy_id = infaProperty.getProperty("add.col.hy_id", "HY_ID_$").toUpperCase();
+					hy_id = "HY_ID_$";
 				} else if (infaTable.hasCol(hy_update_date)) {
-					hy_update_date = infaProperty.getProperty("add.col.hy_update_date", "HY_UPDATE_DATE_$")
-							.toUpperCase();
+					hy_update_date = "HY_UPDATE_DATE_$";
 				} else if (infaTable.hasCol(hy_update_flag)) {
-					hy_update_flag = infaProperty.getProperty("add.col.hy_update_flag", "HY_UPDATE_FLAG_$")
-							.toUpperCase();
+					hy_update_flag = "HY_UPDATE_FLAG_$";
 				}
 			}
 
