@@ -9,15 +9,17 @@ import org.dom4j.Element;
 
 import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
+import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 
-public class InfaZipperXML extends BaseInfaXML implements InfaXML{
+public class InfaZipperXML extends BaseInfaXML implements InfaXML {
 
 	public static Logger logger = Logger.getLogger(InfaZipperXML.class);
+
 	public InfaZipperXML(String owner, String tableName)
-			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
+			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
 		super();
-		logger.debug("begin InfaZipperXML:"+tableName);
+		logger.debug("begin InfaZipperXML:" + tableName);
 		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
 		if (targetName.length() > 30) {
 			targetName = targetName.substring(0, 30);
@@ -29,6 +31,9 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML{
 				+ InfaUtil.infaProperty.getProperty("map.suffix", "_INC");
 
 		InfaTable srcTable = new InfaTable(owner, tableName);
+		if (!srcTable.isHasPk()) {
+			throw new NoPrimaryKeyException(owner + "." + tableName + " NoPrimaryKey!");
+		}
 		InfaTable tarTable = srcTable.copy(targetName);
 
 		InfaCol qysj;
@@ -326,7 +331,7 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML{
 		// WORKFLOWVARIABLE
 		// session ATTRIBUTE
 		InfaUtil.createWorkflowVariableAndAttribute(workflow, session);
-		logger.debug("end InfaZipperXML:"+tableName);
+		logger.debug("end InfaZipperXML:" + tableName);
 	}
-	
+
 }

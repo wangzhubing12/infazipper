@@ -133,14 +133,34 @@ public class XMLUtil {
 
 		switch (xmlType) {
 		case "1":
-			xml = new InfaZipperXML(owner, sourceTablename);
+			try {
+				xml = new InfaZipperXML(owner, sourceTablename);
+			} catch (NoPrimaryKeyException e) {
+				String truncateIfAddError = infaProperty.getProperty("truncIfAddError", "NO");
+				if ("YES".equals(truncateIfAddError)) {
+					xml = new InfaTruncInsertXML(owner, sourceTablename, true);
+				} else {
+					throw e;
+				}
+			}
 			break;
 		case "2":
-			xml = new InfaAddXML(owner, sourceTablename);
+			try {
+				xml = new InfaAddXML(owner, sourceTablename);
+			} catch (NoPrimaryKeyException e) {
+				String truncateIfAddError = infaProperty.getProperty("truncIfAddError", "NO");
+				if ("YES".equals(truncateIfAddError)) {
+					xml = new InfaTruncInsertXML(owner, sourceTablename, true);
+				} else {
+					throw e;
+				}
+			}
 			break;
-
-		default:
+		case "3":
 			xml = new InfaTruncInsertXML(owner, sourceTablename, false);
+			break;
+		default:
+			xml = new InfaTruncInsertXML(owner, sourceTablename, true);
 			break;
 		}
 		logger.debug("end createInfaXML");

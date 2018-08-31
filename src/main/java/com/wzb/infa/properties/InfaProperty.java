@@ -10,13 +10,10 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.wzb.infa.infazipper.App;
-
 public class InfaProperty extends Properties {
 
 	/**
-	 * 单例模式，提供getInstance获取一个实例。
-	 * 提供addInfaProperty增加配置项
+	 * 单例模式，提供getInstance获取一个实例。 提供addInfaProperty增加配置项
 	 */
 	private static volatile InfaProperty infaProperty = null;
 	private static final long serialVersionUID = 1L;
@@ -29,7 +26,7 @@ public class InfaProperty extends Properties {
 		if (infaProperty == null) {
 			infaProperty = new InfaProperty();
 			try {
-				infaProperty.addInfaProperty(App.class.getResourceAsStream("/infa.xml"));
+				infaProperty.addInfaProperty(InfaProperty.class.getResourceAsStream("/infa.xml"));
 			} catch (DocumentException e) {
 				e.printStackTrace();
 			}
@@ -38,16 +35,17 @@ public class InfaProperty extends Properties {
 			return infaProperty;
 		}
 	}
-	
+
 	public InfaProperty addInfaProperty(String path) throws DocumentException {
 		try {
-			FileInputStream fs=new FileInputStream(path);
+			FileInputStream fs = new FileInputStream(path);
 			addInfaProperty(fs);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return infaProperty;
 	}
+
 	private void addInfaProperty(InputStream path) throws DocumentException {
 		// 使用dom4j解析infa.xml,读取默认配置文件
 		SAXReader reader = new SAXReader();

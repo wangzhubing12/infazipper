@@ -33,6 +33,9 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 				+ InfaUtil.infaProperty.getProperty("map.suffix", "_INC");
 
 		InfaTable srcTable = new InfaTable(owner, tableName);
+		if (!srcTable.isHasPk()) {
+			throw new NoPrimaryKeyException(owner + "." + tableName + " NoPrimaryKey!");
+		}
 		InfaTable tarTable = srcTable.copy(targetName);
 
 		InfaCol hyid;

@@ -11,6 +11,8 @@ import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.dom4j.DocumentException;
 
@@ -22,10 +24,11 @@ import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 import com.wzb.infa.obj.InfaXML;
 import com.wzb.infa.properties.InfaProperty;
 
-public class A1 {
-	private static final Logger logger = Logger.getLogger(A1.class);
+public class APP {
+	private static final Logger logger = Logger.getLogger(APP.class);
 
 	public static void main(String[] args) {
+
 		InfaProperty infaProperty = null;
 
 		// 获取配置文件
@@ -44,10 +47,16 @@ public class A1 {
 
 		XMLUtil xmlUtil = XMLUtil.getInstance(); // XML工具
 
-		A1 a1 = new A1();
+		APP a1 = new APP();
 		HashSet<String> tableLIst = a1.getTableList(); // 表清单
 		String fileName = infaProperty.getProperty("work.dir")
 				+ infaProperty.getProperty("xml.output", "gen.xml").toLowerCase(); // 生成的文件名
+		String errorFileName = infaProperty.getProperty("work.dir")
+				+ infaProperty.getProperty("tables.error", "infaxml_error.log").toLowerCase(); // 生成的文件名
+		
+		//设置报错写入到日志文件的文件名
+		((FileAppender)LogManager.getRootLogger().getAppender("errorfile")).setFile(errorFileName);
+		
 		int size = tableLIst.size(); // 总的表数量
 		int errorSize = 0; // 当前报错的表数量
 		int sucessSize = 0;// 当前成功的表数量

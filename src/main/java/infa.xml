@@ -114,7 +114,8 @@
 		<name>mapping.type</name>
 		<value>1</value>
 		<description>1：拉链表；2：增量对比抽取；2.1：增量对比+写删除日志表；
-		其他：全删全插（默认）</description>
+		3:全删全插+处理HY_ID等三个字段（HY_ID用表中第一个字段）
+		其他：原始全删全插（默认）</description>
 	</property>
 	<property>
 		<name>target.prefix</name>
@@ -151,7 +152,16 @@
 		<name>sql.filter</name>
 		<value>unit_id=$$unit_id</value>
 		<description>sql.filter,针对拉链表等，源和目标都有的部分</description>
+	</property>	
+	
+	<property>
+		<name>truncIfAddError</name>
+		<value>NO</value>
+		<description>如果是增量mapping报错，是否直接建立全量，YES 是、NO 否, 默认NO
+		注意不要配置map.suffix，自动默认用INC和ALL，否则全量的也用ALL了</description>
 	</property>		
+	
+		
  -->
  <!-- 以下配置从数据库取表结构、备注、主键等信息的表，oracle可以配置成all_tables之类的数据字典 
  	<property>
