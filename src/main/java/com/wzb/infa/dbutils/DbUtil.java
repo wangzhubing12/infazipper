@@ -40,7 +40,7 @@ public class DbUtil {
 		if (res != null) {
 			return res;
 		} else {
-			logger.warn(owner + "." + table + "[No Comments]");
+			logger.debug(owner + "." + table + "[No Comments]");
 			return "";
 		}
 	}

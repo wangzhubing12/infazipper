@@ -21,7 +21,7 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 	public InfaAddXML(String owner, String tableName)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
 		super();
-		logger.debug("begin InfaTruncInsertXML:" + tableName);
+		logger.debug("begin InfaAddXML:" + tableName);
 		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
 		if (targetName.length() > 30) {
 			targetName = targetName.substring(0, 30);
@@ -300,7 +300,7 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 		// WORKFLOWVARIABLE
 		// session ATTRIBUTE
 		InfaUtil.createWorkflowVariableAndAttribute(workflow, session);
-		logger.debug("end InfaTruncInsertXML:" + tableName);
+		logger.debug("end InfaAddXML:" + tableName);
 	}
 
 }

@@ -111,7 +111,7 @@ public class XMLUtil {
 
 	public InfaXML createInfaXML(String table, String xmlType)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
-		logger.debug("begin createInfaXML");
+		logger.debug("begin createInfaXML"+table);
 		InfaXML xml;
 		String username = infaProperty.getProperty("source.username").toUpperCase();
 		String sourceTablename;
@@ -138,6 +138,7 @@ public class XMLUtil {
 			} catch (NoPrimaryKeyException e) {
 				String truncateIfAddError = infaProperty.getProperty("truncIfAddError", "NO");
 				if ("YES".equals(truncateIfAddError)) {
+					logger.debug("make all mapping because truncIfAddError=YES");
 					xml = new InfaTruncInsertXML(owner, sourceTablename, true);
 				} else {
 					throw e;
@@ -150,6 +151,7 @@ public class XMLUtil {
 			} catch (NoPrimaryKeyException e) {
 				String truncateIfAddError = infaProperty.getProperty("truncIfAddError", "NO");
 				if ("YES".equals(truncateIfAddError)) {
+					
 					xml = new InfaTruncInsertXML(owner, sourceTablename, true);
 				} else {
 					throw e;

@@ -519,7 +519,7 @@ public class InfaTable {
 	 */
 	public InfaTable(String owner, String tableName) throws SQLException, CheckTableExistException {
 		super();
-		logger.debug("begin InfaTable" + tableName);
+		logger.debug("begin InfaTable:" + tableName);
 		this.owner = owner;
 		this.tableName = tableName;
 		InfaCol col;
@@ -555,7 +555,7 @@ public class InfaTable {
 		ResultSet rsPrimaryCols = dbUtil.getPrimaryCols(owner, tableName);
 
 		while (rsPrimaryCols.next()) {
-			logger.debug("find primary key" + tableName);
+			logger.debug("find primary key:" + tableName);
 			hasPk = true;
 			columnName = rsPrimaryCols.getString("COLUMN_NAME");
 			for (InfaCol ketCol : this.cols) {
@@ -564,10 +564,8 @@ public class InfaTable {
 				}
 			}
 		}
-		if(!hasPk) {
-			logger.debug("no primary key" + tableName);
-		}
-		logger.debug("end InfaTable" + tableName);
+
+		logger.debug("end InfaTable:" + tableName);
 	}
 
 	// 无参构造函数隐藏
@@ -642,11 +640,11 @@ public class InfaTable {
 				}
 
 			} catch (UnsupportedDatatypeException e) {
-				e.printStackTrace();
+				logger.error("UnsupportedDatatypeException:" + e.getMessage());
 			}
 		}
 		if (sb.length() == 0) {
-			throw new NoPrimaryKeyException(this.owner+"."+this.tableName+" NoPrimaryKey!");
+			throw new NoPrimaryKeyException(this.owner + "." + this.tableName + " NoPrimaryKey!");
 		}
 		sb.delete(sb.length() - 7, sb.length());
 		return sb.toString();

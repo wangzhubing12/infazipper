@@ -17,7 +17,7 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 	public InfaTruncInsertXML(String owner, String tableName, boolean addHyFlag)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
 		super();
-		logger.debug("begin InfaTruncInsertXML:"+tableName);
+		logger.debug("begin InfaTruncInsertXML:"+tableName+(addHyFlag?" WHIT HY_ID":""));
 		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
 		if (targetName.length() > 30) {
 			targetName = targetName.substring(0, 30);
