@@ -18,6 +18,7 @@ import org.dom4j.io.XMLWriter;
 import com.wzb.infa.exceptions.CheckTableExistException;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
+import com.wzb.infa.obj.InfaAddLogXML;
 import com.wzb.infa.obj.InfaAddXML;
 import com.wzb.infa.obj.InfaTruncInsertXML;
 import com.wzb.infa.obj.InfaXML;
@@ -150,6 +151,19 @@ public class XMLUtil {
 		case "2":
 			try {
 				xml = new InfaAddXML(owner, sourceTablename);
+			} catch (NoPrimaryKeyException e) {
+				String truncateIfAddError = infaProperty.getProperty("truncIfAddError", "NO");
+				if ("YES".equals(truncateIfAddError)) {
+					
+					xml = new InfaTruncInsertXML(owner, sourceTablename, true);
+				} else {
+					throw e;
+				}
+			}
+			break;
+                case "2.1":
+			try {
+				xml = new InfaAddLogXML(owner, sourceTablename);
 			} catch (NoPrimaryKeyException e) {
 				String truncateIfAddError = infaProperty.getProperty("truncIfAddError", "NO");
 				if ("YES".equals(truncateIfAddError)) {
