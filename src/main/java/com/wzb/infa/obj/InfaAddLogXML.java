@@ -24,6 +24,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
         logger.debug("begin InfaAddXML:" + tableName);
 
         InfaProperty infaProperty = InfaProperty.getInstance();
+        String deleteLogName = infaProperty.getProperty("add.delete.log", "ETL_DELETE_LOG").toUpperCase();
         String targetName = infaProperty.getProperty("target.prefix", "") + tableName;
         if (targetName.length() > 30) {
             targetName = targetName.substring(0, 30);
@@ -114,7 +115,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
         logCols.add(logPK);
         logCols.add(logContent);
 
-        InfaTable logTable = new InfaTable(owner, "ETL_DELETE_LOG", logCols);
+        InfaTable logTable = new InfaTable(owner, deleteLogName, logCols);
 
         // 源和目标
         source = srcTable.createSource(tableName, srcDBName);
@@ -123,7 +124,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
         ((Element) target.selectSingleNode("TARGETFIELD[@NAME='" + hy_id + "']")).addAttribute("KEYTYPE", "PRIMARY KEY")
                 .addAttribute("NULLABLE", "NOTNULL");
 
-        Element logTar = logTable.createTarget("ETL_DELETE_LOG", false);
+        Element logTar = logTable.createTarget(deleteLogName, false);
         // 构造中间组件
         Element srcQua = srcTable.createSourceQualifier("SQ_S" + tableName, sqlFilter);
         Element tarQua = tarTable.createSourceQualifier("SQ_T" + targetName, sqlFilter);
@@ -190,7 +191,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
         Element tarUpdateInst = InfaUtil.createTargetInstance("UPDATE_" + targetName, targetName);
         Element tarDeleteInst = InfaUtil.createTargetInstance("DELETE_" + targetName, targetName);
 
-        Element logTarInst = InfaUtil.createTargetInstance("ETL_DELETE_LOG", "ETL_DELETE_LOG");
+        Element logTarInst = InfaUtil.createTargetInstance(deleteLogName, deleteLogName);
 
         ArrayList<Element> connectors = new ArrayList<>();
         connectors.addAll(InfaUtil.createConnector(sSrcInst, source, srcQuaInst, srcQua));

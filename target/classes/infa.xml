@@ -244,6 +244,6 @@
 		<name>add.delete.log</name>
 		<value>recode_delete_log</value>
 		<description>增量比对删除记录,日志表的表名</description>
-	</property>
+    </property>
 	-->	
 </configuration>
