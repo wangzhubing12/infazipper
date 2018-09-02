@@ -114,7 +114,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
         logCols.add(logPK);
         logCols.add(logContent);
 
-        InfaTable logTable = new InfaTable(owner, tableName, logCols);
+        InfaTable logTable = new InfaTable(owner, "ETL_DELETE_LOG", logCols);
 
         // 源和目标
         source = srcTable.createSource(tableName, srcDBName);
@@ -123,7 +123,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
         ((Element) target.selectSingleNode("TARGETFIELD[@NAME='" + hy_id + "']")).addAttribute("KEYTYPE", "PRIMARY KEY")
                 .addAttribute("NULLABLE", "NOTNULL");
 
-        Element logTar = logTable.createTarget(targetName, false);
+        Element logTar = logTable.createTarget("ETL_DELETE_LOG", false);
         // 构造中间组件
         Element srcQua = srcTable.createSourceQualifier("SQ_S" + tableName, sqlFilter);
         Element tarQua = tarTable.createSourceQualifier("SQ_T" + targetName, sqlFilter);

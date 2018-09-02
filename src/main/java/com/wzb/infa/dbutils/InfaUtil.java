@@ -58,31 +58,31 @@ public class InfaUtil {
         String toFieldType = "TARGET".equals(toElement.getName()) ? "TARGETFIELD" : "TRANSFORMFIELD";
         ArrayList<Element> connectors = new ArrayList<>();
 
-        Element from;
-        Element to;
+        Element fromField;
+        Element toField;
 
         for (@SuppressWarnings("unchecked") Iterator<Element> it = fromElement.elementIterator(fromFieldType); it.hasNext();) {
 
-            from = it.next();
-            to = (Element) toElement.selectSingleNode(toFieldType + "[@NAME='" + from.attributeValue("NAME") + "']");
+            fromField = it.next();
+            toField = (Element) toElement.selectSingleNode(toFieldType + "[@NAME='" + fromField.attributeValue("NAME") + "']");
             //to没有对应的字段名称则跳过
-            if (to == null) {
+            if (toField == null) {
                 continue;
             }
             boolean linkfrom = false;// 判断前from的字段是否可拉出一条线
             boolean linkto = false;// 判断前to的字段是否可拉入一条线
             // 源为SOURCE时,或者存在OUTPUT的字段则可以连接
-            if ("SOURCE".equals(fromElement.getName()) || from.attributeValue("PORTTYPE").contains("OUTPUT")) {
+            if ("SOURCE".equals(fromElement.getName()) || fromField.attributeValue("PORTTYPE").contains("OUTPUT")) {
                 linkfrom = true;
             }
             // 目标为TARGET时,或者存在INPUT的字段则可以连接
-            if ("TARGET".equals(toElement.getName()) || to.attributeValue("PORTTYPE").contains("INPUT")) {
+            if ("TARGET".equals(toElement.getName()) || toField.attributeValue("PORTTYPE").contains("INPUT")) {
                 linkto = true;
             }
 
             if (linkfrom && linkto) {
-                connectors.add(createConnector(from.attributeValue("NAME"), fromInstanceName, fromInstancetype,
-                        from.attributeValue("NAME"), toInstanceName, toInstancetype));
+                connectors.add(createConnector(fromField.attributeValue("NAME"), fromInstanceName, fromInstancetype,
+                        fromField.attributeValue("NAME"), toInstanceName, toInstancetype));
             }
         }
 
