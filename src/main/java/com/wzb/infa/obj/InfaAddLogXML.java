@@ -105,7 +105,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
                 "1", "NOT A KEY");
         InfaCol logTableName = new InfaCol("TABLE_NAME", "", "VARCHAR2", "30", "0", "0", "NOTNULL",
                 "2", "NOT A KEY");
-        InfaCol logPK = new InfaCol("PRIMARY_COLS", "", "VARCHAR2", "128", "0", "0", "NOTNULL",
+        InfaCol logPK = new InfaCol("PRIMARY_KEY", "", "VARCHAR2", "128", "0", "0", "NOTNULL",
                 "3", "NOT A KEY");
         InfaCol logContent = new InfaCol("CONTENT", "", "CLOB", tarTable.getColsLenth(), "0", "0", "NOTNULL",
                 "4", "NOT A KEY");
@@ -157,7 +157,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
             logExp.add(logDeleteDate.createExpressionField("SYSDATE"));
             logExp.add(logTableName.createExpressionField("$PM" + tarTable.getName() + "@TableName"));
             logExp.add(logPK.createExpressionField(pkString));
-            logExp.add(logContent.createExpressionField(crc32.substring(5, crc32.length() - 1)));
+            logExp.add(logContent.createExpressionField(crc32.substring(6, crc32.length() - 1)));
         }
         mapping = InfaUtil.createMapping(mappingName);
 
