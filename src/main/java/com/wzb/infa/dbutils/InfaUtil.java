@@ -162,7 +162,7 @@ public class InfaUtil {
 
         if ("Source Definition".equals(transformationType)) {
             sessTransformationInst.addAttribute("ISREPARTITIONPOINT", "NO");
-
+            sessTransformationInst.remove(sessTransformationInst.attribute("PARTITIONTYPE"));
         }
 
         return sessTransformationInst;
