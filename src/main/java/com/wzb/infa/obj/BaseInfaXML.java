@@ -1,5 +1,6 @@
 package com.wzb.infa.obj;
 
+import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
@@ -12,7 +13,7 @@ public abstract class BaseInfaXML implements InfaXML {
 	protected Element target;
 	protected Element mapping;
 	protected Element workflow;
-	public static Logger logger = Logger.getLogger(BaseInfaXML.class);
+	private static final Logger logger = Logger.getLogger(BaseInfaXML.class);
 
 	@Override
 	public String getWorkflowName() {
@@ -42,11 +43,12 @@ public abstract class BaseInfaXML implements InfaXML {
 			xmlWriter.write(this.getTarget());
 			xmlWriter.write(this.getMapping());
 			xmlWriter.write(this.getWorkflow());
-		} catch (Exception e) {
+		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
 	}
 
+        @Override
 	public Element getSource() {
 		return source;
 	}
@@ -55,6 +57,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		this.source = source;
 	}
 
+        @Override
 	public Element getTarSource() {
 		return tarSource;
 	}
@@ -63,6 +66,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		this.tarSource = tarSource;
 	}
 
+        @Override
 	public Element getTarget() {
 		return target;
 	}
@@ -71,6 +75,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		this.target = target;
 	}
 
+        @Override
 	public Element getMapping() {
 		return mapping;
 	}
@@ -79,6 +84,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		this.mapping = mapping;
 	}
 
+        @Override
 	public Element getWorkflow() {
 		return workflow;
 	}
