@@ -66,9 +66,9 @@ public class InfaUtil {
             fromField = it.next();
             toField = (Element) toElement.selectSingleNode(toFieldType + "[@NAME='" + fromField.attributeValue("NAME") + "']");
             //to没有对应的字段名称则跳过
-            if (toField == null) {
-                continue;
-            }
+//            if (toField == null) {
+//                continue;
+//            }
             boolean linkfrom = false;// 判断前from的字段是否可拉出一条线
             boolean linkto = false;// 判断前to的字段是否可拉入一条线
             // 源为SOURCE时,或者存在OUTPUT的字段则可以连接
