@@ -54,35 +54,38 @@ public class InfaUtil {
         String fromInstancetype = fromInstance.attributeValue("TRANSFORMATION_TYPE");
         String toInstanceName = toInstance.attributeValue("NAME");
         String toInstancetype = toInstance.attributeValue("TRANSFORMATION_TYPE");
+        String fromFieldType = "SOURCE".equals(fromElement.getName()) ? "SOURCEFIELD" : "TRANSFORMFIELD";
+        String toFieldType = "TARGET".equals(toElement.getName()) ? "TARGETFIELD" : "TRANSFORMFIELD";
         ArrayList<Element> connectors = new ArrayList<>();
 
         Element from;
         Element to;
-        for (@SuppressWarnings("unchecked") Iterator<Element> it = fromElement.elementIterator("SOURCEFIELD"); it.hasNext();) {
+
+        for (@SuppressWarnings("unchecked") Iterator<Element> it = fromElement.elementIterator(fromFieldType); it.hasNext();) {
+
             from = it.next();
-            to = (Element) toElement.selectSingleNode("TRANSFORMFIELD[@NAME='" + from.attributeValue("NAME") + "']");
-            if (to.attributeValue("PORTTYPE").contains("INPUT")) {
-                connectors.add(createConnector(from.attributeValue("NAME"), fromInstanceName, fromInstancetype,
-                        from.attributeValue("NAME"), toInstanceName, toInstancetype));
-            }
-        }
-        boolean linkto = false;// 判断是否创建连接，如目标没有INPUT时不连接
-        // 目标为TARGET时可以连接
-        if ("TARGET".equals(toElement.getName())) {
-            linkto = true;
-        }
-        for (@SuppressWarnings("unchecked") Iterator<Element> it = fromElement.elementIterator("TRANSFORMFIELD"); it.hasNext();) {
-            from = it.next();
-            to = (Element) toElement.selectSingleNode("TRANSFORMFIELD[@NAME='" + from.attributeValue("NAME") + "']");
+            to = (Element) toElement.selectSingleNode(toFieldType + "[@NAME='" + from.attributeValue("NAME") + "']");
+            //to没有对应的字段名称则跳过
             if (to == null) {
                 continue;
             }
-            if (linkto || to.attributeValue("PORTTYPE").contains("INPUT")) {
+            boolean linkfrom = false;// 判断前from的字段是否可拉出一条线
+            boolean linkto = false;// 判断前to的字段是否可拉入一条线
+            // 源为SOURCE时,或者存在OUTPUT的字段则可以连接
+            if ("SOURCE".equals(fromElement.getName()) || from.attributeValue("PORTTYPE").contains("OUTPUT")) {
+                linkfrom = true;
+            }
+            // 目标为TARGET时,或者存在INPUT的字段则可以连接
+            if ("TARGET".equals(toElement.getName()) || to.attributeValue("PORTTYPE").contains("INPUT")) {
+                linkto = true;
+            }
+
+            if (linkfrom && linkto) {
                 connectors.add(createConnector(from.attributeValue("NAME"), fromInstanceName, fromInstancetype,
                         from.attributeValue("NAME"), toInstanceName, toInstancetype));
             }
-
         }
+
         return connectors;
     }
 
@@ -309,7 +312,6 @@ public class InfaUtil {
     public static Element createWorkflowLink(String fromTaskName, String toTaskName) {
         Element workflowLink = DocumentHelper.createElement("WORKFLOWLINK").addAttribute("CONDITION", "")
                 .addAttribute("FROMTASK", fromTaskName).addAttribute("TOTASK", toTaskName);
-        ;
         return workflowLink;
     }
 
