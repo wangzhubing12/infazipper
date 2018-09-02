@@ -165,7 +165,7 @@ public class XMLUtil {
 			try {
 				xml = new InfaAddLogXML(owner, sourceTablename);
 			} catch (NoPrimaryKeyException e) {
-				String truncateIfAddError = infaProperty.getProperty("truncIfAddError", "NO");
+				String truncateIfAddError = infaProperty.getProperty("AddIfIncError", "NO");
 				if ("YES".equals(truncateIfAddError)) {
 					
 					xml = new InfaTruncInsertXML(owner, sourceTablename, true);

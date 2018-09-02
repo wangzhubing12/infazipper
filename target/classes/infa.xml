@@ -155,7 +155,7 @@
 	</property>	
 	
 	<property>
-		<name>truncIfAddError</name>
+		<name>AddIfIncError</name>
 		<value>NO</value>
 		<description>如果是增量mapping报错，是否直接建立全量，YES 是、NO 否, 默认NO
 		注意不要配置map.suffix，自动默认用INC和ALL，否则全量的也用ALL了</description>
@@ -242,8 +242,8 @@
     </property>
     <property>
 		<name>add.delete.log</name>
-		<value>recode_delete_log</value>
-		<description>增量比对删除记录,日志表的表名</description>
+		<value>ETL_DELETE_LOG</value>
+		<description>增量比对删除记录,日志表的表名，默认ETL_DELETE_LOG</description>
     </property>
 	-->	
 </configuration>
