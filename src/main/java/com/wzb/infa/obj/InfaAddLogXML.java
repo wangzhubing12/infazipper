@@ -339,7 +339,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
         session.add(tarInsertInstS);
         session.add(tarUpdateInstS);
         session.add(tarDeleteInstS);
-        session.add(logTarInstSE);
+        session.add(logTarInstS);
 
         session.add(configreference);
 
@@ -350,7 +350,8 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
         session.add(tarInsertInstSE);
         session.add(tarUpdateInstSE);
         session.add(tarDeleteInstSE);
-
+        session.add(logTarInstSE);
+        
         // session ATTRIBUTE
         InfaUtil.createSessionAttribute(session);
 
