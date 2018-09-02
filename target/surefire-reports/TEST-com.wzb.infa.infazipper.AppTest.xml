@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.wzb.infa.infazipper.AppTest" time="0.004" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.wzb.infa.infazipper.AppTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_65\jre\bin"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\jdk1.8.0_65\jre\bin"/>
     <property name="java.vm.version" value="25.65-b01"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\Administrator\git\infazipper"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -14,49 +14,46 @@
     <property name="user.script" value=""/>
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.os.patch.level" value=""/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\wangzhubing\Documents\NetBeansProjects\infazipper"/>
+    <property name="user.dir" value="C:\Users\Administrator\git\infazipper"/>
     <property name="java.runtime.version" value="1.8.0_65-b17"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_65\jre\lib\endorsed"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\jdk1.8.0_65\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="C:\Users\WANGZH~1\AppData\Local\Temp\"/>
+    <property name="java.io.tmpdir" value="C:\Users\ADMINI~1\AppData\Local\Temp\1\"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
-    <property name="os.name" value="Windows 10"/>
-    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
-    <property name="classworlds.conf" value="C:\usr\apache-maven-3.5.3\bin\..\bin\m2.conf"/>
+    <property name="os.name" value="Windows Server 2008 R2"/>
+    <property name="classworlds.conf" value="C:\Users\Administrator\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf7072512525382098320.tmp"/>
     <property name="sun.jnu.encoding" value="GBK"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_65\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\TortoiseSVN\bin;C:\Users\wangzhubing\AppData\Local\Microsoft\WindowsApps;C:\usr\scala-2.11.8\bin;C:\usr\UnxUtilss\bin;C:\usr\UnxUtilss\usr\local\wbin;C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\MinGW\mingw32\bin;C:\usr\apache-maven-3.5.3\bin;;."/>
-    <property name="maven.conf" value="C:\usr\apache-maven-3.5.3\bin\../conf"/>
+    <property name="java.library.path" value="C:\Program Files\jdk1.8.0_65\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/jdk1.8.0_65/bin/../jre/bin/server;C:/jdk1.8.0_65/bin/../jre/bin;C:/jdk1.8.0_65/bin/../jre/lib/amd64;.;C:\jdk1.8.0_65\bin;C:\jdk1.8.0_65\lib;;C:\Users\Administrator\eclipse\java-oxygen\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="10.0"/>
-    <property name="library.jansi.path" value="C:\usr\apache-maven-3.5.3\bin\..\lib\jansi-native"/>
-    <property name="user.home" value="C:\Users\wangzhubing"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\Administrator"/>
     <property name="user.timezone" value="Asia/Shanghai"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
-    <property name="file.encoding" value="UTF-8"/>
-    <property name="user.name" value="wangzhubing"/>
-    <property name="java.class.path" value="C:\usr\apache-maven-3.5.3\bin\..\boot\plexus-classworlds-2.5.2.jar"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="user.name" value="Administrator"/>
+    <property name="java.class.path" value="C:\apache-maven-3.5.3\boot\plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_65\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install"/>
+    <property name="java.home" value="C:\Program Files\jdk1.8.0_65\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B -gs C:\apache-maven-3.5.3\conf\settings.xml -s C:\apache-maven-3.5.3\conf\settings.xml install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="zh"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.8.0_65"/>
-    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
-    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_65\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_65\jre\classes"/>
+    <property name="java.ext.dirs" value="C:\Program Files\jdk1.8.0_65\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\jdk1.8.0_65\jre\lib\resources.jar;C:\Program Files\jdk1.8.0_65\jre\lib\rt.jar;C:\Program Files\jdk1.8.0_65\jre\lib\sunrsasign.jar;C:\Program Files\jdk1.8.0_65\jre\lib\jsse.jar;C:\Program Files\jdk1.8.0_65\jre\lib\jce.jar;C:\Program Files\jdk1.8.0_65\jre\lib\charsets.jar;C:\Program Files\jdk1.8.0_65\jre\lib\jfr.jar;C:\Program Files\jdk1.8.0_65\jre\classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="C:\usr\apache-maven-3.5.3\bin\.."/>
+    <property name="maven.home" value="C:\apache-maven-3.5.3"/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -64,5 +61,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.wzb.infa.infazipper.AppTest" name="testApp" time="0.004"/>
+  <testcase classname="com.wzb.infa.infazipper.AppTest" name="testApp" time="0.002"/>
 </testsuite>

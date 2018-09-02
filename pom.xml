@@ -80,6 +80,7 @@
                 <includes>
                     <include>log4j.properties</include>
                     <include>infa.xml</include>
+                    <include>ETL_DELETE_LOG.XML</include>
                 </includes>
             </resource>
         </resources>    
