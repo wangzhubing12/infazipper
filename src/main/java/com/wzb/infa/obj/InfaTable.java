@@ -631,9 +631,15 @@ public class InfaTable {
     }
 
     // 无参构造函数隐藏
-    public InfaTable(String owner,String tablename,ArrayList<InfaCol> cols) {
-    }    
-    
+    public InfaTable(String owner, String tablename, ArrayList<InfaCol> cols) {
+        super();
+        logger.debug("begin InfaTable from cols:" + tableName);
+        this.owner = owner;
+        this.tableName = tablename;
+        this.cols = cols;
+        logger.debug("end InfaTable from cols:" + tableName);
+    }
+
     // 无参构造函数隐藏
     private InfaTable() {
     }
