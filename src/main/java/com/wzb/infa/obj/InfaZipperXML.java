@@ -23,10 +23,7 @@ public class InfaZipperXML extends BaseInfaXML implements InfaXML {
 		logger.debug("begin InfaZipperXML:" + tableName);
 
 		InfaProperty infaProperty = InfaProperty.getInstance();
-		String targetName = infaProperty.getProperty("target.prefix", "") + tableName;
-		if (targetName.length() > 30) {
-			targetName = targetName.substring(0, 30);
-		}
+		String targetName = getTargetName(owner,tableName);
 		String sqlFilter = infaProperty.getProperty("sql.filter", "");
 		String srcDBName = infaProperty.getProperty("target.dbname", "TARDB");
 		String tarDBName = infaProperty.getProperty("target.dbname", "SRCDB");

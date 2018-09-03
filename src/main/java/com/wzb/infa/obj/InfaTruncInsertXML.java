@@ -22,11 +22,8 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 		InfaProperty infaProperty = InfaProperty.getInstance();
 		logger.debug("begin InfaTruncInsertXML:" + tableName + (addHyFlag ? " WHIT HY_ID" : ""));
 
-		String targetName = InfaUtil.infaProperty.getProperty("target.prefix", "") + tableName;
-		if (targetName.length() > 30) {
-			logger.warn(targetName + " to long,change to " + targetName.substring(0, 30));
-			targetName = targetName.substring(0, 30);
-		}
+		String targetName = getTargetName(owner,tableName);
+		
 		String sourceQualifierName = InfaUtil.infaProperty.getProperty("qualifier.prefix", "SQ_") + tableName;
 		String expressionName = "EXPTRANS";
 		String sqlFilter = InfaUtil.infaProperty.getProperty("sql.filter", "");

@@ -25,10 +25,7 @@ public class InfaAddLogXML extends BaseInfaXML implements InfaXML {
 
         InfaProperty infaProperty = InfaProperty.getInstance();
         String deleteLogName = infaProperty.getProperty("add.delete.log", "ETL_DELETE_LOG").toUpperCase();
-        String targetName = infaProperty.getProperty("target.prefix", "") + tableName;
-        if (targetName.length() > 30) {
-            targetName = targetName.substring(0, 30);
-        }
+        String targetName = getTargetName(owner,tableName);
         String sqlFilter = infaProperty.getProperty("sql.filter", "");
         String srcDBName = infaProperty.getProperty("target.dbname", "TARDB");
         String tarDBName = infaProperty.getProperty("target.dbname", "SRCDB");

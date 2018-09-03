@@ -45,6 +45,24 @@ public class DbUtil {
 		}
 	}
 
+	public String getTargetTable(String owner, String table) throws SQLException {
+		pstmTargetTableName.setString(1, owner);
+		pstmTargetTableName.setString(2, table);
+		String res;
+		try (ResultSet rs = pstmTargetTableName.executeQuery()) {
+			res = null;
+			while (rs.next()) {
+				res = rs.getString(1);
+			}
+		}
+		if (res != null) {
+			return res;
+		} else {
+			logger.debug(owner + "." + table + " can not find target name!");
+			return "";
+		}
+	}
+
 	public boolean isTabExist(String owner, String table) throws SQLException {
 		pstmTabExist.setString(1, owner);
 		pstmTabExist.setString(2, table);
@@ -81,22 +99,30 @@ public class DbUtil {
 			} catch (SQLException e) {
 			}
 		}
-		if (conn != null) {
+		if (pstmTargetTableName != null) {
 			try {
-				conn.close();
+				pstmTargetTableName.close();
 			} catch (SQLException e) {
 			}
 		}
+		if (srcConn != null) {
+			try {
+				srcConn.close();
+			} catch (SQLException e) {
+			}
+		}
+
 	}
 
 	public static Logger logger = Logger.getLogger(DbUtil.class);
 	public static DbUtil dbUtil = null;
-	private Connection conn = null;
+	private Connection srcConn = null;
 	private InfaProperty infaProperty = null;
 	private PreparedStatement pstmTabCols = null;
 	private PreparedStatement pstmPrimaryCols = null;
 	private PreparedStatement pstmTabComments = null;
 	private PreparedStatement pstmTabExist = null;
+	private PreparedStatement pstmTargetTableName = null;
 
 	public static DbUtil getInstance() {
 		if (dbUtil == null) {
@@ -109,10 +135,11 @@ public class DbUtil {
 		try {
 			infaProperty = InfaProperty.getInstance();
 			Class.forName(infaProperty.getProperty("source.driver"));
-			String url = infaProperty.getProperty("source.url");
-			String username = infaProperty.getProperty("source.username");
-			String password = infaProperty.getProperty("source.password");
-			conn = DriverManager.getConnection(url, username, password);
+			String srcUrl = infaProperty.getProperty("source.url");
+			String srcUsername = infaProperty.getProperty("source.username");
+			String srcPassword = infaProperty.getProperty("source.password");
+			srcConn = DriverManager.getConnection(srcUrl, srcUsername, srcPassword);
+
 		} catch (ClassNotFoundException | SQLException e) {
 			logger.error(e.getMessage());
 
@@ -173,12 +200,15 @@ public class DbUtil {
 		String sqlTabExist = "SELECT COUNT(*) FROM " + infaProperty.getProperty("dictionary.tables", "ALL_TABLES")
 				+ " A WHERE A.OWNER = ? AND A.TABLE_NAME= ?";
 
+		String sqlTargetTableName = "SELECT A.TABLE_NAME FROM "
+				+ infaProperty.getProperty("dictionary.synonyms", "ALL_SYNONYMS")
+				+ " A WHERE A.OWNER=? AND A.SYNONYM_NAME=?";
 		try {
-			pstmTabCols = conn.prepareStatement(sqlTabCols.toString());
-			pstmPrimaryCols = conn.prepareStatement(sqlPrimaryCols.toString());
-			pstmTabComments = conn.prepareStatement(sqlTabComments);
-			pstmTabExist = conn.prepareStatement(sqlTabExist);
-
+			pstmTabCols = srcConn.prepareStatement(sqlTabCols.toString());
+			pstmPrimaryCols = srcConn.prepareStatement(sqlPrimaryCols.toString());
+			pstmTabComments = srcConn.prepareStatement(sqlTabComments);
+			pstmTabExist = srcConn.prepareStatement(sqlTabExist);
+			pstmTargetTableName = srcConn.prepareStatement(sqlTargetTableName);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 		}

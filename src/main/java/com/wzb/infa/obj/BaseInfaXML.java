@@ -1,10 +1,15 @@
 package com.wzb.infa.obj;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
+
+import com.wzb.infa.dbutils.DbUtil;
+import com.wzb.infa.properties.InfaProperty;
 
 public abstract class BaseInfaXML implements InfaXML {
 
@@ -91,5 +96,22 @@ public abstract class BaseInfaXML implements InfaXML {
 
 	public void setWorkflow(Element workflow) {
 		this.workflow = workflow;
+	}
+	
+	
+	public String getTargetName(String owner,String tableName) throws SQLException {
+		String targetName = null;
+		InfaProperty infaProperty = InfaProperty.getInstance();
+		String rule = infaProperty.getProperty("target.name.rule", "default") + tableName;
+		if("default".equals(rule)) {
+			targetName = infaProperty.getProperty("target.prefix", "") + tableName;
+			if (targetName.length() > 30) {
+				targetName = targetName.substring(0, 30);
+			}
+		}else if("database".equals(rule)) {
+			targetName=DbUtil.getInstance().getTargetTable(owner, tableName);
+		}
+
+		return targetName;
 	}
 }

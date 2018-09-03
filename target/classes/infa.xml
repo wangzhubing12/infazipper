@@ -31,6 +31,23 @@
 		<name>source.owner</name>
 		<value>dw_pmis</value>
 	</property>
+	<property>
+		<name>target.url</name>
+		<value>jdbc:oracle:thin:@10.150.0.231:1521:gddw1</value>
+		<description>导入源表的数据库url地址</description>
+	</property>
+	<property>
+		<name>target.username</name>
+		<value>dw_pmis</value>
+	</property>
+	<property>
+		<name>target.password</name>
+		<value>dw_pmis</value>
+	</property>
+	<property>
+		<name>target.owner</name>
+		<value>dw_pmis</value>
+	</property>
 
 	  *******************************************************************-->
  <!-- **********运行文件夹、表清单参数文件配置 *****************************-->
@@ -160,10 +177,17 @@
 		<description>如果是增量mapping报错，是否直接建立全量，YES 是、NO 否, 默认NO
 		注意不要配置map.suffix，自动默认用INC和ALL，否则全量的也用ALL了</description>
 	</property>		
-	
+
+	<property>
+		<name>target.name.rule</name>
+		<value>NO</value>
+		<description>目标表名的规则。默认：default为前缀拼接的方式；
+			database:数据库获取方式：即为从数据库中查源表目标表对应表；
+		</description>
+	</property>
 		
  -->
- <!-- 以下配置从数据库取表结构、备注、主键等信息的表，oracle可以配置成all_tables之类的数据字典 
+ <!-- 以下配置从数据库取源表结构、备注、主键等信息的表，oracle可以配置成all_tables之类的数据字典 
  	<property>
 		<name>dictionary.tables</name>
 		<value>NCWOT_DBA_TABLES</value>
@@ -189,6 +213,11 @@
 		<value>NCWOT_DBA_IND_COLUMNS</value>
 		<description>主键字段的数据字典,默认ALL_IND_COLUMNS</description>
 	</property>
+ 	<property>
+		<name>dictionary.synonyms</name>
+		<value>ALL_SYNONYMS</value>
+		<description>目标表名对应表的数据字典,默认：ALL_SYNONYMS</description>
+	</property>	
 	-->
 	
 	<!-- 拉链表默认三个新增字段修改
