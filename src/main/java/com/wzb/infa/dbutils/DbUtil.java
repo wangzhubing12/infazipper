@@ -58,7 +58,7 @@ public class DbUtil {
 		if (res != null) {
 			return res;
 		} else {
-			logger.debug(owner + "." + table + " can not find target name!");
+			logger.warn(owner + "." + table + " can not find target name!");
 			return "";
 		}
 	}
