@@ -53,7 +53,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		}
 	}
 
-        @Override
+	@Override
 	public Element getSource() {
 		return source;
 	}
@@ -62,7 +62,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		this.source = source;
 	}
 
-        @Override
+	@Override
 	public Element getTarSource() {
 		return tarSource;
 	}
@@ -71,7 +71,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		this.tarSource = tarSource;
 	}
 
-        @Override
+	@Override
 	public Element getTarget() {
 		return target;
 	}
@@ -80,7 +80,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		this.target = target;
 	}
 
-        @Override
+	@Override
 	public Element getMapping() {
 		return mapping;
 	}
@@ -89,7 +89,7 @@ public abstract class BaseInfaXML implements InfaXML {
 		this.mapping = mapping;
 	}
 
-        @Override
+	@Override
 	public Element getWorkflow() {
 		return workflow;
 	}
@@ -97,19 +97,25 @@ public abstract class BaseInfaXML implements InfaXML {
 	public void setWorkflow(Element workflow) {
 		this.workflow = workflow;
 	}
-	
-	
-	public String getTargetName(String owner,String tableName) throws SQLException {
+
+	public String getTargetName(String owner, String tableName) {
 		String targetName = null;
 		InfaProperty infaProperty = InfaProperty.getInstance();
 		String rule = infaProperty.getProperty("target.name.rule", "default") + tableName;
-		if("default".equals(rule)) {
+		if ("default".equals(rule)) {
 			targetName = infaProperty.getProperty("target.prefix", "") + tableName;
 			if (targetName.length() > 30) {
 				targetName = targetName.substring(0, 30);
 			}
-		}else if("database".equals(rule)) {
-			targetName=DbUtil.getInstance().getTargetTable(owner, tableName);
+		} else if ("database".equals(rule)) {
+			try {
+				targetName = DbUtil.getInstance().getTargetTable(owner, tableName);
+			} catch (SQLException e) {
+				targetName = infaProperty.getProperty("target.prefix", "") + tableName;
+				if (targetName.length() > 30) {
+					targetName = targetName.substring(0, 30);
+				}
+			}
 		}
 
 		return targetName;
