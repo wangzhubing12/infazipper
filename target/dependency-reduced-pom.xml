@@ -31,7 +31,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.wzb.infa.infazipper.App</mainClass>
+                  <mainClass>com.wzb.infa.infazipper.APP</mainClass>
                 </transformer>
               </transformers>
             </configuration>
