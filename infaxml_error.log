@@ -13,3 +13,4 @@ DW_PMIS.SDXL_SDXLXX_0930 NoPrimaryKey!
 DW_PMIS.PMIS_SF_ARREARAGE2 NoPrimaryKey!
 DW_PMIS.SDXL_SDXLXX_0830 NoPrimaryKey!
 Same target table name found:NPMIS_ZWOT_PROD_WORK_WRIT_SUB_,ignore this table!
+DW_PMIS.LONG_TABLE_NAME_LIKE_THIS not exist!!!

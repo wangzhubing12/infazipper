@@ -118,7 +118,11 @@ public class APP {
 		String targetTabPrefix = InfaProperty.getInstance().getProperty("target.prefix", "");
 		// 目标表获取规则，default则是前缀加表名，database则从数据库取
 		String rule = InfaProperty.getInstance().getProperty("target.name.rule", "default");
-
+		if ("database".equals(rule)) {
+			logger.debug("target name rule:database");
+		} else {
+			logger.debug("target name rule:default prifix + source name");
+		}
 		try {
 			String tableListFileName = InfaProperty.getInstance().getProperty("work.dir")
 					+ InfaProperty.getInstance().getProperty("tables");
@@ -132,7 +136,7 @@ public class APP {
 			while ((line = tableListReader.readLine()) != null) {
 				if (line.length() == 0)
 					continue;
-				//源表名
+				// 源表名
 				table = line.trim().toUpperCase();
 				// 从数据库获取表前缀的话，无需判断表长度
 				if ("database".equals(rule)) {
