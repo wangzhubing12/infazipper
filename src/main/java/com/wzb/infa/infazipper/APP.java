@@ -53,10 +53,13 @@ public class APP {
 				+ infaProperty.getProperty("xml.output", "gen.xml").toLowerCase(); // 生成的文件名
 		String errorFileName = infaProperty.getProperty("work.dir")
 				+ infaProperty.getProperty("tables.error", "infaxml_error.log").toLowerCase(); // 生成的文件名
+		String infoFileName = infaProperty.getProperty("work.dir")
+				+ infaProperty.getProperty("tables.info", "infaxml_info.log").toLowerCase(); // 生成的文件名
 
 		// 设置报错写入到日志文件的文件名
 		((FileAppender) LogManager.getRootLogger().getAppender("errorfile")).setFile(errorFileName);
-
+		// 设置信息写入到日志文件的文件名
+		((FileAppender) LogManager.getRootLogger().getAppender("infofile")).setFile(infoFileName);
 		int size = tableLIst.size(); // 总的表数量
 		int errorSize = 0; // 当前报错的表数量
 		int sucessSize = 0;// 当前成功的表数量

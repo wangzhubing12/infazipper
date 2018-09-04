@@ -74,8 +74,13 @@
 	</property>
 	<property>
 		<name>tables.error</name>
-		<value>err_tables.txt</value>
-		<description>报错记录文件</description>
+		<value>infaxml_error.log</value>
+		<description>报错记录文件，默认infaxml_error.log</description>
+	</property>
+	<property>
+		<name>tables.info</name>
+		<value>infaxml_info.log</value>
+		<description>信息记录文件，默认infaxml_info.log</description>
 	</property>
  ***************************************************************** -->
   
