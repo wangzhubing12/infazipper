@@ -116,11 +116,14 @@ public class APP {
 		BufferedReader tableListReader = null;
 		// 目标表前缀
 		String targetTabPrefix = InfaProperty.getInstance().getProperty("target.prefix", "");
+		// 目标表获取规则，default则是前缀加表名，database则从数据库取
+		String rule = InfaProperty.getInstance().getProperty("target.name.rule", "default");
 
 		try {
 			String tableListFileName = InfaProperty.getInstance().getProperty("work.dir")
 					+ InfaProperty.getInstance().getProperty("tables");
 			logger.debug("Table List File Name:" + tableListFileName);
+
 			tableListReader = new BufferedReader(new InputStreamReader(new FileInputStream(tableListFileName)));
 
 			String line;
@@ -129,24 +132,29 @@ public class APP {
 			while ((line = tableListReader.readLine()) != null) {
 				if (line.length() == 0)
 					continue;
-				// target table 长度，需要判断源表是否带有OWNER，只取表名部分
-				if (line.contains(".")) {
-					tarTable = targetTabPrefix + line.split("\\.")[1].trim().toUpperCase();
-
-				} else {
-					tarTable = targetTabPrefix + line.trim().toUpperCase();
-
-				}
-				if (tarTable.length() > 30)
-					tarTable = tarTable.substring(0, 30);
-
+				//源表名
 				table = line.trim().toUpperCase();
-
-				if (!tarTableList.contains(tarTable)) {
-					tarTableList.add(tarTable);
+				// 从数据库获取表前缀的话，无需判断表长度
+				if ("database".equals(rule)) {
 					tableList.add(table.trim().toUpperCase());
 				} else {
-					logger.error("Same target table name found:" + tarTable + ",ignore this table!");
+					// target table 长度，需要判断源表是否带有OWNER，只取表名部分
+					if (line.contains(".")) {
+						tarTable = targetTabPrefix + line.split("\\.")[1].trim().toUpperCase();
+
+					} else {
+						tarTable = targetTabPrefix + line.trim().toUpperCase();
+
+					}
+					if (tarTable.length() > 30)
+						tarTable = tarTable.substring(0, 30);
+
+					if (!tarTableList.contains(tarTable)) {
+						tarTableList.add(tarTable);
+						tableList.add(table.trim().toUpperCase());
+					} else {
+						logger.error("Same target table name found:" + tarTable + ",ignore this table!");
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {

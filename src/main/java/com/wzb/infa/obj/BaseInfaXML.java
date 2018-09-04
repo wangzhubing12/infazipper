@@ -101,7 +101,7 @@ public abstract class BaseInfaXML implements InfaXML {
 	public String getTargetName(String owner, String tableName) {
 		String targetName = null;
 		InfaProperty infaProperty = InfaProperty.getInstance();
-		String rule = infaProperty.getProperty("target.name.rule", "default") + tableName;
+		String rule = infaProperty.getProperty("target.name.rule", "default");
 		if ("default".equals(rule)) {
 			targetName = infaProperty.getProperty("target.prefix", "") + tableName;
 			if (targetName.length() > 30) {
