@@ -65,6 +65,7 @@ public class APP {
 		int sucessSize = 0;// 当前成功的表数量
 		int tableSize = 0;// 当前生成的表总数量
 		int fileCount = 0;// 当前生成的文件总数量
+		int currentSuccess;
 		int mapsize = Integer.parseInt(infaProperty.getProperty("xml.output.mappings", "20"));
 
 		String mappingType = infaProperty.getProperty("mapping.type", "-1");
@@ -72,12 +73,13 @@ public class APP {
 
 		for (String table : tableLIst) {
 			tableSize++;
-
+			currentSuccess=-1;
 			try {
 				// 创建XML并加入到ArrayList<InfaXML>
 				xmls.add(xmlUtil.createInfaXML(table, mappingType));
 				logger.debug("success!");
 				sucessSize++;
+				currentSuccess=1;
 			} catch (UnsupportedDatatypeException | SQLException | CheckTableExistException e) {
 				logger.error(e.getMessage());
 				errorSize++;
@@ -88,7 +90,7 @@ public class APP {
 			logger.info("Make xml for " + StringPadder.rightPad(table, "-", 30) + "(" + tableSize + "/" + size
 					+ ")---success:" + sucessSize);
 			// 如果生成的表数量达到xx个则切换文件(排除掉报错的)
-			if (((sucessSize > 0) && (sucessSize % mapsize) == 0) || tableSize >= size) {
+			if (((sucessSize > 0) && (currentSuccess==1) && (sucessSize % mapsize) == 0) || tableSize >= size) {
 
 				logger.info("write InfaXML To File:" + fileName.replace(".xml", fileCount + ".xml"));
 				try {
