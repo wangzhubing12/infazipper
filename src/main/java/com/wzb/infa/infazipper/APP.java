@@ -35,6 +35,21 @@ public class APP {
 		if (args.length > 0) {
 			try {
 				infaProperty = InfaProperty.getInstance().addInfaProperty(args[0]);
+				{
+					String errorFileName = infaProperty.getProperty("work.dir")
+							+ infaProperty.getProperty("tables.error", "infaxml_error.log").toLowerCase(); // 生成的文件名
+					String infoFileName = infaProperty.getProperty("work.dir")
+							+ infaProperty.getProperty("tables.info", "infaxml_info.log").toLowerCase(); // 生成的文件名
+
+					// 设置报错写入到日志文件的文件名
+					Logger rootLog = LogManager.getRootLogger();
+					FileAppender errorFileAppender = ((FileAppender) rootLog.getAppender("errorfile"));
+					FileAppender infoFileAppender = ((FileAppender) rootLog.getAppender("infofile"));
+					errorFileAppender.setFile(errorFileName);
+					infoFileAppender.setFile(infoFileName);
+					errorFileAppender.activateOptions();
+					infoFileAppender.activateOptions();
+				}
 				logger.debug("load properties:" + infaProperty.size());
 			} catch (DocumentException e) {
 				logger.error("Property file error:" + args[0] + e.getMessage());
@@ -51,15 +66,7 @@ public class APP {
 		HashSet<String> tableLIst = a1.getTableList(); // 表清单
 		String fileName = infaProperty.getProperty("work.dir")
 				+ infaProperty.getProperty("xml.output", "gen.xml").toLowerCase(); // 生成的文件名
-		String errorFileName = infaProperty.getProperty("work.dir")
-				+ infaProperty.getProperty("tables.error", "infaxml_error.log").toLowerCase(); // 生成的文件名
-		String infoFileName = infaProperty.getProperty("work.dir")
-				+ infaProperty.getProperty("tables.info", "infaxml_info.log").toLowerCase(); // 生成的文件名
 
-		// 设置报错写入到日志文件的文件名
-		((FileAppender) LogManager.getRootLogger().getAppender("errorfile")).setFile(errorFileName);
-		// 设置信息写入到日志文件的文件名
-		((FileAppender) LogManager.getRootLogger().getAppender("infofile")).setFile(infoFileName);
 		int size = tableLIst.size(); // 总的表数量
 		int errorSize = 0; // 当前报错的表数量
 		int sucessSize = 0;// 当前成功的表数量
@@ -73,13 +80,13 @@ public class APP {
 
 		for (String table : tableLIst) {
 			tableSize++;
-			currentSuccess=-1;
+			currentSuccess = -1;
 			try {
 				// 创建XML并加入到ArrayList<InfaXML>
 				xmls.add(xmlUtil.createInfaXML(table, mappingType));
 				logger.debug("success!");
 				sucessSize++;
-				currentSuccess=1;
+				currentSuccess = 1;
 			} catch (UnsupportedDatatypeException | SQLException | CheckTableExistException e) {
 				logger.error(e.getMessage());
 				errorSize++;
@@ -90,7 +97,7 @@ public class APP {
 			logger.info("Make xml for " + StringPadder.rightPad(table, "-", 30) + "(" + tableSize + "/" + size
 					+ ")---success:" + sucessSize);
 			// 如果生成的表数量达到xx个则切换文件(排除掉报错的)
-			if (((sucessSize > 0) && (currentSuccess==1) && (sucessSize % mapsize) == 0) || tableSize >= size) {
+			if (((sucessSize > 0) && (currentSuccess == 1) && (sucessSize % mapsize) == 0) || tableSize >= size) {
 
 				logger.info("write InfaXML To File:" + fileName.replace(".xml", fileCount + ".xml"));
 				try {

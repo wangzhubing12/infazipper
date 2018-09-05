@@ -1,0 +1,325 @@
+[INFO :2018-09-05 09:32:12] Make xml for LONG_TABLE_NAME_LIKE_THIS-----(1/1)---success:1
+[INFO :2018-09-05 09:32:12] write InfaXML To File:D:\\infaXML\\gen0.xml
+[INFO :2018-09-05 09:32:12] ----------------------------------------------------------------
+[INFO :2018-09-05 09:32:12] MAKE FILES:1,WITH ERROR TABLES:0
+[ERROR:2018-09-05 09:33:00] DW_PMIS.LONG_TABLE_NAME_LIKE_THIS NoPrimaryKey!
+[INFO :2018-09-05 09:33:00] Make xml for LONG_TABLE_NAME_LIKE_THIS-----(1/1)---success:0
+[INFO :2018-09-05 09:33:00] write InfaXML To File:D:\\infaXML\\gen0.xml
+[INFO :2018-09-05 09:33:00] ----------------------------------------------------------------
+[INFO :2018-09-05 09:33:00] MAKE FILES:1,WITH ERROR TABLES:1
+[WARN :2018-09-05 09:35:22] DW_PMIS.BDZ_BDZXX_0930 can not find target name!
+[ERROR:2018-09-05 09:35:22] DW_PMIS.BDZ_BDZXX_0930 NoPrimaryKey!
+[INFO :2018-09-05 09:35:22] Make xml for BDZ_BDZXX_0930----------------(1/32)---success:0
+[WARN :2018-09-05 09:35:22] DW_PMIS.YJQ_SSYYSMY_1500_201208 can not find target name!
+[ERROR:2018-09-05 09:35:22] DW_PMIS.YJQ_SSYYSMY_1500_201208 NoPrimaryKey!
+[INFO :2018-09-05 09:35:22] Make xml for YJQ_SSYYSMY_1500_201208-------(2/32)---success:0
+[WARN :2018-09-05 09:35:22] DW_PMIS.YK_MV_EARLY_WARNING_TACHE can not find target name!
+[ERROR:2018-09-05 09:35:23] DW_PMIS.YK_MV_EARLY_WARNING_TACHE NoPrimaryKey!
+[INFO :2018-09-05 09:35:23] Make xml for YK_MV_EARLY_WARNING_TACHE-----(3/32)---success:0
+[WARN :2018-09-05 09:35:23] DW_PMIS.YXOT_DSSD_PARAME can not find target name!
+[ERROR:2018-09-05 09:35:23] DW_PMIS.YXOT_DSSD_PARAME NoPrimaryKey!
+[INFO :2018-09-05 09:35:23] Make xml for YXOT_DSSD_PARAME--------------(4/32)---success:0
+[WARN :2018-09-05 09:35:23] DW_PMIS.BDZ_BDZXX_0830 can not find target name!
+[ERROR:2018-09-05 09:35:23] DW_PMIS.BDZ_BDZXX_0830 NoPrimaryKey!
+[INFO :2018-09-05 09:35:23] Make xml for BDZ_BDZXX_0830----------------(5/32)---success:0
+[WARN :2018-09-05 09:35:23] DW_PMIS.YK_APP_BASE_INFO_ADD can not find target name!
+[ERROR:2018-09-05 09:35:23] DW_PMIS.YK_APP_BASE_INFO_ADD NoPrimaryKey!
+[INFO :2018-09-05 09:35:23] Make xml for YK_APP_BASE_INFO_ADD----------(6/32)---success:0
+[WARN :2018-09-05 09:35:23] DW_PMIS.HUANG_ABOUT_ZC_TAB can not find target name!
+[ERROR:2018-09-05 09:35:23] DW_PMIS.HUANG_ABOUT_ZC_TAB NoPrimaryKey!
+[INFO :2018-09-05 09:35:23] Make xml for HUANG_ABOUT_ZC_TAB------------(7/32)---success:0
+[WARN :2018-09-05 09:35:23] DW_PMIS.PMIS_KF_SMS_SEND_PC_CONTENT can not find target name!
+[INFO :2018-09-05 09:35:24] Make xml for PMIS_KF_SMS_SEND_PC_CONTENT---(8/32)---success:1
+[WARN :2018-09-05 09:35:24] DW_PMIS.YXBB_QFQKB_QZC can not find target name!
+[INFO :2018-09-05 09:35:24] Make xml for YXBB_QFQKB_QZC----------------(9/32)---success:2
+[WARN :2018-09-05 09:35:24] DW_PMIS.ZWOT_PROD_SAFE_DEVICE_HURLBACK can not find target name!
+[INFO :2018-09-05 09:35:25] Make xml for ZWOT_PROD_SAFE_DEVICE_HURLBACK(10/32)---success:3
+[WARN :2018-09-05 09:35:25] DW_PMIS.QXXX_QXD_HIS can not find target name!
+[ERROR:2018-09-05 09:35:25] DW_PMIS.QXXX_QXD_HIS NoPrimaryKey!
+[INFO :2018-09-05 09:35:25] Make xml for QXXX_QXD_HIS------------------(11/32)---success:3
+[WARN :2018-09-05 09:35:25] DW_PMIS.ZWOT_PROD_BUSINESS_RELATION_V can not find target name!
+[INFO :2018-09-05 09:35:25] Make xml for ZWOT_PROD_BUSINESS_RELATION_V-(12/32)---success:4
+[WARN :2018-09-05 09:35:25] DW_PMIS.ZWOT_PROD_RELAY_PROTECT_ACTION can not find target name!
+[INFO :2018-09-05 09:35:25] Make xml for ZWOT_PROD_RELAY_PROTECT_ACTION(13/32)---success:5
+[ERROR:2018-09-05 09:35:26] DW_PMIS.LONG_TABLE_NAME_LIKE_THIS NoPrimaryKey!
+[INFO :2018-09-05 09:35:26] Make xml for LONG_TABLE_NAME_LIKE_THIS-----(14/32)---success:5
+[WARN :2018-09-05 09:35:26] DW_PMIS.YXBB_SDQKB_QZC can not find target name!
+[INFO :2018-09-05 09:35:26] Make xml for YXBB_SDQKB_QZC----------------(15/32)---success:6
+[WARN :2018-09-05 09:35:26] DW_PMIS.ZWOT_SPRMS_INNER_VERIFY can not find target name!
+[INFO :2018-09-05 09:35:26] Make xml for ZWOT_SPRMS_INNER_VERIFY-------(16/32)---success:7
+[WARN :2018-09-05 09:35:26] DW_PMIS.ZWOT_PROD_WORK_WRIT_SUB_FIRST can not find target name!
+[INFO :2018-09-05 09:35:27] Make xml for ZWOT_PROD_WORK_WRIT_SUB_FIRST-(17/32)---success:8
+[WARN :2018-09-05 09:35:27] DW_PMIS.ZWOT_PROD_RELAYSETTING can not find target name!
+[INFO :2018-09-05 09:35:28] Make xml for ZWOT_PROD_RELAYSETTING--------(18/32)---success:9
+[WARN :2018-09-05 09:35:28] DW_PMIS.HUAN_TABLES_PROCESS_LOG can not find target name!
+[INFO :2018-09-05 09:35:28] Make xml for HUAN_TABLES_PROCESS_LOG-------(19/32)---success:10
+[WARN :2018-09-05 09:35:28] DW_PMIS.HDZ_TABLES can not find target name!
+[ERROR:2018-09-05 09:35:28] DW_PMIS.HDZ_TABLES NoPrimaryKey!
+[INFO :2018-09-05 09:35:28] Make xml for HDZ_TABLES--------------------(20/32)---success:10
+[WARN :2018-09-05 09:35:28] DW_PMIS.ZWOT_SS_SAFE_ORGANIZATION_PER can not find target name!
+[INFO :2018-09-05 09:35:28] Make xml for ZWOT_SS_SAFE_ORGANIZATION_PER-(21/32)---success:11
+[WARN :2018-09-05 09:35:28] DW_PMIS.ZWOT_PROD_TASK_SHELL can not find target name!
+[INFO :2018-09-05 09:35:28] Make xml for ZWOT_PROD_TASK_SHELL----------(22/32)---success:12
+[WARN :2018-09-05 09:35:28] DW_PMIS.SDXL_SDXLXX_0930 can not find target name!
+[ERROR:2018-09-05 09:35:28] DW_PMIS.SDXL_SDXLXX_0930 NoPrimaryKey!
+[INFO :2018-09-05 09:35:28] Make xml for SDXL_SDXLXX_0930--------------(23/32)---success:12
+[WARN :2018-09-05 09:35:29] DW_PMIS.PMIS_SF_ARREARAGE2 can not find target name!
+[ERROR:2018-09-05 09:35:29] DW_PMIS.PMIS_SF_ARREARAGE2 NoPrimaryKey!
+[INFO :2018-09-05 09:35:29] Make xml for PMIS_SF_ARREARAGE2------------(24/32)---success:12
+[WARN :2018-09-05 09:35:29] DW_PMIS.ZWOT_PROD_YD_STATION can not find target name!
+[INFO :2018-09-05 09:35:29] Make xml for ZWOT_PROD_YD_STATION----------(25/32)---success:13
+[WARN :2018-09-05 09:35:29] DW_PMIS.SDXL_SDXLXX_0830 can not find target name!
+[ERROR:2018-09-05 09:35:29] DW_PMIS.SDXL_SDXLXX_0830 NoPrimaryKey!
+[INFO :2018-09-05 09:35:29] Make xml for SDXL_SDXLXX_0830--------------(26/32)---success:13
+[WARN :2018-09-05 09:35:29] DW_PMIS.ZWOT_PROD_SPECIAL_RE_CLASSIFY can not find target name!
+[INFO :2018-09-05 09:35:29] Make xml for ZWOT_PROD_SPECIAL_RE_CLASSIFY-(27/32)---success:14
+[WARN :2018-09-05 09:35:29] DW_PMIS.ZWOT_SS_SAFTY_PRECINCT can not find target name!
+[INFO :2018-09-05 09:35:29] Make xml for ZWOT_SS_SAFTY_PRECINCT--------(28/32)---success:15
+[WARN :2018-09-05 09:35:29] DW_PMIS.PMIS_YX_TARGET_MON can not find target name!
+[INFO :2018-09-05 09:35:30] Make xml for PMIS_YX_TARGET_MON------------(29/32)---success:16
+[WARN :2018-09-05 09:35:30] DW_PMIS.ZWOT_PROD_POWER can not find target name!
+[INFO :2018-09-05 09:35:30] Make xml for ZWOT_PROD_POWER---------------(30/32)---success:17
+[WARN :2018-09-05 09:35:30] DW_PMIS.PMIS_MTMS_NAME_NEW can not find target name!
+[INFO :2018-09-05 09:35:30] Make xml for PMIS_MTMS_NAME_NEW------------(31/32)---success:18
+[WARN :2018-09-05 09:35:30] DW_PMIS.ZWOT_PROD_UNLOCK_KEY_APPLY can not find target name!
+[INFO :2018-09-05 09:35:30] Make xml for ZWOT_PROD_UNLOCK_KEY_APPLY----(32/32)---success:19
+[INFO :2018-09-05 09:35:30] write InfaXML To File:D:\\infaXML\\gen0.xml
+[INFO :2018-09-05 09:35:31] ----------------------------------------------------------------
+[INFO :2018-09-05 09:35:31] MAKE FILES:1,WITH ERROR TABLES:13
+[WARN :2018-09-05 09:40:09] DW_PMIS.BDZ_BDZXX_0930 can not find target name!
+[ERROR:2018-09-05 09:40:09] DW_PMIS.BDZ_BDZXX_0930 NoPrimaryKey!
+[INFO :2018-09-05 09:40:09] Make xml for BDZ_BDZXX_0930----------------(1/32)---success:0
+[WARN :2018-09-05 09:40:09] DW_PMIS.YJQ_SSYYSMY_1500_201208 can not find target name!
+[ERROR:2018-09-05 09:40:09] DW_PMIS.YJQ_SSYYSMY_1500_201208 NoPrimaryKey!
+[INFO :2018-09-05 09:40:09] Make xml for YJQ_SSYYSMY_1500_201208-------(2/32)---success:0
+[WARN :2018-09-05 09:40:09] DW_PMIS.YK_MV_EARLY_WARNING_TACHE can not find target name!
+[ERROR:2018-09-05 09:40:09] DW_PMIS.YK_MV_EARLY_WARNING_TACHE NoPrimaryKey!
+[INFO :2018-09-05 09:40:09] Make xml for YK_MV_EARLY_WARNING_TACHE-----(3/32)---success:0
+[WARN :2018-09-05 09:40:10] DW_PMIS.YXOT_DSSD_PARAME can not find target name!
+[ERROR:2018-09-05 09:40:10] DW_PMIS.YXOT_DSSD_PARAME NoPrimaryKey!
+[INFO :2018-09-05 09:40:10] Make xml for YXOT_DSSD_PARAME--------------(4/32)---success:0
+[WARN :2018-09-05 09:40:10] DW_PMIS.BDZ_BDZXX_0830 can not find target name!
+[ERROR:2018-09-05 09:40:10] DW_PMIS.BDZ_BDZXX_0830 NoPrimaryKey!
+[INFO :2018-09-05 09:40:10] Make xml for BDZ_BDZXX_0830----------------(5/32)---success:0
+[WARN :2018-09-05 09:40:10] DW_PMIS.YK_APP_BASE_INFO_ADD can not find target name!
+[ERROR:2018-09-05 09:40:10] DW_PMIS.YK_APP_BASE_INFO_ADD NoPrimaryKey!
+[INFO :2018-09-05 09:40:10] Make xml for YK_APP_BASE_INFO_ADD----------(6/32)---success:0
+[WARN :2018-09-05 09:40:10] DW_PMIS.HUANG_ABOUT_ZC_TAB can not find target name!
+[ERROR:2018-09-05 09:40:10] DW_PMIS.HUANG_ABOUT_ZC_TAB NoPrimaryKey!
+[INFO :2018-09-05 09:40:10] Make xml for HUANG_ABOUT_ZC_TAB------------(7/32)---success:0
+[WARN :2018-09-05 09:40:10] DW_PMIS.PMIS_KF_SMS_SEND_PC_CONTENT can not find target name!
+[INFO :2018-09-05 09:40:10] Make xml for PMIS_KF_SMS_SEND_PC_CONTENT---(8/32)---success:1
+[WARN :2018-09-05 09:40:10] DW_PMIS.YXBB_QFQKB_QZC can not find target name!
+[INFO :2018-09-05 09:40:11] Make xml for YXBB_QFQKB_QZC----------------(9/32)---success:2
+[WARN :2018-09-05 09:40:11] DW_PMIS.ZWOT_PROD_SAFE_DEVICE_HURLBACK can not find target name!
+[INFO :2018-09-05 09:40:11] Make xml for ZWOT_PROD_SAFE_DEVICE_HURLBACK(10/32)---success:3
+[WARN :2018-09-05 09:40:11] DW_PMIS.QXXX_QXD_HIS can not find target name!
+[ERROR:2018-09-05 09:40:12] DW_PMIS.QXXX_QXD_HIS NoPrimaryKey!
+[INFO :2018-09-05 09:40:12] Make xml for QXXX_QXD_HIS------------------(11/32)---success:3
+[WARN :2018-09-05 09:40:12] DW_PMIS.ZWOT_PROD_BUSINESS_RELATION_V can not find target name!
+[INFO :2018-09-05 09:40:12] Make xml for ZWOT_PROD_BUSINESS_RELATION_V-(12/32)---success:4
+[WARN :2018-09-05 09:40:12] DW_PMIS.ZWOT_PROD_RELAY_PROTECT_ACTION can not find target name!
+[INFO :2018-09-05 09:40:12] Make xml for ZWOT_PROD_RELAY_PROTECT_ACTION(13/32)---success:5
+[ERROR:2018-09-05 09:40:13] DW_PMIS.LONG_TABLE_NAME_LIKE_THIS NoPrimaryKey!
+[INFO :2018-09-05 09:40:13] Make xml for LONG_TABLE_NAME_LIKE_THIS-----(14/32)---success:5
+[WARN :2018-09-05 09:40:13] DW_PMIS.YXBB_SDQKB_QZC can not find target name!
+[INFO :2018-09-05 09:40:13] Make xml for YXBB_SDQKB_QZC----------------(15/32)---success:6
+[WARN :2018-09-05 09:40:13] DW_PMIS.ZWOT_SPRMS_INNER_VERIFY can not find target name!
+[INFO :2018-09-05 09:40:13] Make xml for ZWOT_SPRMS_INNER_VERIFY-------(16/32)---success:7
+[WARN :2018-09-05 09:40:13] DW_PMIS.ZWOT_PROD_WORK_WRIT_SUB_FIRST can not find target name!
+[INFO :2018-09-05 09:40:14] Make xml for ZWOT_PROD_WORK_WRIT_SUB_FIRST-(17/32)---success:8
+[WARN :2018-09-05 09:40:14] DW_PMIS.ZWOT_PROD_RELAYSETTING can not find target name!
+[INFO :2018-09-05 09:40:15] Make xml for ZWOT_PROD_RELAYSETTING--------(18/32)---success:9
+[WARN :2018-09-05 09:40:15] DW_PMIS.HUAN_TABLES_PROCESS_LOG can not find target name!
+[INFO :2018-09-05 09:40:15] Make xml for HUAN_TABLES_PROCESS_LOG-------(19/32)---success:10
+[WARN :2018-09-05 09:40:15] DW_PMIS.HDZ_TABLES can not find target name!
+[ERROR:2018-09-05 09:40:15] DW_PMIS.HDZ_TABLES NoPrimaryKey!
+[INFO :2018-09-05 09:40:15] Make xml for HDZ_TABLES--------------------(20/32)---success:10
+[WARN :2018-09-05 09:40:15] DW_PMIS.ZWOT_SS_SAFE_ORGANIZATION_PER can not find target name!
+[INFO :2018-09-05 09:40:15] Make xml for ZWOT_SS_SAFE_ORGANIZATION_PER-(21/32)---success:11
+[WARN :2018-09-05 09:40:15] DW_PMIS.ZWOT_PROD_TASK_SHELL can not find target name!
+[INFO :2018-09-05 09:40:15] Make xml for ZWOT_PROD_TASK_SHELL----------(22/32)---success:12
+[WARN :2018-09-05 09:40:15] DW_PMIS.SDXL_SDXLXX_0930 can not find target name!
+[ERROR:2018-09-05 09:40:15] DW_PMIS.SDXL_SDXLXX_0930 NoPrimaryKey!
+[INFO :2018-09-05 09:40:15] Make xml for SDXL_SDXLXX_0930--------------(23/32)---success:12
+[WARN :2018-09-05 09:40:15] DW_PMIS.PMIS_SF_ARREARAGE2 can not find target name!
+[ERROR:2018-09-05 09:40:16] DW_PMIS.PMIS_SF_ARREARAGE2 NoPrimaryKey!
+[INFO :2018-09-05 09:40:16] Make xml for PMIS_SF_ARREARAGE2------------(24/32)---success:12
+[WARN :2018-09-05 09:40:16] DW_PMIS.ZWOT_PROD_YD_STATION can not find target name!
+[INFO :2018-09-05 09:40:16] Make xml for ZWOT_PROD_YD_STATION----------(25/32)---success:13
+[WARN :2018-09-05 09:40:16] DW_PMIS.SDXL_SDXLXX_0830 can not find target name!
+[ERROR:2018-09-05 09:40:16] DW_PMIS.SDXL_SDXLXX_0830 NoPrimaryKey!
+[INFO :2018-09-05 09:40:16] Make xml for SDXL_SDXLXX_0830--------------(26/32)---success:13
+[WARN :2018-09-05 09:40:16] DW_PMIS.ZWOT_PROD_SPECIAL_RE_CLASSIFY can not find target name!
+[INFO :2018-09-05 09:40:16] Make xml for ZWOT_PROD_SPECIAL_RE_CLASSIFY-(27/32)---success:14
+[WARN :2018-09-05 09:40:16] DW_PMIS.ZWOT_SS_SAFTY_PRECINCT can not find target name!
+[INFO :2018-09-05 09:40:16] Make xml for ZWOT_SS_SAFTY_PRECINCT--------(28/32)---success:15
+[WARN :2018-09-05 09:40:16] DW_PMIS.PMIS_YX_TARGET_MON can not find target name!
+[INFO :2018-09-05 09:40:16] Make xml for PMIS_YX_TARGET_MON------------(29/32)---success:16
+[WARN :2018-09-05 09:40:16] DW_PMIS.ZWOT_PROD_POWER can not find target name!
+[INFO :2018-09-05 09:40:16] Make xml for ZWOT_PROD_POWER---------------(30/32)---success:17
+[WARN :2018-09-05 09:40:17] DW_PMIS.PMIS_MTMS_NAME_NEW can not find target name!
+[INFO :2018-09-05 09:40:17] Make xml for PMIS_MTMS_NAME_NEW------------(31/32)---success:18
+[WARN :2018-09-05 09:40:17] DW_PMIS.ZWOT_PROD_UNLOCK_KEY_APPLY can not find target name!
+[INFO :2018-09-05 09:40:17] Make xml for ZWOT_PROD_UNLOCK_KEY_APPLY----(32/32)---success:19
+[INFO :2018-09-05 09:40:17] write InfaXML To File:D:\\infaXML\\gen0.xml
+[INFO :2018-09-05 09:40:17] ----------------------------------------------------------------
+[INFO :2018-09-05 09:40:17] MAKE FILES:1,WITH ERROR TABLES:13
+[WARN :2018-09-05 09:43:02] DW_PMIS.BDZ_BDZXX_0930 can not find target name!
+[ERROR:2018-09-05 09:43:02] DW_PMIS.BDZ_BDZXX_0930 NoPrimaryKey!
+[INFO :2018-09-05 09:43:02] Make xml for BDZ_BDZXX_0930----------------(1/32)---success:0
+[WARN :2018-09-05 09:43:02] DW_PMIS.YJQ_SSYYSMY_1500_201208 can not find target name!
+[ERROR:2018-09-05 09:43:02] DW_PMIS.YJQ_SSYYSMY_1500_201208 NoPrimaryKey!
+[INFO :2018-09-05 09:43:02] Make xml for YJQ_SSYYSMY_1500_201208-------(2/32)---success:0
+[WARN :2018-09-05 09:43:02] DW_PMIS.YK_MV_EARLY_WARNING_TACHE can not find target name!
+[ERROR:2018-09-05 09:43:02] DW_PMIS.YK_MV_EARLY_WARNING_TACHE NoPrimaryKey!
+[INFO :2018-09-05 09:43:02] Make xml for YK_MV_EARLY_WARNING_TACHE-----(3/32)---success:0
+[WARN :2018-09-05 09:43:02] DW_PMIS.YXOT_DSSD_PARAME can not find target name!
+[ERROR:2018-09-05 09:43:02] DW_PMIS.YXOT_DSSD_PARAME NoPrimaryKey!
+[INFO :2018-09-05 09:43:02] Make xml for YXOT_DSSD_PARAME--------------(4/32)---success:0
+[WARN :2018-09-05 09:43:02] DW_PMIS.BDZ_BDZXX_0830 can not find target name!
+[ERROR:2018-09-05 09:43:03] DW_PMIS.BDZ_BDZXX_0830 NoPrimaryKey!
+[INFO :2018-09-05 09:43:03] Make xml for BDZ_BDZXX_0830----------------(5/32)---success:0
+[WARN :2018-09-05 09:43:03] DW_PMIS.YK_APP_BASE_INFO_ADD can not find target name!
+[ERROR:2018-09-05 09:43:03] DW_PMIS.YK_APP_BASE_INFO_ADD NoPrimaryKey!
+[INFO :2018-09-05 09:43:03] Make xml for YK_APP_BASE_INFO_ADD----------(6/32)---success:0
+[WARN :2018-09-05 09:43:03] DW_PMIS.HUANG_ABOUT_ZC_TAB can not find target name!
+[ERROR:2018-09-05 09:43:03] DW_PMIS.HUANG_ABOUT_ZC_TAB NoPrimaryKey!
+[INFO :2018-09-05 09:43:03] Make xml for HUANG_ABOUT_ZC_TAB------------(7/32)---success:0
+[WARN :2018-09-05 09:43:03] DW_PMIS.PMIS_KF_SMS_SEND_PC_CONTENT can not find target name!
+[INFO :2018-09-05 09:43:03] Make xml for PMIS_KF_SMS_SEND_PC_CONTENT---(8/32)---success:1
+[WARN :2018-09-05 09:43:03] DW_PMIS.YXBB_QFQKB_QZC can not find target name!
+[INFO :2018-09-05 09:43:04] Make xml for YXBB_QFQKB_QZC----------------(9/32)---success:2
+[WARN :2018-09-05 09:43:04] DW_PMIS.ZWOT_PROD_SAFE_DEVICE_HURLBACK can not find target name!
+[INFO :2018-09-05 09:43:04] Make xml for ZWOT_PROD_SAFE_DEVICE_HURLBACK(10/32)---success:3
+[WARN :2018-09-05 09:43:04] DW_PMIS.QXXX_QXD_HIS can not find target name!
+[ERROR:2018-09-05 09:43:04] DW_PMIS.QXXX_QXD_HIS NoPrimaryKey!
+[INFO :2018-09-05 09:43:04] Make xml for QXXX_QXD_HIS------------------(11/32)---success:3
+[WARN :2018-09-05 09:43:05] DW_PMIS.ZWOT_PROD_BUSINESS_RELATION_V can not find target name!
+[INFO :2018-09-05 09:43:05] Make xml for ZWOT_PROD_BUSINESS_RELATION_V-(12/32)---success:4
+[WARN :2018-09-05 09:43:05] DW_PMIS.ZWOT_PROD_RELAY_PROTECT_ACTION can not find target name!
+[INFO :2018-09-05 09:43:05] Make xml for ZWOT_PROD_RELAY_PROTECT_ACTION(13/32)---success:5
+[ERROR:2018-09-05 09:43:05] DW_PMIS.LONG_TABLE_NAME_LIKE_THIS NoPrimaryKey!
+[INFO :2018-09-05 09:43:05] Make xml for LONG_TABLE_NAME_LIKE_THIS-----(14/32)---success:5
+[WARN :2018-09-05 09:43:06] DW_PMIS.YXBB_SDQKB_QZC can not find target name!
+[INFO :2018-09-05 09:43:06] Make xml for YXBB_SDQKB_QZC----------------(15/32)---success:6
+[WARN :2018-09-05 09:43:06] DW_PMIS.ZWOT_SPRMS_INNER_VERIFY can not find target name!
+[INFO :2018-09-05 09:43:06] Make xml for ZWOT_SPRMS_INNER_VERIFY-------(16/32)---success:7
+[WARN :2018-09-05 09:43:06] DW_PMIS.ZWOT_PROD_WORK_WRIT_SUB_FIRST can not find target name!
+[INFO :2018-09-05 09:43:07] Make xml for ZWOT_PROD_WORK_WRIT_SUB_FIRST-(17/32)---success:8
+[WARN :2018-09-05 09:43:07] DW_PMIS.ZWOT_PROD_RELAYSETTING can not find target name!
+[INFO :2018-09-05 09:43:07] Make xml for ZWOT_PROD_RELAYSETTING--------(18/32)---success:9
+[WARN :2018-09-05 09:43:07] DW_PMIS.HUAN_TABLES_PROCESS_LOG can not find target name!
+[INFO :2018-09-05 09:43:08] Make xml for HUAN_TABLES_PROCESS_LOG-------(19/32)---success:10
+[WARN :2018-09-05 09:43:08] DW_PMIS.HDZ_TABLES can not find target name!
+[ERROR:2018-09-05 09:43:08] DW_PMIS.HDZ_TABLES NoPrimaryKey!
+[INFO :2018-09-05 09:43:08] Make xml for HDZ_TABLES--------------------(20/32)---success:10
+[WARN :2018-09-05 09:43:08] DW_PMIS.ZWOT_SS_SAFE_ORGANIZATION_PER can not find target name!
+[INFO :2018-09-05 09:43:08] Make xml for ZWOT_SS_SAFE_ORGANIZATION_PER-(21/32)---success:11
+[WARN :2018-09-05 09:43:08] DW_PMIS.ZWOT_PROD_TASK_SHELL can not find target name!
+[INFO :2018-09-05 09:43:08] Make xml for ZWOT_PROD_TASK_SHELL----------(22/32)---success:12
+[WARN :2018-09-05 09:43:08] DW_PMIS.SDXL_SDXLXX_0930 can not find target name!
+[ERROR:2018-09-05 09:43:08] DW_PMIS.SDXL_SDXLXX_0930 NoPrimaryKey!
+[INFO :2018-09-05 09:43:08] Make xml for SDXL_SDXLXX_0930--------------(23/32)---success:12
+[WARN :2018-09-05 09:43:08] DW_PMIS.PMIS_SF_ARREARAGE2 can not find target name!
+[ERROR:2018-09-05 09:43:08] DW_PMIS.PMIS_SF_ARREARAGE2 NoPrimaryKey!
+[INFO :2018-09-05 09:43:08] Make xml for PMIS_SF_ARREARAGE2------------(24/32)---success:12
+[WARN :2018-09-05 09:43:08] DW_PMIS.ZWOT_PROD_YD_STATION can not find target name!
+[INFO :2018-09-05 09:43:09] Make xml for ZWOT_PROD_YD_STATION----------(25/32)---success:13
+[WARN :2018-09-05 09:43:09] DW_PMIS.SDXL_SDXLXX_0830 can not find target name!
+[ERROR:2018-09-05 09:43:09] DW_PMIS.SDXL_SDXLXX_0830 NoPrimaryKey!
+[INFO :2018-09-05 09:43:09] Make xml for SDXL_SDXLXX_0830--------------(26/32)---success:13
+[WARN :2018-09-05 09:43:09] DW_PMIS.ZWOT_PROD_SPECIAL_RE_CLASSIFY can not find target name!
+[INFO :2018-09-05 09:43:09] Make xml for ZWOT_PROD_SPECIAL_RE_CLASSIFY-(27/32)---success:14
+[WARN :2018-09-05 09:43:09] DW_PMIS.ZWOT_SS_SAFTY_PRECINCT can not find target name!
+[INFO :2018-09-05 09:43:09] Make xml for ZWOT_SS_SAFTY_PRECINCT--------(28/32)---success:15
+[WARN :2018-09-05 09:43:09] DW_PMIS.PMIS_YX_TARGET_MON can not find target name!
+[INFO :2018-09-05 09:43:09] Make xml for PMIS_YX_TARGET_MON------------(29/32)---success:16
+[WARN :2018-09-05 09:43:09] DW_PMIS.ZWOT_PROD_POWER can not find target name!
+[INFO :2018-09-05 09:43:09] Make xml for ZWOT_PROD_POWER---------------(30/32)---success:17
+[WARN :2018-09-05 09:43:10] DW_PMIS.PMIS_MTMS_NAME_NEW can not find target name!
+[INFO :2018-09-05 09:43:10] Make xml for PMIS_MTMS_NAME_NEW------------(31/32)---success:18
+[WARN :2018-09-05 09:43:10] DW_PMIS.ZWOT_PROD_UNLOCK_KEY_APPLY can not find target name!
+[INFO :2018-09-05 09:43:10] Make xml for ZWOT_PROD_UNLOCK_KEY_APPLY----(32/32)---success:19
+[INFO :2018-09-05 09:43:10] write InfaXML To File:D:\\infaXML\\gen0.xml
+[INFO :2018-09-05 09:43:10] ----------------------------------------------------------------
+[INFO :2018-09-05 09:43:10] MAKE FILES:1,WITH ERROR TABLES:13
+[WARN :2018-09-05 09:43:46] DW_PMIS.BDZ_BDZXX_0930 can not find target name!
+[ERROR:2018-09-05 09:43:47] DW_PMIS.BDZ_BDZXX_0930 NoPrimaryKey!
+[INFO :2018-09-05 09:43:47] Make xml for BDZ_BDZXX_0930----------------(1/32)---success:0
+[WARN :2018-09-05 09:43:47] DW_PMIS.YJQ_SSYYSMY_1500_201208 can not find target name!
+[ERROR:2018-09-05 09:43:47] DW_PMIS.YJQ_SSYYSMY_1500_201208 NoPrimaryKey!
+[INFO :2018-09-05 09:43:47] Make xml for YJQ_SSYYSMY_1500_201208-------(2/32)---success:0
+[WARN :2018-09-05 09:43:47] DW_PMIS.YK_MV_EARLY_WARNING_TACHE can not find target name!
+[ERROR:2018-09-05 09:43:47] DW_PMIS.YK_MV_EARLY_WARNING_TACHE NoPrimaryKey!
+[INFO :2018-09-05 09:43:47] Make xml for YK_MV_EARLY_WARNING_TACHE-----(3/32)---success:0
+[WARN :2018-09-05 09:43:47] DW_PMIS.YXOT_DSSD_PARAME can not find target name!
+[ERROR:2018-09-05 09:43:47] DW_PMIS.YXOT_DSSD_PARAME NoPrimaryKey!
+[INFO :2018-09-05 09:43:47] Make xml for YXOT_DSSD_PARAME--------------(4/32)---success:0
+[WARN :2018-09-05 09:43:47] DW_PMIS.BDZ_BDZXX_0830 can not find target name!
+[ERROR:2018-09-05 09:43:47] DW_PMIS.BDZ_BDZXX_0830 NoPrimaryKey!
+[INFO :2018-09-05 09:43:47] Make xml for BDZ_BDZXX_0830----------------(5/32)---success:0
+[WARN :2018-09-05 09:43:47] DW_PMIS.YK_APP_BASE_INFO_ADD can not find target name!
+[ERROR:2018-09-05 09:43:47] DW_PMIS.YK_APP_BASE_INFO_ADD NoPrimaryKey!
+[INFO :2018-09-05 09:43:47] Make xml for YK_APP_BASE_INFO_ADD----------(6/32)---success:0
+[WARN :2018-09-05 09:43:47] DW_PMIS.HUANG_ABOUT_ZC_TAB can not find target name!
+[ERROR:2018-09-05 09:43:47] DW_PMIS.HUANG_ABOUT_ZC_TAB NoPrimaryKey!
+[INFO :2018-09-05 09:43:47] Make xml for HUANG_ABOUT_ZC_TAB------------(7/32)---success:0
+[WARN :2018-09-05 09:43:47] DW_PMIS.PMIS_KF_SMS_SEND_PC_CONTENT can not find target name!
+[INFO :2018-09-05 09:43:48] Make xml for PMIS_KF_SMS_SEND_PC_CONTENT---(8/32)---success:1
+[WARN :2018-09-05 09:43:48] DW_PMIS.YXBB_QFQKB_QZC can not find target name!
+[INFO :2018-09-05 09:43:48] Make xml for YXBB_QFQKB_QZC----------------(9/32)---success:2
+[WARN :2018-09-05 09:43:48] DW_PMIS.ZWOT_PROD_SAFE_DEVICE_HURLBACK can not find target name!
+[INFO :2018-09-05 09:43:49] Make xml for ZWOT_PROD_SAFE_DEVICE_HURLBACK(10/32)---success:3
+[WARN :2018-09-05 09:43:49] DW_PMIS.QXXX_QXD_HIS can not find target name!
+[ERROR:2018-09-05 09:43:49] DW_PMIS.QXXX_QXD_HIS NoPrimaryKey!
+[INFO :2018-09-05 09:43:49] Make xml for QXXX_QXD_HIS------------------(11/32)---success:3
+[WARN :2018-09-05 09:43:49] DW_PMIS.ZWOT_PROD_BUSINESS_RELATION_V can not find target name!
+[INFO :2018-09-05 09:43:49] Make xml for ZWOT_PROD_BUSINESS_RELATION_V-(12/32)---success:4
+[WARN :2018-09-05 09:43:49] DW_PMIS.ZWOT_PROD_RELAY_PROTECT_ACTION can not find target name!
+[INFO :2018-09-05 09:43:50] Make xml for ZWOT_PROD_RELAY_PROTECT_ACTION(13/32)---success:5
+[ERROR:2018-09-05 09:43:50] DW_PMIS.LONG_TABLE_NAME_LIKE_THIS NoPrimaryKey!
+[INFO :2018-09-05 09:43:50] Make xml for LONG_TABLE_NAME_LIKE_THIS-----(14/32)---success:5
+[WARN :2018-09-05 09:43:50] DW_PMIS.YXBB_SDQKB_QZC can not find target name!
+[INFO :2018-09-05 09:43:50] Make xml for YXBB_SDQKB_QZC----------------(15/32)---success:6
+[WARN :2018-09-05 09:43:50] DW_PMIS.ZWOT_SPRMS_INNER_VERIFY can not find target name!
+[INFO :2018-09-05 09:43:50] Make xml for ZWOT_SPRMS_INNER_VERIFY-------(16/32)---success:7
+[WARN :2018-09-05 09:43:50] DW_PMIS.ZWOT_PROD_WORK_WRIT_SUB_FIRST can not find target name!
+[INFO :2018-09-05 09:43:51] Make xml for ZWOT_PROD_WORK_WRIT_SUB_FIRST-(17/32)---success:8
+[WARN :2018-09-05 09:43:51] DW_PMIS.ZWOT_PROD_RELAYSETTING can not find target name!
+[INFO :2018-09-05 09:43:52] Make xml for ZWOT_PROD_RELAYSETTING--------(18/32)---success:9
+[WARN :2018-09-05 09:43:52] DW_PMIS.HUAN_TABLES_PROCESS_LOG can not find target name!
+[INFO :2018-09-05 09:43:52] Make xml for HUAN_TABLES_PROCESS_LOG-------(19/32)---success:10
+[WARN :2018-09-05 09:43:52] DW_PMIS.HDZ_TABLES can not find target name!
+[ERROR:2018-09-05 09:43:52] DW_PMIS.HDZ_TABLES NoPrimaryKey!
+[INFO :2018-09-05 09:43:52] Make xml for HDZ_TABLES--------------------(20/32)---success:10
+[WARN :2018-09-05 09:43:52] DW_PMIS.ZWOT_SS_SAFE_ORGANIZATION_PER can not find target name!
+[INFO :2018-09-05 09:43:52] Make xml for ZWOT_SS_SAFE_ORGANIZATION_PER-(21/32)---success:11
+[WARN :2018-09-05 09:43:53] DW_PMIS.ZWOT_PROD_TASK_SHELL can not find target name!
+[INFO :2018-09-05 09:43:53] Make xml for ZWOT_PROD_TASK_SHELL----------(22/32)---success:12
+[WARN :2018-09-05 09:43:53] DW_PMIS.SDXL_SDXLXX_0930 can not find target name!
+[ERROR:2018-09-05 09:43:53] DW_PMIS.SDXL_SDXLXX_0930 NoPrimaryKey!
+[INFO :2018-09-05 09:43:53] Make xml for SDXL_SDXLXX_0930--------------(23/32)---success:12
+[WARN :2018-09-05 09:43:53] DW_PMIS.PMIS_SF_ARREARAGE2 can not find target name!
+[ERROR:2018-09-05 09:43:53] DW_PMIS.PMIS_SF_ARREARAGE2 NoPrimaryKey!
+[INFO :2018-09-05 09:43:53] Make xml for PMIS_SF_ARREARAGE2------------(24/32)---success:12
+[WARN :2018-09-05 09:43:53] DW_PMIS.ZWOT_PROD_YD_STATION can not find target name!
+[INFO :2018-09-05 09:43:53] Make xml for ZWOT_PROD_YD_STATION----------(25/32)---success:13
+[WARN :2018-09-05 09:43:53] DW_PMIS.SDXL_SDXLXX_0830 can not find target name!
+[ERROR:2018-09-05 09:43:53] DW_PMIS.SDXL_SDXLXX_0830 NoPrimaryKey!
+[INFO :2018-09-05 09:43:53] Make xml for SDXL_SDXLXX_0830--------------(26/32)---success:13
+[WARN :2018-09-05 09:43:53] DW_PMIS.ZWOT_PROD_SPECIAL_RE_CLASSIFY can not find target name!
+[INFO :2018-09-05 09:43:54] Make xml for ZWOT_PROD_SPECIAL_RE_CLASSIFY-(27/32)---success:14
+[WARN :2018-09-05 09:43:54] DW_PMIS.ZWOT_SS_SAFTY_PRECINCT can not find target name!
+[INFO :2018-09-05 09:43:54] Make xml for ZWOT_SS_SAFTY_PRECINCT--------(28/32)---success:15
+[WARN :2018-09-05 09:43:54] DW_PMIS.PMIS_YX_TARGET_MON can not find target name!
+[INFO :2018-09-05 09:43:54] Make xml for PMIS_YX_TARGET_MON------------(29/32)---success:16
+[WARN :2018-09-05 09:43:54] DW_PMIS.ZWOT_PROD_POWER can not find target name!
+[INFO :2018-09-05 09:43:54] Make xml for ZWOT_PROD_POWER---------------(30/32)---success:17
+[WARN :2018-09-05 09:43:54] DW_PMIS.PMIS_MTMS_NAME_NEW can not find target name!
+[INFO :2018-09-05 09:43:54] Make xml for PMIS_MTMS_NAME_NEW------------(31/32)---success:18
+[WARN :2018-09-05 09:43:54] DW_PMIS.ZWOT_PROD_UNLOCK_KEY_APPLY can not find target name!
+[INFO :2018-09-05 09:43:54] Make xml for ZWOT_PROD_UNLOCK_KEY_APPLY----(32/32)---success:19
+[INFO :2018-09-05 09:43:54] write InfaXML To File:D:\\infaXML\\gen0.xml
+[INFO :2018-09-05 09:43:55] ----------------------------------------------------------------
+[INFO :2018-09-05 09:43:55] MAKE FILES:1,WITH ERROR TABLES:13
