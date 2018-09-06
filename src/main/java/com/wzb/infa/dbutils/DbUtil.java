@@ -55,12 +55,11 @@ public class DbUtil {
 				res = rs.getString(1);
 			}
 		}
-		if (res != null) {
+		if (res != null && res.length() > 0) {
 			return res;
-		} else {
-			logger.warn(owner + "." + table + " can not find target name!");
-			return "";
 		}
+		
+		throw new SQLException(owner + "." + table + " can not find target name!");
 	}
 
 	public boolean isTabExist(String owner, String table) throws SQLException {

@@ -111,7 +111,7 @@ public abstract class BaseInfaXML implements InfaXML {
 			try {
 				targetName = DbUtil.getInstance().getTargetTable(owner, tableName);
 			} catch (SQLException e) {
-				logger.warn("no database tagget ,use default"+tableName);
+				logger.warn(e.getMessage());
 				targetName = infaProperty.getProperty("target.prefix", "") + tableName;
 				if (targetName.length() > 30) {
 					targetName = targetName.substring(0, 30);

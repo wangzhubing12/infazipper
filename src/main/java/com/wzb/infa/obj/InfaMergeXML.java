@@ -26,14 +26,15 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 		InfaProperty infaProperty = InfaProperty.getInstance();
 
 		String targetName = getTargetName(owner, tableName);
-		String incByDateColName=infaProperty.getProperty("incByDateColName", "CZSJ");
+		logger.debug("getTargetName:" + owner + "." + tableName + " ==>" + targetName);
+		String incByDateColName = infaProperty.getProperty("incByDateColName", "CZSJ");
 		String sqlFilter = infaProperty.getProperty("sql.filter", "");
-		if("".equals(sqlFilter)) {
-			sqlFilter=incByDateColName+">to_date('$$INCTIME','MM/DD/YYYY HH24:MI:SS')";
-		}else {
-			sqlFilter=sqlFilter+" AND "+incByDateColName+">to_date('$$INCTIME','MM/DD/YYYY HH24:MI:SS')";
+		if ("".equals(sqlFilter)) {
+			sqlFilter = incByDateColName + ">to_date('$$INCTIME','MM/DD/YYYY HH24:MI:SS')";
+		} else {
+			sqlFilter = sqlFilter + " AND " + incByDateColName + ">to_date('$$INCTIME','MM/DD/YYYY HH24:MI:SS')";
 		}
-		
+
 		String srcDBName = infaProperty.getProperty("target.dbname", "TARDB");
 		String mappingName = infaProperty.getProperty("map.prefix", "M_") + tableName
 				+ infaProperty.getProperty("map.suffix", "_INC");
@@ -47,7 +48,7 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 		InfaCol hyid;
 		InfaCol hyUpdateDate;
 		InfaCol hyUpdateFlag;
-		InfaCol setParam; //设置参数的字段
+		InfaCol setParam; // 设置参数的字段
 		String hy_id;
 		String hy_update_date;
 		String hy_update_flag;
@@ -88,7 +89,7 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 
 			hyUpdateFlag = new InfaCol(hy_update_flag, "", "VARCHAR2", "1", "0", "0", "NOTNULL",
 					String.valueOf(infaTableColSize + 3), "NOT A KEY");
-			
+
 			setParam = new InfaCol("SETPARAM", "", "DATE", "19", "0", "0", "NOTNULL",
 					String.valueOf(infaTableColSize + 4), "NOT A KEY");
 
@@ -117,7 +118,8 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 		updateExp.add(hyid.createExpressionField(pkString));
 		updateExp.add(hyUpdateDate.createExpressionField("sysdate"));
 		updateExp.add(hyUpdateFlag.createExpressionField("2"));
-		updateExp.add(setParam.createExpressionField("SETVARIABLE($$INCTIME,"+incByDateColName+")"));
+		updateExp.add(setParam.createExpressionField("SETVARIABLE($$INCTIME," + incByDateColName + ")")
+				.addAttribute("PORTTYPE", "LOCAL VARIABLE"));
 
 		mapping = InfaUtil.createMapping(mappingName);
 
@@ -160,13 +162,13 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 		// variable
 		InfaUtil.createMappingVariables(mapping);
 		{
-			//单独增加增量的那个变量
-			mapping.addElement("MAPPINGVARIABLE").addAttribute("DATATYPE", "date/time")
-            .addAttribute("DEFAULTVALUE", "01/01/1800 0024:00:00").addAttribute("DESCRIPTION", "")
-            .addAttribute("ISEXPRESSIONVARIABLE", "NO").addAttribute("ISPARAM", "YES")
-            .addAttribute("NAME", "SETPARAM").addAttribute("PRECISION", "29")
-            .addAttribute("SCALE", "9").addAttribute("USERDEFINED", "YES");
-			
+			// 单独增加增量的那个变量
+			mapping.addElement("MAPPINGVARIABLE").addAttribute("AGGFUNCTION", "MAX")
+					.addAttribute("DATATYPE", "date/time").addAttribute("DEFAULTVALUE", "01/01/1800 0024:00:00")
+					.addAttribute("DESCRIPTION", "").addAttribute("ISEXPRESSIONVARIABLE", "NO")
+					.addAttribute("ISPARAM", "NO").addAttribute("NAME", "$$INCTIME").addAttribute("PRECISION", "29")
+					.addAttribute("SCALE", "9").addAttribute("USERDEFINED", "YES");
+
 		}
 		mapping.addElement("ERPINFO");
 
@@ -200,8 +202,7 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 		Element srcQuaInstSE = InfaUtil.createReaderSessionextension(srcQua, "$DBConnectionSRC");
 
 		Element tarUpdateInstSE = InfaUtil.createWriterSessionextension(tarUpdateInst);
-		((Element) tarUpdateInstSE.selectSingleNode("ATTRIBUTE[@NAME='Update as Update']")).addAttribute("VALUE",
-				"NO");
+		((Element) tarUpdateInstSE.selectSingleNode("ATTRIBUTE[@NAME='Update as Update']")).addAttribute("VALUE", "NO");
 		((Element) tarUpdateInstSE.selectSingleNode("ATTRIBUTE[@NAME='Update else Insert']")).addAttribute("VALUE",
 				"YES");
 		session.add(sSrcInstS);
