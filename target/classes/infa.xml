@@ -136,6 +136,7 @@
 		<name>mapping.type</name>
 		<value>1</value>
 		<description>1：拉链表；2：增量对比抽取；2.1：增量对比+写删除日志表；
+		2.2:按时间增量抽取，必须在配置项incByDateColName中指定时间字段
 		3:全删全插+处理HY_ID等三个字段（HY_ID用表中第一个字段）
 		其他：原始全删全插（默认）</description>
 	</property>
@@ -182,6 +183,12 @@
 		<description>如果是增量mapping报错，是否直接建立全量，YES 是、NO 否, 默认NO
 		注意不要配置map.suffix，自动默认用INC和ALL，否则全量的也用ALL了</description>
 	</property>		
+
+	<property>
+		<name>incByDateColName</name>
+		<value>CZSJ</value>
+		<description>按时间只增改的增量mapping，必须指定增量时间字段</description>
+	</property>	
 
 	<property>
 		<name>target.name.rule</name>

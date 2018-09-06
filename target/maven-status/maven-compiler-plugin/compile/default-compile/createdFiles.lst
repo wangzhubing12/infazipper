@@ -13,6 +13,7 @@ com\wzb\infa\infazipper\APP.class
 com\wzb\infa\exceptions\CheckTableExistException.class
 com\wzb\infa\infazipper\APP$StringPadder.class
 com\wzb\infa\obj\InfaCol.class
+com\wzb\infa\obj\InfaMergeXML.class
 com\wzb\infa\obj\InfaZipperXML.class
 com\wzb\infa\exceptions\UnsupportedDatatypeException.class
 com\wzb\infa\dbutils\XMLUtil.class

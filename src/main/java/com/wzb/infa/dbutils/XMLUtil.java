@@ -20,6 +20,7 @@ import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 import com.wzb.infa.obj.InfaAddLogXML;
 import com.wzb.infa.obj.InfaAddXML;
+import com.wzb.infa.obj.InfaMergeXML;
 import com.wzb.infa.obj.InfaTruncInsertXML;
 import com.wzb.infa.obj.InfaXML;
 import com.wzb.infa.obj.InfaZipperXML;
@@ -65,9 +66,9 @@ public class XMLUtil {
 		OutputFormat format = new OutputFormat("    ", true);
 		format.setEncoding("GBK");
 		File xmloutFile = new File(toFileName);
-		
+
 		XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(xmloutFile), format);
-		
+
 		Document doc = createDocument();
 		Element folder = (Element) doc.selectSingleNode("//FOLDER");
 
@@ -114,7 +115,7 @@ public class XMLUtil {
 
 	public InfaXML createInfaXML(String table, String xmlType)
 			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
-		logger.debug("begin createInfaXML"+table);
+		logger.debug("begin createInfaXML" + table);
 		InfaXML xml;
 		String username = infaProperty.getProperty("source.username").toUpperCase();
 		String sourceTablename;
@@ -154,20 +155,33 @@ public class XMLUtil {
 			} catch (NoPrimaryKeyException e) {
 				String truncateIfAddError = infaProperty.getProperty("AddIfIncError", "NO");
 				if ("YES".equals(truncateIfAddError)) {
-					
+
 					xml = new InfaTruncInsertXML(owner, sourceTablename, true);
 				} else {
 					throw e;
 				}
 			}
 			break;
-                case "2.1":
+		case "2.1":
 			try {
 				xml = new InfaAddLogXML(owner, sourceTablename);
 			} catch (NoPrimaryKeyException e) {
 				String truncateIfAddError = infaProperty.getProperty("AddIfIncError", "NO");
 				if ("YES".equals(truncateIfAddError)) {
-					
+
+					xml = new InfaTruncInsertXML(owner, sourceTablename, true);
+				} else {
+					throw e;
+				}
+			}
+			break;
+		case "2.2":
+			try {
+				xml = new InfaMergeXML(owner, sourceTablename);
+			} catch (NoPrimaryKeyException e) {
+				String truncateIfAddError = infaProperty.getProperty("AddIfIncError", "NO");
+				if ("YES".equals(truncateIfAddError)) {
+
 					xml = new InfaTruncInsertXML(owner, sourceTablename, true);
 				} else {
 					throw e;

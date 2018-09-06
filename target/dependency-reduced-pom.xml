@@ -4,7 +4,7 @@
   <groupId>com.wzb.infa</groupId>
   <artifactId>infazipper</artifactId>
   <name>infazipper</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <url>http://maven.aliyun.com/nexus/content/groups/public</url>
   <build>
     <resources>
