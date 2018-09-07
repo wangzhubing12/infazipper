@@ -10,6 +10,7 @@ import org.dom4j.Element;
 import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
 import com.wzb.infa.exceptions.DuplicateColumnExceptiion;
+import com.wzb.infa.exceptions.NoColFoundException;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 import com.wzb.infa.properties.InfaProperty;
@@ -19,7 +20,7 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 	private Logger logger = Logger.getLogger(InfaMergeXML.class);
 
 	public InfaMergeXML(String owner, String tableName)
-			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException {
+			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException, NoColFoundException {
 		super();
 		logger.debug("begin InfaMergeXML:" + tableName);
 
@@ -44,7 +45,9 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 			throw new NoPrimaryKeyException(owner + "." + tableName + " NoPrimaryKey!");
 		}
 		InfaTable tarTable = srcTable.copy(targetName);
-
+		if(!srcTable.hasCol(incByDateColName)) {
+			throw new NoColFoundException(owner + "." + tableName+"." +incByDateColName+ " NoColFound!");
+		}
 		InfaCol hyid;
 		InfaCol hyUpdateDate;
 		InfaCol hyUpdateFlag;

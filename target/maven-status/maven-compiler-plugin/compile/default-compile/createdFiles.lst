@@ -18,3 +18,4 @@ com\wzb\infa\obj\InfaZipperXML.class
 com\wzb\infa\exceptions\UnsupportedDatatypeException.class
 com\wzb\infa\dbutils\XMLUtil.class
 com\wzb\infa\obj\InfaCol$1.class
+com\wzb\infa\exceptions\NoColFoundException.class

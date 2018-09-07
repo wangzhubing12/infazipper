@@ -19,6 +19,7 @@ import org.dom4j.DocumentException;
 import com.wzb.infa.dbutils.DbUtil;
 import com.wzb.infa.dbutils.XMLUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
+import com.wzb.infa.exceptions.NoColFoundException;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 import com.wzb.infa.obj.InfaXML;
@@ -87,7 +88,7 @@ public class APP {
 				logger.debug("success!");
 				sucessSize++;
 				currentSuccess = 1;
-			} catch (UnsupportedDatatypeException | SQLException | CheckTableExistException e) {
+			} catch (UnsupportedDatatypeException | NoColFoundException | SQLException | CheckTableExistException e) {
 				logger.error(e.getMessage());
 				errorSize++;
 			} catch (NoPrimaryKeyException e) {

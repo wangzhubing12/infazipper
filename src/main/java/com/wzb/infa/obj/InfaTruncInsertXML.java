@@ -9,6 +9,7 @@ import org.dom4j.Element;
 
 import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
+import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 import com.wzb.infa.properties.InfaProperty;
 
@@ -22,8 +23,8 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 		InfaProperty infaProperty = InfaProperty.getInstance();
 		logger.debug("begin InfaTruncInsertXML:" + tableName + (addHyFlag ? " WHIT HY_ID" : ""));
 
-		String targetName = getTargetName(owner,tableName);
-		
+		String targetName = getTargetName(owner, tableName);
+
 		String sourceQualifierName = InfaUtil.infaProperty.getProperty("qualifier.prefix", "SQ_") + tableName;
 		String expressionName = "EXPTRANS";
 		String sqlFilter = InfaUtil.infaProperty.getProperty("sql.filter", "");
@@ -47,6 +48,13 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 		String hy_id;
 		String hy_update_date;
 		String hy_update_flag;
+		String pkString = null;
+		try {
+			pkString = infaTable.getPkString();
+		} catch (NoPrimaryKeyException e) {
+			logger.debug(e.getMessage());
+			pkString = infaTable.getCols().get(0).getColumnName();
+		}
 		if (addHyFlag) {
 			// 先看是否强制使用配置文件中的配置
 			String force = infaProperty.getProperty("add.col.force", "false").toUpperCase();
@@ -87,7 +95,7 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 			target.add(hyUpdateDate.createTargetField(false));
 			target.add(hyUpdateFlag.createTargetField(false));
 			// expression ADD COLS
-			expression.add(hyid.createExpressionField(infaTable.getCols().get(0).getColumnName()));
+			expression.add(hyid.createExpressionField(pkString));
 			expression.add(hyUpdateDate.createExpressionField("sysdate"));
 			expression.add(hyUpdateFlag.createExpressionField("1"));
 		}

@@ -5,6 +5,7 @@ C:\Users\Administrator\git\infazipper\src\main\java\com\wzb\infa\exceptions\Unsu
 C:\Users\Administrator\git\infazipper\src\main\java\com\wzb\infa\exceptions\NoPrimaryKeyException.java
 C:\Users\Administrator\git\infazipper\src\main\java\com\wzb\infa\dbutils\XMLUtil.java
 C:\Users\Administrator\git\infazipper\src\main\java\com\wzb\infa\obj\InfaTable.java
+C:\Users\Administrator\git\infazipper\src\main\java\com\wzb\infa\exceptions\NoColFoundException.java
 C:\Users\Administrator\git\infazipper\src\main\java\com\wzb\infa\obj\BaseInfaXML.java
 C:\Users\Administrator\git\infazipper\src\main\java\com\wzb\infa\obj\InfaCol.java
 C:\Users\Administrator\git\infazipper\src\main\java\com\wzb\infa\properties\InfaProperty.java
