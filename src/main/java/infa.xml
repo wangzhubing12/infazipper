@@ -189,7 +189,12 @@
 		<value>CZSJ</value>
 		<description>按时间只增改的增量mapping，必须指定增量时间字段</description>
 	</property>	
-
+	<property>
+		<name>merge.strategy</name>
+		<value>DD_INSERT</value>
+		<description>按时间只增配置为：DD_INSERT,增改为DD_UPDATE，默认DD_UPDATE</description>
+	</property>	
+	
 	<property>
 		<name>target.name.rule</name>
 		<value>default</value>

@@ -19,8 +19,8 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 
 	private Logger logger = Logger.getLogger(InfaMergeXML.class);
 
-	public InfaMergeXML(String owner, String tableName)
-			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, NoPrimaryKeyException, NoColFoundException {
+	public InfaMergeXML(String owner, String tableName) throws UnsupportedDatatypeException, SQLException,
+			CheckTableExistException, NoPrimaryKeyException, NoColFoundException {
 		super();
 		logger.debug("begin InfaMergeXML:" + tableName);
 
@@ -45,8 +45,8 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 			throw new NoPrimaryKeyException(owner + "." + tableName + " NoPrimaryKey!");
 		}
 		InfaTable tarTable = srcTable.copy(targetName);
-		if(!srcTable.hasCol(incByDateColName)) {
-			throw new NoColFoundException(owner + "." + tableName+"." +incByDateColName+ " NoColFound!");
+		if (!srcTable.hasCol(incByDateColName)) {
+			throw new NoColFoundException(owner + "." + tableName + "." + incByDateColName + " NoColFound!");
 		}
 		InfaCol hyid;
 		InfaCol hyUpdateDate;
@@ -115,7 +115,13 @@ public class InfaMergeXML extends BaseInfaXML implements InfaXML {
 		// 构造中间组件
 		Element srcQua = srcTable.createSourceQualifier("SQ_S" + tableName, sqlFilter);
 
-		Element updStg = srcTable.createUpdateStrategy("UPD_" + tableName, "DD_UPDATE", false, null);
+		String strategy = infaProperty.getProperty("merge.strategy", "DD_UPDATE").toUpperCase();
+		if ("DD_UPDATE".equals(strategy) || "DD_INSERT".equals(strategy)) {
+
+		} else {
+			strategy = "DD_UPDATE";
+		}
+		Element updStg = srcTable.createUpdateStrategy("UPD_" + tableName, strategy, false, null);
 
 		Element updateExp = srcTable.createExpression("EXP_UPDATE", false);
 		updateExp.add(hyid.createExpressionField(pkString));
