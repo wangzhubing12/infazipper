@@ -9,6 +9,7 @@ import org.dom4j.Element;
 
 import com.wzb.infa.dbutils.InfaUtil;
 import com.wzb.infa.exceptions.CheckTableExistException;
+import com.wzb.infa.exceptions.MutiParamsTruncException;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
 import com.wzb.infa.properties.InfaProperty;
@@ -18,9 +19,18 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 	public static Logger logger = Logger.getLogger(InfaTruncInsertXML.class);
 
 	public InfaTruncInsertXML(String owner, String tableName, boolean addHyFlag)
-			throws UnsupportedDatatypeException, SQLException, CheckTableExistException {
+			throws UnsupportedDatatypeException, SQLException, CheckTableExistException, MutiParamsTruncException {
 		super();
 		InfaProperty infaProperty = InfaProperty.getInstance();
+		{
+			// BUG 全删全插暂时不支持多工作流
+			String[] mutiParams = infaProperty.getProperty("workflow.muti-params", "-1").replaceAll("\n", "")
+					.split(";");
+			if (mutiParams.length > 1) {
+				throw new MutiParamsTruncException("can not truncate in " + mutiParams.length + " workflows!!!");
+			}
+		}
+
 		logger.debug("begin InfaTruncInsertXML:" + tableName + (addHyFlag ? " WHIT HY_ID" : ""));
 
 		String targetName = getTargetName(owner, tableName);
