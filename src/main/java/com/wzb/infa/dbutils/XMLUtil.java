@@ -94,6 +94,8 @@ public class XMLUtil {
 				String wfName = workflow.attributeValue("NAME");
 				String wfNameAdd;
 				String wfParam;
+				String wfPramLogFileName;
+				String sessionPramLogFileName;
 				for (String mutiParam : mutiParams) {
 					e = workflow.createCopy();
 					wfNameAdd = mutiParam.split(":")[0].trim();
@@ -103,6 +105,17 @@ public class XMLUtil {
 					// 修改参数文件路径
 					((Element) e.selectSingleNode("ATTRIBUTE[@NAME='Parameter Filename']")).addAttribute("VALUE",
 							wfParam);
+					// 修改工作流日志文件路径
+					wfPramLogFileName = ((Element) e.selectSingleNode("ATTRIBUTE[@NAME='Workflow Log File Name']"))
+							.attributeValue("VALUE");
+					((Element) e.selectSingleNode("ATTRIBUTE[@NAME='Workflow Log File Name']")).addAttribute("VALUE",
+							wfPramLogFileName.replace(".log", wfNameAdd + ".log"));
+					// 修改session日志文件路径
+					sessionPramLogFileName = ((Element) e
+							.selectSingleNode("SESSION[1]/ATTRIBUTE[@NAME='Session Log File Name']"))
+									.attributeValue("VALUE");
+					((Element) e.selectSingleNode("SESSION[1]/ATTRIBUTE[@NAME='Session Log File Name']"))
+							.addAttribute("VALUE", sessionPramLogFileName.replace(".log", wfNameAdd + ".log"));
 					folder.add(e);// workflow加到folder下
 				}
 			} else {
