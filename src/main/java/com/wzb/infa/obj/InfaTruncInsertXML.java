@@ -63,7 +63,19 @@ public class InfaTruncInsertXML extends BaseInfaXML implements InfaXML {
 			pkString = infaTable.getPkString();
 		} catch (NoPrimaryKeyException e) {
 			logger.debug(e.getMessage());
-			pkString = infaTable.getCols().get(0).getColumnName();
+			// pkString
+			InfaCol firstCOl = infaTable.getCols().get(0);
+
+			if (firstCOl.getDataType().equals("timestamp") || firstCOl.getDataType().equals("date")) {
+				pkString = "to_char(" + firstCOl.getColumnName() + ",'YYYYMMDDHH24MISS')";
+			} else if (firstCOl.getDataType().equals("number(p,s)")) {
+				pkString = "to_char(" + firstCOl.getColumnName() + ")";
+			} else if (firstCOl.getDataType().contains("lob") || firstCOl.getDataType().contains("raw")
+					|| firstCOl.getDataType().contains("long")) {
+				pkString = "noPrimaryKey";
+			} else {
+				pkString = firstCOl.getColumnName();
+			}
 		}
 		if (addHyFlag) {
 			// 先看是否强制使用配置文件中的配置
