@@ -31,6 +31,23 @@
 		<name>source.owner</name>
 		<value>dw_pmis</value>
 	</property>
+	<property>
+		<name>target.url</name>
+		<value>jdbc:oracle:thin:@10.150.0.231:1521:gddw1</value>
+		<description>导入源表的数据库url地址</description>
+	</property>
+	<property>
+		<name>target.username</name>
+		<value>dw_pmis</value>
+	</property>
+	<property>
+		<name>target.password</name>
+		<value>dw_pmis</value>
+	</property>
+	<property>
+		<name>target.owner</name>
+		<value>dw_pmis</value>
+	</property>
 
 	  *******************************************************************-->
  <!-- **********运行文件夹、表清单参数文件配置 *****************************-->
@@ -57,8 +74,13 @@
 	</property>
 	<property>
 		<name>tables.error</name>
-		<value>err_tables.txt</value>
-		<description>报错记录文件</description>
+		<value>infaxml_error.log</value>
+		<description>报错记录文件，默认infaxml_error.log</description>
+	</property>
+	<property>
+		<name>tables.info</name>
+		<value>infaxml_info.log</value>
+		<description>信息记录文件，默认infaxml_info.log</description>
 	</property>
  ***************************************************************** -->
   
@@ -92,13 +114,31 @@
 	</property>
 	<property>
 		<name>workflow.paramter.filename</name>
-		<value>/home/infa/AAA.txt</value>
-		<description>workflow命名前缀</description>
+		<value>/home/infa/A1.txt</value>
+		<description>workflow参数文件</description>
+	</property>
+	<property>
+		<name>workflow.muti-params</name>
+		<value> 0200:/home/infa/A2.txt;
+				0400:/home/infa/A3.txt;
+				0500:/home/infa/A4.txt;
+				0600:/home/infa/A5.txt;
+		</value>
+		<description>
+			workflow参数文件,如配置此项，则原来的
+		    workflow.paramter.filename将被这里的配置取代。
+		         此项配置格式为，
+		         1）每个配置文件以分号隔开；
+		         2）每个配置文件前加上工作流额外的名称后缀和冒号；
+	   </description>
 	</property>
 	<property>
 		<name>mapping.type</name>
 		<value>1</value>
-		<description>1：拉链表；2：增量对比抽取；其他：全删全插（默认）</description>
+		<description>1：拉链表；2：增量对比抽取；2.1：增量对比+写删除日志表；
+		2.2:按时间增量抽取，必须在配置项incByDateColName中指定时间字段
+		3:全删全插+处理HY_ID等三个字段（HY_ID用表中第一个字段）
+		其他：原始全删全插（默认）</description>
 	</property>
 	<property>
 		<name>target.prefix</name>
@@ -135,9 +175,36 @@
 		<name>sql.filter</name>
 		<value>unit_id=$$unit_id</value>
 		<description>sql.filter,针对拉链表等，源和目标都有的部分</description>
+	</property>	
+	
+	<property>
+		<name>AddIfIncError</name>
+		<value>NO</value>
+		<description>如果是增量mapping报错，是否直接建立全量，YES 是、NO 否, 默认NO
+		注意不要配置map.suffix，自动默认用INC和ALL，否则全量的也用ALL了</description>
 	</property>		
+
+	<property>
+		<name>incByDateColName</name>
+		<value>CZSJ</value>
+		<description>按时间只增改的增量mapping，必须指定增量时间字段</description>
+	</property>	
+	<property>
+		<name>merge.strategy</name>
+		<value>DD_INSERT</value>
+		<description>按时间只增配置为：DD_INSERT,增改为DD_UPDATE，默认DD_UPDATE</description>
+	</property>	
+	
+	<property>
+		<name>target.name.rule</name>
+		<value>default</value>
+		<description>目标表名的规则。默认：default为前缀拼接的方式；
+			database:数据库获取方式：即为从数据库中查源表目标表对应表；
+		</description>
+	</property>
+		
  -->
- <!-- 以下配置从数据库取表结构、备注、主键等信息的表，oracle可以配置成all_tables之类的数据字典 
+ <!-- 以下配置从数据库取源表结构、备注、主键等信息的表，oracle可以配置成all_tables之类的数据字典 
  	<property>
 		<name>dictionary.tables</name>
 		<value>NCWOT_DBA_TABLES</value>
@@ -163,6 +230,11 @@
 		<value>NCWOT_DBA_IND_COLUMNS</value>
 		<description>主键字段的数据字典,默认ALL_IND_COLUMNS</description>
 	</property>
+ 	<property>
+		<name>dictionary.synonyms</name>
+		<value>ALL_SYNONYMS</value>
+		<description>目标表名对应表的数据字典,默认：ALL_SYNONYMS</description>
+	</property>	
 	-->
 	
 	<!-- 拉链表默认三个新增字段修改
@@ -213,6 +285,11 @@
 		<name>add.col.hy_update_flag</name>
 		<value>HY_UPDATE_FLAG</value>
 		<description>默认HY_UPDATE_FLAG</description>
+    </property>
+    <property>
+		<name>add.delete.log</name>
+		<value>ETL_DELETE_LOG</value>
+		<description>增量比对删除记录,日志表的表名，默认ETL_DELETE_LOG</description>
     </property>
 	-->	
 </configuration>
