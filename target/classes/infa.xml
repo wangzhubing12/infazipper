@@ -117,12 +117,13 @@
 		<value>/home/infa/A1.txt</value>
 		<description>workflow参数文件</description>
 	</property>
+
 	<property>
 		<name>workflow.muti-params</name>
-		<value> 0200:/home/infa/A2.txt;
-				0400:/home/infa/A3.txt;
-				0500:/home/infa/A4.txt;
-				0600:/home/infa/A5.txt;
+		<value> 0200:/home/infa/A2.txt:p1;
+				0400:/home/infa/A3.txt:p2;
+				0500:/home/infa/A4.txt:p3;
+				0600:/home/infa/A5.txt:p4;
 		</value>
 		<description>
 			workflow参数文件,如配置此项，则原来的
@@ -183,7 +184,13 @@
 		<description>如果是增量mapping报错，是否直接建立全量，YES 是、NO 否, 默认NO
 		注意不要配置map.suffix，自动默认用INC和ALL，否则全量的也用ALL了</description>
 	</property>		
-
+	<property>
+		<name>truncateByPartition</name>
+		<value>PARTITION</value>
+		<description>全删全插流程，如果是多个工作流，可以按分区trucnate或者按子分区truncate，
+		这里设置truncate的方式，PARTITION OR SUNPARTITION
+		需要在workflow.muti-params中增加分区或者子分区名称</description>
+	</property>
 	<property>
 		<name>incByDateColName</name>
 		<value>CZSJ</value>

@@ -323,3 +323,8 @@
 [INFO :2018-09-05 09:43:54] write InfaXML To File:D:\\infaXML\\gen0.xml
 [INFO :2018-09-05 09:43:55] ----------------------------------------------------------------
 [INFO :2018-09-05 09:43:55] MAKE FILES:1,WITH ERROR TABLES:13
+[ERROR:2019-01-18 17:03:35] Invalid object: 2
+[ERROR:2019-01-18 17:13:17] Invalid object: 0
+[ERROR:2019-01-18 17:13:37] Invalid object: 0
+[ERROR:2019-01-18 17:13:49] Invalid object: 0
+[ERROR:2019-01-18 17:13:58] Invalid object: 1

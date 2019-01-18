@@ -23,7 +23,7 @@ import com.wzb.infa.exceptions.MutiParamsTruncException;
 import com.wzb.infa.exceptions.NoColFoundException;
 import com.wzb.infa.exceptions.NoPrimaryKeyException;
 import com.wzb.infa.exceptions.UnsupportedDatatypeException;
-import com.wzb.infa.obj.InfaXML;
+import com.wzb.infa.infaobj.base.InfaXML;
 import com.wzb.infa.properties.InfaProperty;
 
 public class APP {
