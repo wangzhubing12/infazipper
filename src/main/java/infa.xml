@@ -17,7 +17,7 @@
 	<property>
 		<name>source.url</name>
 		<value>jdbc:oracle:thin:@10.150.0.231:1521:gddw1</value>
-		<description>导入源表的数据库url地址</description>
+		<description>导入源表的数据库url地址1</description>
 	</property>
 	<property>
 		<name>source.username</name>
