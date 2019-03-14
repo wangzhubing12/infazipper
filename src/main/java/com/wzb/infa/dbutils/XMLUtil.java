@@ -29,6 +29,7 @@ import com.wzb.infa.infaobj.InfaZipperXML;
 import com.wzb.infa.properties.InfaProperty;
 
 public class XMLUtil {
+
     private static XMLUtil xmlUtil;
 
     private XMLUtil() {
@@ -95,7 +96,7 @@ public class XMLUtil {
                 String wfName = workflow.attributeValue("NAME");
                 String wfNameAdd;
                 String wfParam;
-                String wfTruncate;
+                String wfTruncate="";
                 String wfPramLogFileName;
                 String sessionPramLogFileName;
                 String tableName = "";
@@ -104,7 +105,10 @@ public class XMLUtil {
                     e = workflow.createCopy();
                     wfNameAdd = mutiParam.split(":")[0].trim();
                     wfParam = mutiParam.split(":")[1].trim();
-                    wfTruncate = mutiParam.split(":")[2].trim();
+                    boolean isTruncateTask = (e.selectNodes("SESSION/SESSTRANSFORMATIONINST").size() == 3);
+                    if (truncateByPartition.contains("PARTITION") && isTruncateTask) {
+                        wfTruncate = mutiParam.split(":")[2].trim();
+                    }
                     // 修改工作流名称
                     e.addAttribute("NAME", wfName + wfNameAdd);
                     // 修改参数文件路径
@@ -112,7 +116,6 @@ public class XMLUtil {
                             wfParam);
 
                     //如果不是3个SESSTRANSFORMATIONINST，则默认不是全删全插
-                    boolean isTruncateTask = (e.selectNodes("SESSION/SESSTRANSFORMATIONINST").size() == 3);
                     if (truncateByPartition.contains("PARTITION") && isTruncateTask) {
                         tableName = ((Element) e.selectSingleNode("SESSION/SESSTRANSFORMATIONINST[@TRANSFORMATIONTYPE='Target Definition']")).attributeValue("TRANSFORMATIONNAME");
                         targetPreSql = "ALTER TABLE " + tableName + " TRUNCATE " + truncateByPartition + " " + wfTruncate;

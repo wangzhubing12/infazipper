@@ -41,55 +41,41 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
         }
         InfaTable tarTable = srcTable.copy(targetName);
 
-        InfaCol hyid;
-        InfaCol hyUpdateDate;
-        InfaCol hyUpdateFlag;
-        String hy_id;
-        String hy_update_date;
-        String hy_update_flag;
-        InfaCol crc32Col;
         String crc32 = srcTable.getCRC32String();
         String pkString = srcTable.getPkString();
-        {
-
-            // 先看是否强制使用配置文件中的配置
-            String force = infaProperty.getProperty("add.col.force", "false").toUpperCase();
-            // 拿到配置文件中的配置(强制又不指定，用HY_ID字段)
-            hy_id = infaProperty.getProperty("add.col.hy_id", "HY_ID").toUpperCase();
-            hy_update_date = infaProperty.getProperty("add.col.hy_update_date", "HY_UPDATE_DATE").toUpperCase();
-            hy_update_flag = infaProperty.getProperty("add.col.hy_update_flag", "HY_UPDATE_FLAG").toUpperCase();
-
-            if ("TRUE".equals(force)) {
-                // 如果强制用配置文件中的配置,直接用上面配置文件中的名称
-            } else {
-                // 不强制用配置文件中的配置
-
-                // 如果默认的字段已经存在于源表中,用名称+"_$"
-                if (tarTable.hasCol(hy_id)) {
-                    hy_id = "HY_ID_$";
-                }
-                if (tarTable.hasCol(hy_update_date)) {
-                    hy_update_date = "HY_UPDATE_DATE_$";
-                }
-                if (tarTable.hasCol(hy_update_flag)) {
-                    hy_update_flag = "HY_UPDATE_FLAG_$";
-                }
+        // 处理增加字段的情况，先看是否强制使用配置文件中的配置
+        String force = infaProperty.getProperty("add.col.force", "false").toUpperCase();
+        String hy_id = infaProperty.getProperty("add.col.hy_id", "HY_ID").toUpperCase();
+        String hy_update_date = infaProperty.getProperty("add.col.hy_update_date", "HY_UPDATE_DATE").toUpperCase();
+        String hy_update_flag = infaProperty.getProperty("add.col.hy_update_flag", "HY_UPDATE_FLAG").toUpperCase();
+        if ((!"TRUE".equals(force)) && (!"REUSE".equals(force))) {
+            if (tarTable.hasCol(hy_id)) {
+                hy_id = "HY_ID_$";
             }
-            // ADD COLS
-            int infaTableColSize = tarTable.getCols().size();
+            if (tarTable.hasCol(hy_update_date)) {
+                hy_update_date = "HY_UPDATE_DATE_$";
+            }
+            if (tarTable.hasCol(hy_update_flag)) {
+                hy_update_flag = "HY_UPDATE_FLAG_$";
+            }
+        }
 
-            hyid = new InfaCol(hy_id, "", "varchar2", "128", "0", "0", "NOTNULL", String.valueOf(infaTableColSize + 1),
-                    "NOT A KEY");
+        int infaTableColSize = tarTable.getCols().size();
 
-            hyUpdateDate = new InfaCol(hy_update_date, "", "DATE", "19", "0", "0", "NOTNULL",
-                    String.valueOf(infaTableColSize + 2), "NOT A KEY");
+        InfaCol hyid = new InfaCol(hy_id, "", "varchar2", "128", "0", "0", "NOTNULL", String.valueOf(infaTableColSize + 1), "NOT A KEY");
 
-            hyUpdateFlag = new InfaCol(hy_update_flag, "", "VARCHAR2", "1", "0", "0", "NOTNULL",
-                    String.valueOf(infaTableColSize + 3), "NOT A KEY");
+        InfaCol hyUpdateDate = new InfaCol(hy_update_date, "", "DATE", "19", "0", "0", "NOTNULL",
+                String.valueOf(infaTableColSize + 2),
+                "NOT A KEY");
 
-            crc32Col = new InfaCol("CRC32", "", "varchar2", "32", "0", "0", "NOTNULL",
-                    String.valueOf(infaTableColSize + 4), "NOT A KEY");
+        InfaCol hyUpdateFlag = new InfaCol(hy_update_flag, "", "VARCHAR2", "1", "0", "0", "NOTNULL",
+                String.valueOf(infaTableColSize + 3),
+                "NOT A KEY");
 
+        InfaCol crc32Col = new InfaCol("CRC32", "", "varchar2", "32", "0", "0", "NOTNULL",
+                String.valueOf(infaTableColSize + 4),
+                "NOT A KEY");
+        if ("REUSE".equals(force)) {
             try {
                 tarTable.addCol(hyid);
                 tarTable.addCol(hyUpdateDate);
@@ -97,12 +83,14 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
             } catch (DuplicateColumnExceptiion e) {
                 logger.fatal(e.getMessage());
             }
-
         }
-
         // 源和目标
         source = srcTable.createSource(tableName, srcDBName);
+        ((Element) source.selectSingleNode("SOURCEFIELD[@NAME='" + hy_id + "']")).addAttribute("KEYTYPE", "PRIMARY KEY")
+                .addAttribute("NULLABLE", "NOTNULL");
         tarSource = tarTable.createSource(tableName, tarDBName);
+        ((Element) tarSource.selectSingleNode("SOURCEFIELD[@NAME='" + hy_id + "']")).addAttribute("KEYTYPE", "PRIMARY KEY")
+                .addAttribute("NULLABLE", "NOTNULL");
         target = tarTable.createTarget(targetName, false);
         ((Element) target.selectSingleNode("TARGETFIELD[@NAME='" + hy_id + "']")).addAttribute("KEYTYPE", "PRIMARY KEY")
                 .addAttribute("NULLABLE", "NOTNULL");
@@ -126,14 +114,18 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
 
         Element insertExp = srcTable.createExpression("EXP_INSERT", false);
 
-        insertExp.add(hyid.createExpressionField(pkString));
-        insertExp.add(hyUpdateDate.createExpressionField("sysdate"));
-        insertExp.add(hyUpdateFlag.createExpressionField("1"));
+        if (!"REUSE".equals(force)) {
+            insertExp.add(hyid.createExpressionField(pkString));
+            insertExp.add(hyUpdateDate.createExpressionField("sysdate"));
+            insertExp.add(hyUpdateFlag.createExpressionField("1"));
+        }
 
         Element updateExp = srcTable.createExpression("EXP_UPDATE", false);
-        updateExp.add(hyid.createExpressionField(pkString));
-        updateExp.add(hyUpdateDate.createExpressionField("sysdate"));
-        updateExp.add(hyUpdateFlag.createExpressionField("2"));
+        if (!"REUSE".equals(force)) {
+            updateExp.add(hyid.createExpressionField(pkString));
+            updateExp.add(hyUpdateDate.createExpressionField("sysdate"));
+            updateExp.add(hyUpdateFlag.createExpressionField("2"));
+        }
 
         mapping = InfaUtil.createMapping(mappingName);
 
@@ -223,7 +215,7 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
         mapping.add(tarDeleteInst);
 
         // connector加到mapping下
-        for (Iterator<Element> it = connectors.iterator(); it.hasNext(); ) {
+        for (Iterator<Element> it = connectors.iterator(); it.hasNext();) {
             // System.out.println(it.next().asXML());
             mapping.add(it.next());
         }
@@ -252,7 +244,6 @@ public class InfaAddXML extends BaseInfaXML implements InfaXML {
         Element session = InfaUtil.createSession(mapping);
 
         // SESSTRANSFORMATIONINST
-
         Element sSrcInstS = InfaUtil.createSessTransformationInst(sSrcInst, owner);
         Element sTarInstS = InfaUtil.createSessTransformationInst(sTarInst, owner);
         Element srcQuaInstS = InfaUtil.createSessTransformationInst(srcQuaInst, owner);
